@@ -1,46 +1,91 @@
 # Windows Server Installation
 
+This runbook covers a normal PassMan Server installation or in-place upgrade on Windows. Use it before opening the server to other users.
+
 ## Requirements
 
-- Windows Server or supported Windows desktop environment.
-- Permission to run the MSI as Administrator.
-- Inbound access for the selected TCP port.
-- Backup or clean-install decision before production deployment.
+| Requirement | Notes |
+| --- | --- |
+| Windows Server or approved Windows host | Use a controlled host with stable storage and backup policy. |
+| Administrator rights | Required for the MSI, service registration and firewall rule. |
+| Inbound TCP access | Default port is `1903`; change only if your network policy requires it. |
+| Backup decision | Export or preserve the existing data directory before production upgrades. |
+| Release assets | Use the MSI and update manifest from GitHub Releases, not files copied from chat or support threads. |
 
 ## Install
 
-1. Download the latest MSI: `PassMan-1.5.3-x64.msi`.
-2. Run the MSI as Administrator.
-3. The installer prepares the PassMan server files, bundled Node runtime, Prisma/SQLite runtime files, Windows service, firewall rule, and data/log directories.
-4. Open PassMan from a browser:
+1. Download `PassMan-1.5.3-x64.msi` from the latest GitHub Release.
+2. Verify the filename and source before running it.
+3. Run the MSI as Administrator.
+4. The installer prepares the standalone server, bundled Node runtime, Prisma/SQLite runtime files, Windows service, firewall rule, data directory and log directory.
+5. Open PassMan from the server first:
 
 ```text
-http://<SERVER_IP>:1903
+http://127.0.0.1:1903
 ```
 
-## Default Paths
+Then validate remote access:
 
 ```text
-C:\ProgramData\PassMan
-C:\ProgramData\PassMan\logs
+http://<SERVER_HOST>:1903
 ```
 
-## Service
+## Installed Surfaces
 
-Service name:
+| Surface | Value |
+| --- | --- |
+| Windows service | `PassManServer` |
+| Display name | `PassMan Server` |
+| Data directory | `C:\ProgramData\PassMan` |
+| Log directory | `C:\ProgramData\PassMan\logs` |
+| Default port | `1903` |
+| Browser entry | `http://<SERVER_HOST>:1903` before HTTPS is configured |
+
+## Post-Install Validation
+
+Run these checks before creating broad access:
+
+```powershell
+sc.exe query PassManServer
+```
 
 ```text
-PassManServer
+http://127.0.0.1:1903/api/profile
 ```
 
-Display name:
+Expected result:
 
-```text
-PassMan Server
-```
+- The service is installed and running.
+- The local API responds.
+- The remote URL opens from an approved workstation.
+- The firewall rule allows only the intended network path.
+- No installer error remains in the PassMan log folder.
 
-## Verify
+## First Login Path
 
-- `http://127.0.0.1:1903/api/profile` should respond on the server.
-- Remote users can access `http://<SERVER_IP>:1903` when firewall and network rules allow it.
-- Installer logs should be reviewed under `C:\ProgramData\PassMan\logs`.
+After service validation:
+
+1. Create the owner profile.
+2. Unlock the vault with the master password.
+3. Apply the license.
+4. Configure public host and HTTPS.
+5. Enable 2FA before adding additional users.
+
+## Upgrade Notes
+
+- Export a backup before production upgrades.
+- Let the MSI update the server and support components together.
+- The offline decrypter and DC agent script are refreshed by the MSI and also documented in release notes.
+- Do not manually replace files under the installed server directory unless support explicitly asks for that diagnostic step.
+
+## Public Evidence For Support
+
+Safe to share after redaction:
+
+- MSI filename.
+- PassMan server version.
+- Windows service status.
+- Redacted installer log excerpt.
+- Browser URL shape, with real host replaced by `<SERVER_HOST>`.
+
+Do not share databases, backups, PFX/P12 files, private keys, master passwords, secret values or real internal hostnames.

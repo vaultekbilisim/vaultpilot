@@ -7,6 +7,7 @@ const warnings = []
 
 const ignoredDirectories = new Set(['.git', 'node_modules'])
 const textExtensions = new Set(['.md', '.mjs', '.json', '.svg', '.yml', '.yaml'])
+const publicBinaryExtensions = new Set(['.png'])
 const linkFileExtensions = new Set(['.md'])
 
 function walk(directory) {
@@ -154,7 +155,15 @@ function validateRequiredFiles() {
     'assets/visuals/update-trust-chain.svg',
     'assets/visuals/ad-sync-tree.svg',
     'assets/visuals/share-lifecycle.svg',
-    'assets/visuals/social-preview.svg'
+    'assets/visuals/social-preview.svg',
+    'assets/screenshots/login-lock-screen.png',
+    'assets/screenshots/overview-security-posture.png',
+    'assets/screenshots/passwords-record-list.png',
+    'assets/screenshots/sharing-package-flow.png',
+    'assets/screenshots/update-center.png',
+    'assets/screenshots/browser-extension-management.png',
+    'assets/screenshots/active-directory-sync-tree.png',
+    'assets/screenshots/offline-share-decrypter.png'
   ]
   for (const file of required) {
     const fullPath = path.join(root, file)
@@ -190,14 +199,34 @@ function validateNoLargeReleaseAssets(files) {
   }
 }
 
+function validateScreenshotAssets(files) {
+  for (const file of files) {
+    const rel = relative(file)
+    if (!rel.startsWith('assets/screenshots/') || path.extname(file).toLowerCase() !== '.png') {
+      continue
+    }
+    const size = statSync(file).size
+    if (size > 2_000_000) {
+      fail(`${rel} is too large for the public git tree (${size} bytes)`)
+    }
+    if (!/^[a-z0-9-]+\.png$/.test(path.basename(file))) {
+      fail(`${rel} must use lowercase kebab-case naming`)
+    }
+  }
+}
+
 const files = walk(root)
 validateRequiredFiles()
 validateRemovedSiteFiles()
 validatePairedDocs()
 validateNoLargeReleaseAssets(files)
+validateScreenshotAssets(files)
 
 for (const file of files) {
   const ext = path.extname(file).toLowerCase()
+  if (publicBinaryExtensions.has(ext)) {
+    continue
+  }
   if (!textExtensions.has(ext) && path.basename(file) !== '.gitignore') {
     warn(`skipped non-text file: ${relative(file)}`)
     continue

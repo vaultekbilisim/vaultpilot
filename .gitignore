@@ -9,6 +9,11 @@ temp/
 .serena/
 .codex/
 
+# Intentional public product screenshots used by GitHub documentation.
+!assets/
+!assets/screenshots/
+!assets/screenshots/*.png
+
 # Release assets belong in GitHub Releases, not in git
 *.msi
 *.zip

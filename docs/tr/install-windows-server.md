@@ -1,46 +1,91 @@
 # Windows Server Kurulumu
 
+Bu runbook, PassMan Server'ın Windows üzerinde normal kurulumu veya yerinde yükseltmesi için kullanılır. Sunucuyu diğer kullanıcılara açmadan önce bu kontroller tamamlanmalıdır.
+
 ## Gereksinimler
 
-- Windows Server veya desteklenen Windows masaüstü ortamı.
-- Administrator yetkisiyle MSI çalıştırma izni.
-- Kullanılacak TCP portu için inbound erişim.
-- Kurulumdan önce alınmış yedek veya temiz kurulum kararı.
+| Gereksinim | Not |
+| --- | --- |
+| Windows Server veya onaylı Windows host | Stabil disk ve yedekleme politikası olan kontrollü bir host kullanın. |
+| Yönetici yetkisi | MSI, servis kaydı ve firewall kuralı için gerekir. |
+| Gelen TCP erişimi | Varsayılan port `1903`; yalnızca ağ politikanız gerektiriyorsa değiştirin. |
+| Yedek kararı | Üretim yükseltmesinden önce mevcut data dizinini koruyun veya yedek alın. |
+| Release varlıkları | MSI ve update manifestini GitHub Releases üzerinden indirin. Chat veya destek mesajlarından kopyalanmış dosyaları kullanmayın. |
 
 ## Kurulum
 
-1. En güncel MSI dosyasını indirin: `PassMan-1.5.3-x64.msi`.
-2. MSI'ı administrator olarak çalıştırın.
-3. Kurulum PassMan Server dosyalarını, bundled Node runtime'ını, Prisma/SQLite runtime dosyalarını, Windows servisini, firewall kuralını ve log/data dizinlerini hazırlar.
-4. Kurulum sonrası tarayıcıdan açın:
+1. En güncel GitHub Release üzerinden `PassMan-1.5.3-x64.msi` dosyasını indirin.
+2. Çalıştırmadan önce dosya adını ve kaynağı doğrulayın.
+3. MSI'ı Administrator olarak çalıştırın.
+4. Kurulum; standalone server, gömülü Node runtime, Prisma/SQLite runtime dosyaları, Windows servisi, firewall kuralı, data dizini ve log dizinini hazırlar.
+5. Önce sunucu üzerinden PassMan'ı açın:
 
 ```text
-http://<SERVER_IP>:1903
+http://127.0.0.1:1903
 ```
 
-## Varsayılan Dizinler
+Sonra uzaktan erişimi doğrulayın:
 
 ```text
-C:\ProgramData\PassMan
-C:\ProgramData\PassMan\logs
+http://<SERVER_HOST>:1903
 ```
 
-## Servis
+## Kurulan Yüzeyler
 
-Windows servis adı:
+| Yüzey | Değer |
+| --- | --- |
+| Windows servisi | `PassManServer` |
+| Görünen ad | `PassMan Server` |
+| Data dizini | `C:\ProgramData\PassMan` |
+| Log dizini | `C:\ProgramData\PassMan\logs` |
+| Varsayılan port | `1903` |
+| Tarayıcı girişi | HTTPS yapılandırılmadan önce `http://<SERVER_HOST>:1903` |
+
+## Kurulum Sonrası Doğrulama
+
+Geniş erişim vermeden önce şu kontrolleri çalıştırın:
+
+```powershell
+sc.exe query PassManServer
+```
 
 ```text
-PassManServer
+http://127.0.0.1:1903/api/profile
 ```
 
-Görünen ad:
+Beklenen sonuç:
 
-```text
-PassMan Server
-```
+- Servis kurulu ve çalışır durumda.
+- Lokal API cevap veriyor.
+- Uzak URL onaylı bir istemciden açılıyor.
+- Firewall kuralı yalnızca hedef ağ yolunu açıyor.
+- PassMan log dizininde kalıcı installer hatası yok.
 
-## Kontrol
+## İlk Giriş Yolu
 
-- `http://127.0.0.1:1903/api/profile` sunucu üzerinde cevap vermeli.
-- Uzak kullanıcılar firewall ve ağ izinleri uygunsa `http://<SERVER_IP>:1903` ile erişebilmelidir.
-- Kurulum logları `C:\ProgramData\PassMan\logs` altında incelenmelidir.
+Servis doğrulamasından sonra:
+
+1. Owner profilini oluşturun.
+2. Ana parola ile kasayı açın.
+3. Lisansı uygulayın.
+4. Public host ve HTTPS yapılandırmasını tamamlayın.
+5. Ek kullanıcı eklemeden önce 2FA'yı etkinleştirin.
+
+## Yükseltme Notları
+
+- Üretim yükseltmesinden önce yedek dışa aktarın.
+- MSI'ın server ve destek bileşenlerini birlikte güncellemesine izin verin.
+- Offline decrypter ve DC agent script'i MSI tarafından yenilenir ve release notlarında izlenir.
+- Destek özellikle istemedikçe kurulu server dizinindeki dosyaları elle değiştirmeyin.
+
+## Destek İçin Güvenli Kanıt
+
+Redakte edildikten sonra paylaşılabilir:
+
+- MSI dosya adı.
+- PassMan server sürümü.
+- Windows servis durumu.
+- Redakte edilmiş installer log kesiti.
+- Gerçek host yerine `<SERVER_HOST>` kullanılan tarayıcı URL biçimi.
+
+Database, yedek, PFX/P12 dosyası, private key, ana parola, secret değeri veya gerçek internal hostname paylaşmayın.

@@ -1,43 +1,55 @@
 # Public Host, HTTPS and Certificates
 
-PassMan starts on a local HTTP port by default. A controlled DNS name and HTTPS are recommended for production use.
+PassMan can start on HTTP for first-run setup, but production access should use a controlled host name and HTTPS certificate.
 
-## Host and Port
+## What Operators Configure
 
-Set the public host and port in the Server System screen.
+| Field | Required | Purpose |
+| --- | --- | --- |
+| Public host | Yes | DNS name or server host users open in the browser. |
+| Public port | Yes | Default is `1903`; use your approved inbound port. |
+| HTTPS certificate package | Yes for HTTPS | PFX/P12 package containing the certificate and private key. |
+| Certificate password | Required when the package is protected | Used by the server to load the package. |
 
-Examples:
+PassMan does not need a separate "certificate source" selector. The operator chooses the certificate file directly.
 
-```text
-passman.company.local
-vault.example.com
-```
+## Supported Certificate Package
 
-Default port:
-
-```text
-1903
-```
-
-## Certificate
-
-When HTTPS is enabled, PassMan must be given a certificate package it can read. The operator provides the certificate file directly; PassMan does not require a separate certificate-source selection flow.
-
-Supported package type:
+Use one certificate package:
 
 ```text
 PFX / P12
 ```
 
-Security notes:
+The certificate must match the host users open in the browser. The subject or SAN should contain the configured host name.
 
-- Do not upload certificate private keys to this public repository or logs.
-- Store the certificate file on the server with restricted ACLs.
-- The certificate subject/SAN should match the host users open in the browser.
+## Production Checklist
 
-## Verify
+1. Create or obtain the certificate package outside PassMan.
+2. Confirm the host name resolves to the PassMan server.
+3. Open Server System and set the public host and port.
+4. Upload the PFX/P12 package.
+5. Enter the package password if required.
+6. Save the HTTPS configuration.
+7. Restart or let PassMan reload the service when the UI requests it.
+8. Open:
 
-1. The host name resolves to the PassMan server.
-2. The port is allowed by firewall policy.
-3. The certificate matches the host name.
-4. The browser opens `https://<HOST>:<PORT>` without warnings.
+```text
+https://<HOST>:<PORT>
+```
+
+## Security Notes
+
+- Never upload PFX/P12 files, private keys or certificate passwords to this public repository.
+- Store certificate packages on the server with restricted ACLs.
+- Replace expired certificates before browser warnings appear.
+- Use internal PKI for private networks or a trusted public certificate for internet-facing DNS names.
+
+## Troubleshooting
+
+| Symptom | Check |
+| --- | --- |
+| Browser hostname warning | Certificate SAN does not match `<HOST>`. |
+| HTTPS does not start | PFX/P12 password is wrong or the package is not readable. |
+| Works locally, not remotely | DNS, firewall or reverse proxy path is not aligned with the configured host/port. |
+| Certificate accepted on server only | Client devices do not trust the issuing CA. |

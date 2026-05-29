@@ -1,22 +1,36 @@
 # Güncelleme Merkezi
 
-PassMan Update Center, ana Windows MSI paketini ve Chromium extension paketini yönetir. Offline Share Decrypter ve DC Agent Service, MSI ile yenilenen destek bileşenleri olarak release notlarında izlenir.
+PassMan Güncelleme Merkezi ana Windows MSI paketini yönetir. Tarayıcı eklentisi, Offline Share Decrypter ve PassMan DC Agent Service bileşenleri release notlarında izlenir; MSI veya belgelenmiş release asset'leriyle yenilenir.
+
+![PassMan update center](../../assets/screenshots/update-center.png)
 
 ## Güvenli Güncelleme Modeli
 
-PassMan şu kontrolleri yapar:
+PassMan şunları doğrular:
 
-- İmzalı update manifest doğrulaması.
-- Paket URL ve dosya adı kontrolü.
-- SHA-256 hash doğrulaması.
-- MSI Authenticode signer thumbprint kontrolü.
-- Paket boyutu ve metadata kontrolü.
+- İmzalı update manifesti.
+- Paket URL'si ve dosya adı.
+- SHA-256 checksum.
+- MSI Authenticode signer thumbprint.
+- Dosya boyutu ve release metadata'sı.
 
-Global CA zinciri PassMan'ın kendi update güveni için zorunlu değildir; imzalı manifest local signer thumbprint'ini pin'lediğinde PassMan paketi kabul edebilir. Windows SmartScreen itibarı için CA-backed veya trusted signing hâlâ önerilir.
+İmzalı manifest lokal release signer thumbprint'ini pin'lediğinde PassMan-managed update trust için global CA chain zorunlu değildir. Windows SmartScreen itibarı ve geniş OS-level güven için CA-backed veya trusted-signing sertifika hâlâ önerilir.
 
-## Release Assets
+## Normal Güncelleme Akışı
 
-Güncel public release şu asset'leri içerir:
+1. Yedek dışa aktarın.
+2. Güncelleme Merkezi'ni açın.
+3. Güncellemeleri kontrol edin.
+4. Sürüm, notlar, signer ve checksum bilgisini inceleyin.
+5. Güncellemeyi başlatın.
+6. PassMan MSI'ı sunucuda indirir ve doğrular.
+7. Quiet Windows Installer akışı çalışır.
+8. PassMan servisi yeniden başlar.
+9. Konsolu yeniden açıp sürüm ve sağlık durumunu doğrulayın.
+
+## Release Asset'leri
+
+Güncel public release şunları içerir:
 
 - `PassMan-1.5.3-x64.msi`
 - `passman-update.json`
@@ -24,9 +38,15 @@ Güncel public release şu asset'leri içerir:
 - `passman-share-decrypter.zip`
 - `passman-ad-agent.ps1`
 
-## Operasyon Önerileri
+## Bileşen Notları
 
-- Güncelleme öncesi yedek alın.
-- MSI imzasını ve manifest durumunu kontrol edin.
-- Güncelleme sonrası servis durumunu ve versiyonu doğrulayın.
-- Hata durumunda installer ve PassMan loglarını birlikte inceleyin.
+Güncelleme Merkezi DC agent ve decrypter için ayrı installer akışı açmamalıdır. Sürüm notları görünür kalır; fakat MSI server paketiyle gelen destek dosyalarını yeniler. Operatörler manuel kurulum veya kurtarma gerektiğinde en güncel release asset'ini yine indirebilir.
+
+## Sorun Giderme
+
+| Belirti | İlk kontrol |
+| --- | --- |
+| Güncelleme yüzde 76 civarında duruyor | MSI imzası ve Windows Installer event log. |
+| Checksum uyuşmuyor | İndirilen MSI'ı silip release asset üzerinden tekrar deneyin. |
+| Servis yeniden başlamıyor | `PassManServer` durumunu sorgulayın ve installer loglarını inceleyin. |
+| Sürüm değişmedi | MSI'ın tamamlandığını doğrulayın, sonra servisi yeniden başlatın. |

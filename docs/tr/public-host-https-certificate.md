@@ -1,43 +1,55 @@
-# Public Host, HTTPS ve Sertifika
+# Public Host, HTTPS ve Sertifikalar
 
-PassMan varsayılan olarak yerel HTTP portu ile başlar. Üretim kullanımında kontrollü DNS adı ve HTTPS önerilir.
+PassMan ilk kurulum için HTTP üzerinde başlayabilir; üretim erişiminde kontrollü bir host adı ve HTTPS sertifikası kullanılmalıdır.
 
-## Host ve Port
+## Operatörün Girdiği Alanlar
 
-Sunucu sistemi ekranında kullanılacak public host ve port tanımlanır.
+| Alan | Zorunlu | Amaç |
+| --- | --- | --- |
+| Public host | Evet | Kullanıcıların tarayıcıda açacağı DNS adı veya server host'u. |
+| Public port | Evet | Varsayılan `1903`; onaylı gelen portu kullanın. |
+| HTTPS sertifika paketi | HTTPS için evet | Sertifika ve private key içeren PFX/P12 paketi. |
+| Sertifika parolası | Paket parola korumalıysa zorunlu | Server'ın paketi yüklemesi için kullanılır. |
 
-Örnekler:
+PassMan ayrı bir "sertifika kaynağı" seçimi istemez. Operatör doğrudan sertifika dosyasını seçer.
 
-```text
-passman.sirket.local
-vault.example.com
-```
+## Desteklenen Sertifika Paketi
 
-Port varsayılanı:
-
-```text
-1903
-```
-
-## Sertifika
-
-HTTPS etkinleştirilecekse PassMan'ın okuyabileceği sertifika paketi seçilmelidir. Operatör sertifika dosyasını sağlar; PassMan gereksiz sertifika kaynağı seçimi istemez.
-
-Desteklenen paket tipi:
+Tek paket kullanılır:
 
 ```text
 PFX / P12
 ```
 
-Güvenlik notları:
+Sertifika, kullanıcıların tarayıcıda açtığı host ile eşleşmelidir. Subject veya SAN içinde yapılandırılan host adı bulunmalıdır.
 
-- Sertifika private key'i PassMan public repository'ye veya loglara konmamalıdır.
-- Sertifika dosyası sunucuda sınırlı ACL ile saklanmalıdır.
-- Kullanıcıların tarayıcı uyarısı görmemesi için host adı sertifika ile eşleşmelidir.
+## Üretim Kontrol Listesi
 
-## Kontrol
+1. Sertifika paketini PassMan dışında oluşturun veya temin edin.
+2. Host adının PassMan sunucusuna çözümlendiğini doğrulayın.
+3. Sunucu sistemi ekranında public host ve port değerlerini girin.
+4. PFX/P12 paketini yükleyin.
+5. Gerekiyorsa paket parolasını girin.
+6. HTTPS yapılandırmasını kaydedin.
+7. UI isterse servisi yeniden başlatın veya PassMan'ın yeniden yüklemesini bekleyin.
+8. Şu adresi açın:
 
-1. Host adı DNS veya hosts dosyası üzerinden sunucuya çözülmeli.
-2. Port firewall'da izinli olmalı.
-3. Sertifika host adıyla eşleşmeli.
-4. Tarayıcı `https://<HOST>:<PORT>` ile uyarısız açılmalıdır.
+```text
+https://<HOST>:<PORT>
+```
+
+## Güvenlik Notları
+
+- PFX/P12 dosyalarını, private key'leri veya sertifika parolalarını bu public repoya yüklemeyin.
+- Sertifika paketlerini sunucuda kısıtlı ACL ile saklayın.
+- Tarayıcı uyarıları başlamadan önce süresi dolan sertifikaları değiştirin.
+- Private network için internal PKI, internet-facing DNS için trusted public certificate kullanın.
+
+## Sorun Giderme
+
+| Belirti | Kontrol |
+| --- | --- |
+| Tarayıcı hostname uyarısı veriyor | Sertifika SAN değeri `<HOST>` ile eşleşmiyor. |
+| HTTPS başlamıyor | PFX/P12 parolası yanlış veya paket okunamıyor. |
+| Lokalde çalışıyor, uzaktan çalışmıyor | DNS, firewall veya reverse proxy yolu host/port ile hizalı değil. |
+| Sertifika yalnızca sunucuda kabul ediliyor | İstemci cihazlar sertifikayı veren CA'ya güvenmiyor. |

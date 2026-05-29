@@ -1,18 +1,32 @@
 # Update Center
 
-PassMan Update Center manages the main Windows MSI package and the Chromium extension package. Offline Share Decrypter and DC Agent Service are support components refreshed by the MSI and tracked in release notes.
+PassMan Update Center manages the main Windows MSI package. The browser extension, Offline Share Decrypter and PassMan DC Agent Service are tracked as component release notes and are refreshed by the MSI or their documented release assets.
+
+![PassMan update center](../../assets/screenshots/update-center.png)
 
 ## Secure Update Model
 
 PassMan verifies:
 
 - Signed update manifest.
-- Package URL and file name.
-- SHA-256 hash.
+- Package URL and filename.
+- SHA-256 checksum.
 - MSI Authenticode signer thumbprint.
-- File size and metadata.
+- File size and release metadata.
 
-A global CA chain is not required for PassMan-managed update trust when the signed manifest pins the local release signer thumbprint. CA-backed or trusted signing is still recommended for Windows SmartScreen reputation.
+A global CA chain is not required for PassMan-managed update trust when the signed manifest pins the local release signer thumbprint. CA-backed or trusted-signing certificates remain recommended for Windows SmartScreen reputation and broad OS-level trust.
+
+## Normal Update Flow
+
+1. Export a backup.
+2. Open Update Center.
+3. Check for updates.
+4. Review version, notes, signer and checksum.
+5. Start the update.
+6. PassMan downloads and verifies the MSI on the server.
+7. The quiet Windows Installer flow runs.
+8. The PassMan service restarts.
+9. Reopen the console and confirm version and health.
 
 ## Release Assets
 
@@ -24,9 +38,15 @@ The current public release contains:
 - `passman-share-decrypter.zip`
 - `passman-ad-agent.ps1`
 
-## Operations
+## Component Notes
 
-- Export a backup before updating.
-- Check the MSI signature and manifest status.
-- Verify service status and version after the update.
-- Review installer and PassMan logs together when updates fail.
+Update Center should not create separate installer flows for the DC agent and decrypter. Their version notes remain visible, but the MSI refreshes the support files shipped by the server package. Operators can still download the latest release asset when they need manual installation or recovery.
+
+## Troubleshooting
+
+| Symptom | First check |
+| --- | --- |
+| Update stops around 76 percent | MSI signature and Windows Installer event log. |
+| Checksum mismatch | Delete the downloaded MSI and retry from the release asset. |
+| Service does not restart | Query `PassManServer` and review installer logs. |
+| Version did not change | Confirm the MSI completed, then restart the service. |
