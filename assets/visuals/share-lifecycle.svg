@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 520" role="img" aria-label="PassMan offline sharing lifecycle">
+  <rect width="980" height="520" rx="34" fill="#05070a"/>
+  <text x="70" y="86" fill="#f7f2e8" font-family="Segoe UI, sans-serif" font-size="36" font-weight="760">Offline share lifecycle</text>
+  <g font-family="Segoe UI, sans-serif">
+    <g>
+      <circle cx="150" cy="230" r="62" fill="#111a22" stroke="#f0b35c" stroke-width="3"/>
+      <text x="126" y="224" fill="#f7f2e8" font-size="20" font-weight="760">Select</text>
+      <text x="110" y="250" fill="#9da8b3" font-size="14">records</text>
+    </g>
+    <g>
+      <circle cx="370" cy="230" r="62" fill="#111a22" stroke="#5cc8d7" stroke-width="3"/>
+      <text x="338" y="224" fill="#f7f2e8" font-size="20" font-weight="760">Policy</text>
+      <text x="326" y="250" fill="#9da8b3" font-size="14">expiry · opens</text>
+    </g>
+    <g>
+      <circle cx="590" cy="230" r="62" fill="#111a22" stroke="#f0b35c" stroke-width="3"/>
+      <text x="554" y="224" fill="#f7f2e8" font-size="20" font-weight="760">Package</text>
+      <text x="548" y="250" fill="#9da8b3" font-size="14">JSON + files</text>
+    </g>
+    <g>
+      <circle cx="810" cy="230" r="62" fill="#111a22" stroke="#65c98a" stroke-width="3"/>
+      <text x="774" y="224" fill="#f7f2e8" font-size="20" font-weight="760">Decrypt</text>
+      <text x="764" y="250" fill="#9da8b3" font-size="14">local browser</text>
+    </g>
+  </g>
+  <path d="M216 230h86M436 230h86M656 230h86" stroke="#2f3f4b" stroke-width="6" stroke-linecap="round"/>
+  <rect x="104" y="352" width="772" height="76" rx="26" fill="#101820" stroke="#2b3744"/>
+  <text x="138" y="397" fill="#cfd7df" font-family="Segoe UI, sans-serif" font-size="18">External packages stay selected-record, expiring, usage-limited, and decryptable without a network call.</text>
+</svg>

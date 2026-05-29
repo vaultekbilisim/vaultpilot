@@ -1,0 +1,9 @@
+{
+  "name": "passman-public-docs",
+  "version": "1.5.3",
+  "private": true,
+  "description": "Public documentation and product site for PassMan Enterprise Vault Console.",
+  "scripts": {
+    "validate": "node scripts/validate-docs.mjs"
+  }
+}

@@ -4,6 +4,12 @@ PassMan is a self-hosted, zero-knowledge enterprise password and secrets vault f
 
 This public repository contains product documentation, knowledge-base articles, release notes, and GitHub Release downloads. The product source code and signing workflow remain private.
 
+## Product Site
+
+- Public product hub: https://ucsahinn.github.io/passman-releases/
+- Documentation hub: https://ucsahinn.github.io/passman-releases/docs/
+- Knowledge base: https://ucsahinn.github.io/passman-releases/kb/
+
 ## Current Stable Release
 
 **PassMan 1.5.3**
@@ -55,8 +61,20 @@ Common guides:
 - [EN: Public host, HTTPS and certificates](docs/en/public-host-https-certificate.md)
 - [EN: Active Directory agent](docs/en/active-directory-agent.md)
 - [EN: Sharing and offline decrypter](docs/en/sharing-and-offline-decrypter.md)
+- [KB: installation and operations](kb/index.html)
 
 Full release history is in [RELEASES.md](RELEASES.md).
+
+## Visual Assets
+
+The public site includes safe demo visuals and diagrams under `assets/visuals/`. These files use mock data only and are safe for public product explanation:
+
+- Enterprise overview console demo.
+- Chromium extension badge/autofill demo.
+- Zero-knowledge browser/server flow.
+- Signed update trust chain.
+- Active Directory tree sync concept.
+- Offline sharing lifecycle.
 
 ## Update Verification
 
@@ -73,3 +91,13 @@ PassMan is distributed for licensed users. This repository is not an open-source
 Do not upload private keys, signing certificates, database files, environment files, AD bind credentials, agent tokens, license issuer material, customer data, logs, or screenshots containing secrets to this repository.
 
 Installers, ZIP packages, PowerShell scripts, and signed manifests belong in GitHub Releases, not in the git tree.
+
+## Repository Validation
+
+Run before publishing public documentation changes:
+
+```powershell
+npm run validate
+```
+
+The validation checks local links, TR/EN doc parity, required visual assets, stale latest-version wording, and forbidden secret-like patterns.

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 520" role="img" aria-label="PassMan Active Directory sync tree">
+  <rect width="980" height="520" rx="34" fill="#05070a"/>
+  <rect x="64" y="64" width="852" height="392" rx="32" fill="#0b1218" stroke="#26313d"/>
+  <text x="96" y="116" fill="#f7f2e8" font-family="Segoe UI, sans-serif" font-size="32" font-weight="760">Directory selection tree</text>
+  <text x="96" y="150" fill="#9da8b3" font-family="Segoe UI, sans-serif" font-size="17">OU, group and user scope stay readable at domain scale.</text>
+  <g font-family="Segoe UI, sans-serif" font-size="18">
+    <rect x="96" y="194" width="360" height="46" rx="16" fill="#111a22" stroke="#f0b35c"/>
+    <text x="132" y="224" fill="#f5d49d">☑ corp.local</text>
+    <rect x="130" y="260" width="326" height="42" rx="15" fill="#101820" stroke="#2b3744"/>
+    <text x="164" y="287" fill="#f7f2e8">☑ OU=Engineering</text>
+    <rect x="164" y="318" width="292" height="42" rx="15" fill="#101820" stroke="#2b3744"/>
+    <text x="198" y="345" fill="#cfd7df">☑ Group=Infrastructure</text>
+    <rect x="198" y="376" width="258" height="42" rx="15" fill="#101820" stroke="#2b3744"/>
+    <text x="232" y="403" fill="#cfd7df">☑ user: admin.ops</text>
+  </g>
+  <g font-family="Segoe UI, sans-serif">
+    <rect x="538" y="194" width="318" height="94" rx="22" fill="#111a22" stroke="#2b3744"/>
+    <text x="568" y="232" fill="#f7f2e8" font-size="24" font-weight="760">Login scope</text>
+    <text x="568" y="260" fill="#9da8b3" font-size="16">31 objects selected</text>
+    <rect x="538" y="316" width="318" height="94" rx="22" fill="#111a22" stroke="#2b3744"/>
+    <text x="568" y="354" fill="#f7f2e8" font-size="24" font-weight="760">Credential import</text>
+    <text x="568" y="382" fill="#9da8b3" font-size="16">7 eligible users</text>
+  </g>
+</svg>

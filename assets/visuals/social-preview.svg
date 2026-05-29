@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="PassMan social preview">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop stop-color="#05070a"/>
+      <stop offset=".55" stop-color="#0c141c"/>
+      <stop offset="1" stop-color="#17120c"/>
+    </linearGradient>
+    <radialGradient id="r" cx=".78" cy=".12" r=".7">
+      <stop stop-color="#5cc8d7" stop-opacity=".34"/>
+      <stop offset=".52" stop-color="#f0b35c" stop-opacity=".15"/>
+      <stop offset="1" stop-color="#05070a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <rect width="1200" height="630" fill="url(#r)"/>
+  <rect x="64" y="64" width="1072" height="502" rx="42" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
+  <circle cx="130" cy="132" r="24" fill="#f0b35c"/>
+  <text x="174" y="143" fill="#f7f2e8" font-family="Segoe UI, sans-serif" font-size="34" font-weight="800">PassMan</text>
+  <text x="110" y="292" fill="#fff5df" font-family="Segoe UI, sans-serif" font-size="74" font-weight="800">Enterprise Vault Console</text>
+  <text x="114" y="354" fill="#c7d0d6" font-family="Segoe UI, sans-serif" font-size="28">Self-hosted zero-knowledge secrets management for Windows Server.</text>
+  <rect x="114" y="416" width="248" height="58" rx="29" fill="#f0b35c"/>
+  <text x="150" y="453" fill="#05070a" font-family="Segoe UI, sans-serif" font-size="22" font-weight="800">Download 1.5.3</text>
+  <rect x="828" y="154" width="212" height="306" rx="34" fill="#0c141c" stroke="#5cc8d7"/>
+  <text x="872" y="218" fill="#f7f2e8" font-family="Segoe UI, sans-serif" font-size="52" font-weight="800">25</text>
+  <text x="944" y="218" fill="#9da8b3" font-family="Segoe UI, sans-serif" font-size="28">/100</text>
+  <text x="872" y="260" fill="#ffd38a" font-family="Segoe UI, sans-serif" font-size="18">Actionable posture</text>
+  <path d="M872 340c38-52 84 32 126-20" stroke="#f0b35c" stroke-width="8" fill="none" stroke-linecap="round"/>
+</svg>

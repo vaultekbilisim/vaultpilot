@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PassMan Enterprise Vault Console</title>
+    <meta name="description" content="Self-hosted zero-knowledge enterprise vault console for Windows Server.">
+    <meta property="og:title" content="PassMan Enterprise Vault Console">
+    <meta property="og:description" content="Self-hosted zero-knowledge secrets management for Windows Server.">
+    <meta property="og:image" content="assets/visuals/social-preview.svg">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <nav class="floating-nav" aria-label="Primary navigation">
+        <a class="brand" href="index.html" aria-label="PassMan home">
+          <img src="assets/favicon.svg" alt="">
+          <span>PassMan</span>
+        </a>
+        <div class="nav-links" aria-label="Site sections">
+          <a href="#product">Product</a>
+          <a href="#security">Security</a>
+          <a href="#docs">Docs</a>
+          <a href="#visuals">Visuals</a>
+          <a href="RELEASES.md">Releases</a>
+        </div>
+        <div class="nav-actions">
+          <a class="button button-secondary" href="https://github.com/ucsahinn/passman-releases/releases/latest">Latest release <span class="icon">↗</span></a>
+          <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" data-menu-toggle>☰</button>
+        </div>
+      </nav>
+      <div class="mobile-menu" hidden data-mobile-menu>
+        <a href="#product">Product</a>
+        <a href="#security">Security</a>
+        <a href="#docs">Docs</a>
+        <a href="#visuals">Visuals</a>
+        <a href="RELEASES.md">Releases</a>
+      </div>
+
+      <header class="hero">
+        <div data-reveal>
+          <span class="eyebrow">Self-hosted · Zero-knowledge · Windows MSI</span>
+          <h1>Enterprise vault control without cloud custody.</h1>
+          <p class="lead">PassMan gives teams a local security console for passwords, API keys, credentials, secure notes, certificates, files, sharing, audit, Active Directory sync, browser autofill and signed updates.</p>
+          <div class="button-row">
+            <a class="button button-primary" href="https://github.com/ucsahinn/passman-releases/releases/latest/download/PassMan-1.5.3-x64.msi">Download 1.5.3 <span class="icon">↓</span></a>
+            <a class="button button-secondary" href="docs/en/overview.md">Read docs <span class="icon">↗</span></a>
+          </div>
+          <div class="hero-proof" aria-label="Release facts">
+            <div class="proof-pill"><strong>1.5.3</strong><span>Current stable</span></div>
+            <div class="proof-pill"><strong>MSI</strong><span>Windows service</span></div>
+            <div class="proof-pill"><strong>TR + EN</strong><span>Public KB</span></div>
+          </div>
+        </div>
+        <div class="bezel hero-visual" data-reveal>
+          <div class="core">
+            <img src="assets/visuals/overview-console.svg" alt="PassMan enterprise dashboard demo with security posture and action cards">
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section id="product" class="section">
+          <div class="section-head" data-reveal>
+            <div>
+              <span class="eyebrow">Vault Console</span>
+              <h2>Built for controlled enterprise operations.</h2>
+            </div>
+            <p>PassMan keeps the server local, the keys browser-side, and the operator workflow audit-ready.</p>
+          </div>
+          <div class="bento">
+            <article class="tile tile-large" data-reveal>
+              <div class="tile-inner">
+                <span class="tag">Security posture</span>
+                <h3>Dashboard decisions in the first minute.</h3>
+                <p>Security score, 2FA risk, audit chain state, extension health, package status and license capacity are presented as actions instead of passive metrics.</p>
+                <div class="metric-row">
+                  <div class="metric"><strong>2FA</strong><span>risk action</span></div>
+                  <div class="metric"><strong>Audit</strong><span>chain health</span></div>
+                  <div class="metric"><strong>MSI</strong><span>signed update</span></div>
+                  <div class="metric"><strong>AD</strong><span>tree sync</span></div>
+                </div>
+              </div>
+            </article>
+            <article class="tile tile-medium" data-reveal>
+              <div class="tile-inner">
+                <span class="tag">Selected sharing</span>
+                <h3>Share records, not the whole vault.</h3>
+                <p>Internal shares wrap keys for known users. External shares produce expiring, usage-limited offline packages that can include selected file records.</p>
+              </div>
+            </article>
+            <article class="tile tile-small" data-reveal>
+              <div class="tile-inner">
+                <span class="tag">Extension</span>
+                <h3>Badge counts, autofill and save prompts.</h3>
+                <p>Paired Chromium devices show active-site matches, offer one-click fill and can save or update login records after user action.</p>
+              </div>
+            </article>
+            <article class="tile tile-small" data-reveal>
+              <div class="tile-inner">
+                <span class="tag">Directory</span>
+                <h3>PassMan DC Agent Service.</h3>
+                <p>Domain-side sync runs as a Windows service with local bind password capture, redacted logs, repair, status and tail-log commands.</p>
+              </div>
+            </article>
+            <article class="tile tile-small" data-reveal>
+              <div class="tile-inner">
+                <span class="tag">Updates</span>
+                <h3>Signed manifest trust chain.</h3>
+                <p>The application verifies manifest signature, asset hashes, file metadata and MSI signer thumbprint before exposing updates.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="security" class="section">
+          <div class="section-head" data-reveal>
+            <div>
+              <span class="eyebrow">Trust Model</span>
+              <h2>Security model visible to operators.</h2>
+            </div>
+            <p>The public docs explain what is protected, where keys live, how updates are trusted and which logs are safe to share.</p>
+          </div>
+          <div class="visual-grid">
+            <figure class="visual-frame" data-reveal>
+              <img src="assets/visuals/zero-knowledge-flow.svg" alt="Zero knowledge browser to server flow diagram">
+              <figcaption>Browser-side key derivation and ciphertext-only persistence.</figcaption>
+            </figure>
+            <figure class="visual-frame" data-reveal>
+              <img src="assets/visuals/update-trust-chain.svg" alt="Signed update manifest trust chain diagram">
+              <figcaption>Manifest, hash, signer pin and MSI install flow.</figcaption>
+            </figure>
+            <figure class="visual-frame" data-reveal>
+              <img src="assets/visuals/share-lifecycle.svg" alt="Offline sharing lifecycle diagram">
+              <figcaption>Selected records, expiry, usage limits and local decryption.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section id="docs" class="section">
+          <div class="section-head" data-reveal>
+            <div>
+              <span class="eyebrow">Documentation</span>
+              <h2>Operator guides and KB paths.</h2>
+            </div>
+            <p>Start from product overview, install the Windows service, configure host/certificate, pair extension, sync AD and troubleshoot safely.</p>
+          </div>
+          <div class="doc-grid">
+            <a class="doc-card" href="docs/tr/overview.md" data-reveal><span class="tag">TR</span><h3>Türkçe dokümantasyon</h3><p>Kurulum, lisans, güncelleme, AD ajan, eklenti ve paylaşım rehberleri.</p></a>
+            <a class="doc-card" href="docs/en/overview.md" data-reveal><span class="tag">EN</span><h3>English documentation</h3><p>Installation, licensing, updates, AD agent, extension and sharing guides.</p></a>
+            <a class="doc-card" href="kb/index.html" data-reveal><span class="tag">KB</span><h3>Knowledge base</h3><p>Common operational issues with fast, redaction-safe troubleshooting steps.</p></a>
+          </div>
+        </section>
+
+        <section id="visuals" class="section">
+          <div class="section-head" data-reveal>
+            <div>
+              <span class="eyebrow">Product Visuals</span>
+              <h2>Safe demo screens and diagrams.</h2>
+            </div>
+            <p>Visual assets use mock data only. They are designed to explain the product without leaking customer or operator secrets.</p>
+          </div>
+          <div class="visual-grid">
+            <figure class="visual-frame" data-reveal>
+              <img src="assets/visuals/extension-demo.svg" alt="Browser extension active-site badge and autofill demo">
+              <figcaption>Extension badge count and autofill prompt demo.</figcaption>
+            </figure>
+            <figure class="visual-frame" data-reveal>
+              <img src="assets/visuals/ad-sync-tree.svg" alt="Active Directory OU group user tree selection demo">
+              <figcaption>AD sync tree and scope selection concept.</figcaption>
+            </figure>
+            <figure class="visual-frame" data-reveal>
+              <img src="assets/visuals/overview-console.svg" alt="Overview dashboard safe demo screenshot">
+              <figcaption>Dashboard safe demo screen with action-oriented posture.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="cta-panel" data-reveal>
+            <span class="eyebrow">Release channel</span>
+            <h2>Download from GitHub Releases. Verify inside PassMan.</h2>
+            <p class="lead">The public repo keeps documentation and release notes in git. Installers, ZIP packages, scripts and signed manifests stay in GitHub Releases.</p>
+            <div class="button-row">
+              <a class="button button-primary" href="https://github.com/ucsahinn/passman-releases/releases/latest">Open latest release <span class="icon">↗</span></a>
+              <a class="button button-secondary" href="SECURITY.md">Security policy <span class="icon">↗</span></a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>PassMan Enterprise Vault Console · Public documentation and release channel · Source remains private.</p>
+      </footer>
+    </div>
+    <script src="assets/site.js"></script>
+  </body>
+</html>

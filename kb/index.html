@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PassMan Knowledge Base</title>
+    <meta name="description" content="PassMan public knowledge base and troubleshooting index.">
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../assets/styles.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <nav class="floating-nav" aria-label="Primary navigation">
+        <a class="brand" href="../index.html"><img src="../assets/favicon.svg" alt=""><span>PassMan KB</span></a>
+        <div class="nav-links">
+          <a href="../index.html">Product</a>
+          <a href="../docs/index.html">Docs</a>
+          <a href="../RELEASES.md">Releases</a>
+          <a href="../SUPPORT.md">Support</a>
+        </div>
+      </nav>
+      <header class="section" data-reveal>
+        <span class="eyebrow">Knowledge Base</span>
+        <h1>Fast operator answers, without leaking secrets.</h1>
+        <p class="lead">Use these public-safe entries to diagnose common installation, update, AD sync, extension, certificate, audit and license states.</p>
+      </header>
+      <main class="section">
+        <div class="kb-grid">
+          <a class="kb-card" href="en/msi-installation-fails.md"><span class="tag">MSI</span><h3>Installation fails</h3><p>Check admin context, port ownership, service state and installer logs.</p></a>
+          <a class="kb-card" href="en/update-stuck-76.md"><span class="tag">Update</span><h3>Update stays around 76%</h3><p>Understand service restart reconciliation and verbose MSI log review.</p></a>
+          <a class="kb-card" href="en/dc-agent-service.md"><span class="tag">AD Agent</span><h3>Service cannot connect</h3><p>Verify URL reachability, bind username format, redacted logs and repair mode.</p></a>
+          <a class="kb-card" href="en/extension-pairing.md"><span class="tag">Extension</span><h3>Pairing remains pending</h3><p>Review pair code lifetime, username, unlocked vault state and device approval.</p></a>
+          <a class="kb-card" href="en/certificate-warning.md"><span class="tag">HTTPS</span><h3>Certificate warning</h3><p>Check host/SAN match, PFX/P12 path, server ACL and firewall route.</p></a>
+          <a class="kb-card" href="en/audit-chain-partial.md"><span class="tag">Audit</span><h3>Audit chain is partial</h3><p>Inspect related events with advanced filters and treat unexplained breaks as incidents.</p></a>
+          <a class="kb-card" href="en/license-read-only.md"><span class="tag">License</span><h3>Read-only state</h3><p>Review trial expiry, license signature, active user count and activation status.</p></a>
+          <a class="kb-card" href="en/external-share-fails.md"><span class="tag">Share</span><h3>External package fails</h3><p>Separate wrong passphrase, expired package, exhausted usage and tampered metadata.</p></a>
+          <a class="kb-card" href="../SECURITY.md"><span class="tag">Safety</span><h3>What can I send to support?</h3><p>Use redacted logs and metadata only; never send secrets, tokens, DB files or private keys.</p></a>
+          <a class="kb-card" href="tr/msi-installation-fails.md"><span class="tag">TR</span><h3>Türkçe KB</h3><p>MSI, update, DC Agent, extension, sertifika, audit, lisans ve paylaşım sorunları.</p></a>
+        </div>
+      </main>
+      <footer class="footer"><p>PassMan public knowledge base.</p></footer>
+    </div>
+    <script src="../assets/site.js"></script>
+  </body>
+</html>

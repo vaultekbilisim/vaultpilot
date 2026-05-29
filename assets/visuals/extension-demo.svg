@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" role="img" aria-label="PassMan browser extension demo">
+  <rect width="900" height="620" rx="36" fill="#05070a"/>
+  <rect x="30" y="30" width="840" height="560" rx="30" fill="#0b1218" stroke="#26313d"/>
+  <rect x="62" y="62" width="776" height="56" rx="20" fill="#111a22" stroke="#2c3844"/>
+  <circle cx="92" cy="90" r="8" fill="#e36b6b"/>
+  <circle cx="116" cy="90" r="8" fill="#f0b35c"/>
+  <circle cx="140" cy="90" r="8" fill="#65c98a"/>
+  <rect x="188" y="76" width="412" height="28" rx="14" fill="#071017" stroke="#33414e"/>
+  <text x="214" y="96" fill="#94a2ad" font-family="Segoe UI, sans-serif" font-size="15">accounts.example.com</text>
+  <rect x="624" y="72" width="50" height="36" rx="16" fill="#16232c" stroke="#5cc8d7"/>
+  <text x="644" y="96" fill="#bcecf2" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700">3</text>
+  <rect x="118" y="166" width="420" height="328" rx="26" fill="#101820" stroke="#2c3844"/>
+  <text x="154" y="220" fill="#f7f2e8" font-family="Segoe UI, sans-serif" font-size="34" font-weight="760">Sign in</text>
+  <rect x="154" y="256" width="300" height="46" rx="16" fill="#071017" stroke="#33414e"/>
+  <text x="176" y="285" fill="#9da8b3" font-family="Segoe UI, sans-serif" font-size="16">admin@example.com</text>
+  <rect x="154" y="320" width="300" height="46" rx="16" fill="#071017" stroke="#33414e"/>
+  <text x="176" y="349" fill="#9da8b3" font-family="Segoe UI, sans-serif" font-size="16">••••••••••••</text>
+  <rect x="154" y="392" width="148" height="50" rx="18" fill="#f0b35c"/>
+  <text x="190" y="424" fill="#071017" font-family="Segoe UI, sans-serif" font-size="16" font-weight="800">Continue</text>
+  <rect x="568" y="146" width="240" height="392" rx="28" fill="#0e161e" stroke="#f0b35c"/>
+  <text x="596" y="196" fill="#f7f2e8" font-family="Segoe UI, sans-serif" font-size="24" font-weight="760">PassMan</text>
+  <text x="596" y="226" fill="#9da8b3" font-family="Segoe UI, sans-serif" font-size="15">3 records for this site</text>
+  <g font-family="Segoe UI, sans-serif">
+    <rect x="596" y="260" width="184" height="66" rx="18" fill="#131f28" stroke="#2c3844"/>
+    <text x="614" y="288" fill="#f7f2e8" font-size="16" font-weight="700">Admin Portal</text>
+    <text x="614" y="312" fill="#9da8b3" font-size="13">Credential · Owner</text>
+    <rect x="596" y="342" width="184" height="66" rx="18" fill="#131f28" stroke="#2c3844"/>
+    <text x="614" y="370" fill="#f7f2e8" font-size="16" font-weight="700">Finance SSO</text>
+    <text x="614" y="394" fill="#9da8b3" font-size="13">Password · 2FA</text>
+    <rect x="596" y="424" width="184" height="66" rx="18" fill="#131f28" stroke="#2c3844"/>
+    <text x="614" y="452" fill="#f7f2e8" font-size="16" font-weight="700">API Console</text>
+    <text x="614" y="476" fill="#9da8b3" font-size="13">API key · Scoped</text>
+  </g>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 520" role="img" aria-label="PassMan zero knowledge flow">
+  <rect width="980" height="520" rx="34" fill="#05070a"/>
+  <g fill="#101820" stroke="#2b3744" stroke-width="2">
+    <rect x="70" y="96" width="210" height="140" rx="28"/>
+    <rect x="385" y="96" width="210" height="140" rx="28"/>
+    <rect x="700" y="96" width="210" height="140" rx="28"/>
+    <rect x="228" y="322" width="210" height="112" rx="26"/>
+    <rect x="542" y="322" width="210" height="112" rx="26"/>
+  </g>
+  <g font-family="Segoe UI, sans-serif">
+    <text x="100" y="150" fill="#f7f2e8" font-size="26" font-weight="760">Browser</text>
+    <text x="100" y="184" fill="#9da8b3" font-size="16">Master password stays local</text>
+    <text x="415" y="150" fill="#f7f2e8" font-size="26" font-weight="760">Web Crypto</text>
+    <text x="415" y="184" fill="#9da8b3" font-size="16">Keys unlock in RAM</text>
+    <text x="730" y="150" fill="#f7f2e8" font-size="26" font-weight="760">PassMan Server</text>
+    <text x="730" y="184" fill="#9da8b3" font-size="16">Receives ciphertext only</text>
+    <text x="258" y="370" fill="#f7f2e8" font-size="24" font-weight="760">Wrapped keys</text>
+    <text x="258" y="402" fill="#9da8b3" font-size="16">Per user public key</text>
+    <text x="572" y="370" fill="#f7f2e8" font-size="24" font-weight="760">SQLite</text>
+    <text x="572" y="402" fill="#9da8b3" font-size="16">Encrypted payloads</text>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-width="5">
+    <path d="M285 166h84" stroke="#f0b35c"/>
+    <path d="M600 166h84" stroke="#5cc8d7"/>
+    <path d="M493 238c-24 44-74 72-126 98" stroke="#f0b35c"/>
+    <path d="M592 238c26 46 58 72 103 98" stroke="#5cc8d7"/>
+  </g>
+  <g fill="#f0b35c">
+    <circle cx="376" cy="166" r="7"/>
+    <circle cx="691" cy="166" r="7"/>
+  </g>
+</svg>
