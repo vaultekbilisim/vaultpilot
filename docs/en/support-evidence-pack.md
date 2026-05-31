@@ -6,7 +6,7 @@ Use this checklist to prepare a clean, public-safe support handoff. It keeps the
 
 | Field | Example format |
 | --- | --- |
-| PassMan version | `1.5.5` |
+| PassMan version | `1.6.0` |
 | Surface | Login, installer, update, extension, AD sync, sharing, backup, license, HTTPS or audit. |
 | Environment | Windows Server version and browser family. |
 | Impact | One user, all users, one vault, one extension device, one AD provider, one update job. |

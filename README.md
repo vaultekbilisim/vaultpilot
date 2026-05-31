@@ -25,7 +25,7 @@
 </p>
 
 <p align="center">
-  <code>Stable 1.5.5</code>
+  <code>Stable 1.6.0</code>
   &nbsp;
   <code>Windows MSI</code>
   &nbsp;
@@ -85,7 +85,7 @@ This repository does not contain private source code, license issuer material, u
 | Security posture | 2FA, audit chain, extension health, license state, update status and priority actions are visible from the overview. |
 | Selected sharing | Only selected records and files are packaged; operators set expiry, maximum opens and recipient handling. |
 | Browser extension | Pairing, active-site record count, autofill, save-login and update-login prompts for paired devices. |
-| Directory integration | PassMan DC Agent Service runs as a Windows service and syncs AD OU, group and user metadata. |
+| Directory integration | PassMan DC Agent Service runs as a Windows service and syncs AD OU, group, user and computer metadata without collecting AD password values. |
 | Operations | Offline licensing, signed updates, backups, diagnostics, HTTPS certificate upload and support-safe logs. |
 
 ## Operator Path
@@ -103,7 +103,7 @@ This repository does not contain private source code, license issuer material, u
 
 | Asset | Purpose | Delivery |
 | --- | --- | --- |
-| [PassMan-1.5.5-x64.msi](https://github.com/ucsahinn/passman-releases/releases/latest/download/PassMan-1.5.5-x64.msi) | Installs or upgrades PassMan Server on Windows. | GitHub Release |
+| [PassMan-1.6.0-x64.msi](https://github.com/ucsahinn/passman-releases/releases/latest/download/PassMan-1.6.0-x64.msi) | Installs or upgrades PassMan Server on Windows. | GitHub Release |
 | [passman-update.json](https://github.com/ucsahinn/passman-releases/releases/latest/download/passman-update.json) | Signed update manifest verified by PassMan. | GitHub Release |
 | [passman-chromium-extension.zip](https://github.com/ucsahinn/passman-releases/releases/latest/download/passman-chromium-extension.zip) | Browser extension fallback package. | GitHub Release |
 | [passman-share-decrypter.zip](https://github.com/ucsahinn/passman-releases/releases/latest/download/passman-share-decrypter.zip) | Offline external-share opening tool. | GitHub Release |
@@ -115,10 +115,10 @@ PassMan-managed updates verify the signed manifest, release asset metadata, SHA-
 
 | Component | Version | Update path |
 | --- | ---: | --- |
-| PassMan Enterprise Vault Console | 1.5.5 | Windows MSI / Update Center |
-| Chromium Browser Extension | 3.1.8 | Managed rollout or ZIP fallback |
+| PassMan Enterprise Vault Console | 1.6.0 | Windows MSI / Update Center |
+| Chromium Browser Extension | 1.3.1 | Managed rollout or ZIP fallback |
 | Offline Share Decrypter | 1.2.0 | Bundled support component and release ZIP |
-| PassMan DC Agent Service | 1.0.10 | Bundled support component and release script |
+| PassMan DC Agent Service | 1.1.0 | Bundled support component and release script |
 
 ## Documentation Gateway
 

@@ -19,7 +19,7 @@
   <text x="110" y="292" fill="#fff5df" font-family="Segoe UI, sans-serif" font-size="74" font-weight="800">Enterprise Vault Console</text>
   <text x="114" y="354" fill="#c7d0d6" font-family="Segoe UI, sans-serif" font-size="28">Self-hosted zero-knowledge secrets management for Windows Server.</text>
   <rect x="114" y="416" width="248" height="58" rx="29" fill="#f0b35c"/>
-  <text x="150" y="453" fill="#05070a" font-family="Segoe UI, sans-serif" font-size="22" font-weight="800">Download 1.5.5</text>
+  <text x="150" y="453" fill="#05070a" font-family="Segoe UI, sans-serif" font-size="22" font-weight="800">Download 1.6.0</text>
   <rect x="828" y="154" width="212" height="306" rx="34" fill="#0c141c" stroke="#5cc8d7"/>
   <text x="872" y="218" fill="#f7f2e8" font-family="Segoe UI, sans-serif" font-size="52" font-weight="800">25</text>
   <text x="944" y="218" fill="#9da8b3" font-family="Segoe UI, sans-serif" font-size="28">/100</text>

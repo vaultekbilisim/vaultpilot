@@ -1,128 +1,82 @@
 # PassMan Release Notes
 
-Latest public release: **PassMan Enterprise Vault Console 1.5.5**
+Latest public release: **PassMan Enterprise Vault Console 1.6.0**
 
-Release page: https://github.com/ucsahinn/passman-releases/releases/tag/v1.5.5
+Release page: https://github.com/ucsahinn/passman-releases/releases/tag/v1.6.0
 
-## PassMan 1.5.5
+## PassMan 1.6.0
 
-### Console 1.5.5
+### Console 1.6.0
 
-- Supersedes 1.5.4 and 1.5.3 for Windows MSI upgrades.
-- Verifies browser session state after login before protected dashboard loaders fan out to secrets, audit, update, users, license, integration, share and extension endpoints.
-- Reduces repeated `401` / `403` noise immediately after unlock by treating stale or not-yet-bound browser sessions as a controlled authentication state instead of an operator incident.
-- Adds public operator guidance for day-0 administration, release asset verification, support evidence collection, trust boundaries and the login-session 401/403 pattern.
-- Keeps the 1.5.x enterprise console scope: dynamic theme engine, executive overview, actionable security posture, selected-record sharing, 15-minute RAM fast unlock, file-backed shares, RBAC, audit, diagnostics, and Update Center polish.
+- Keeps authenticated browser sessions alive across page refreshes for the intended 15-minute window without storing master passwords, master-derived keys, raw secrets, auth tokens or plaintext secret data in browser storage.
+- Restores password exposure checks through the HIBP k-anonymity flow when the network is reachable. Blocked browser or network states are shown as unavailable without exposing the checked value.
+- Separates transient action toasts from the timestamped notification center, including read, dismiss and clear actions.
+- Removes repeated low-value Overview KPI cards and focuses the dashboard on security posture, live operations signals, category distribution, recent activity and runtime evidence.
+- Cleans the sharing flow by removing the live package-scope card and returning the operator to a clean selection state after `Finish`.
+- Simplifies Update Center around the main Windows MSI lane, update activity, operator remediation and consistent component release notes.
+- Improves navigation collapse, responsive shell behavior, server diagnostics, user/RBAC surfaces and integration screens for repeated enterprise operator use.
 - Keeps the self-hosted Windows MSI server model with Prisma/SQLite persistence and browser-side vault unlock.
 - SQLCipher remains deferred hardening; sensitive payloads are encrypted before SQLite persistence.
 
 ### Release Assets
 
-- `PassMan-1.5.5-x64.msi`
+- `PassMan-1.6.0-x64.msi`
 - `passman-update.json`
 - `passman-chromium-extension.zip`
 - `passman-share-decrypter.zip`
 - `passman-ad-agent.ps1`
 
-### Chromium Extension 3.1.8
+### Chromium Extension 1.3.1
 
 - Active-site badge counts show how many matching PassMan records are available for the current site.
-- Autofill, save-login, and update-login prompts remain available after pairing and unlock.
-- Browser notifications avoid plaintext usernames, passwords, or secret values.
+- Login forms can show an inline PassMan panel for one-click fill and save/update suggestions.
+- Paired background sessions keep page detection, one-click fill and save/update prompts available without asking for the extension PIN again inside the active 15-minute window.
+- Manual password exposure checks run without a separate build-time flag and send only the SHA-1 prefix to the HIBP k-anonymity range API.
+- The About view checks both managed Chrome/Edge update state and the server-hosted ZIP package. Managed deployments can reload a staged browser update; unmanaged ZIP installs receive a manual download action.
+- Autofill, save, update, pairing and update notifications avoid plaintext usernames, passwords and secret values.
 
 ### Offline Share Decrypter 1.2.0
 
 - Opens selected-record external share packages locally in the browser.
-- Supports file-backed share records.
-- Enforces package expiry and usage limits.
-- Shows distinct error states for invalid JSON, wrong passphrase, tampered metadata, expired packages, and exhausted usage limits.
+- Supports file-backed share records, expiry and usage limits.
+- Shows separate states for invalid JSON, wrong passphrase, tampered metadata, expired packages and exhausted usage limits.
+- Does not write plaintext package content to persistent browser storage.
 
-### PassMan DC Agent Service 1.0.10
+### PassMan DC Agent Service 1.1.0
 
-- Installs the Windows service as `PassManDCAgent` with display name `PassMan DC Agent Service`.
-- Supports install, repair, status, tail-log, and online-requirement modes.
-- Captures the AD bind password locally and does not send it to PassMan.
-- Redacts agent ids, tokens, passwords, and secret-like values from agent/service logs.
+- Syncs OU, group, user and computer objects with host, OS, DNS host name, last logon, privileged membership, stale, disabled and locked signals.
+- Reports password state only: password last set, expired, must change, locked and disabled.
+- Does not collect AD password values, hashes, Kerberos tickets, LSASS memory, ntds.dit, DPAPI secrets or bind passwords.
+- Prepares RDP/SSH credential drafts from directory metadata while keeping the credential password empty until an authorized PassMan user saves it into an encrypted record.
+- Models account unlock, disable, must-change and temporary password reset as sensitive admin actions with confirmation and audit logging.
+- Repair commands can update the installed service connection configuration, including the DPAPI-protected agent token, without logging the token value.
 
 ### Verification Summary
 
-- Lint, TypeScript, Vitest, Next standalone build, extension package, share decrypter package, DC Agent package, UI smoke checks, Windows MSI packaging, Authenticode signing, update manifest issue/verify, `npm audit`, and source-focused secret scans passed before publication.
+- Lint, TypeScript, Vitest, Next standalone build, extension package, share decrypter package, DC Agent package, UI smoke checks, Windows MSI packaging, MSI scenario verification, update manifest issue/verify, `npm audit`, release evidence audit and source-focused secret scans passed before publication.
 - Local MSI upgrade testing can still require an elevated Windows Installer context on the target machine.
 
 <details>
-<summary>PassMan 1.5.4</summary>
+<summary>PassMan 1.5.4 maintenance rollup</summary>
 
 ### Console 1.5.4
 
-- Publication and public documentation gateway refresh for the 1.5.x line.
-- No public component package behavior change from 1.5.3.
-- Superseded by 1.5.5 for new installations and updates.
+- Consolidated the 1.5.1 through 1.5.4 maintenance line into one visible release.
+- Hardened Windows Installer upgrade sequencing, stale update-job reconciliation, quiet MSI status visibility, installer rollback handling and support-safe technical detail.
+- Preserved CSP nonce hardening, server-side TOTP boundaries, redacted diagnostics and local signer thumbprint checks.
+
+### DC Agent Service 1.0.2
+
+- Improved service stop, wrapper refresh, repair, status and tail-log flows.
+- Kept agent ids, tokens, passwords and secret-like values redacted before log write.
 
 </details>
 
 <details>
-<summary>PassMan 1.5.3</summary>
-
-### Console 1.5.3
-
-- Superseded 1.5.2 for Windows MSI upgrades.
-- Hardened major MSI upgrades from older PassMan Server installs where `RemoveExistingProducts` could run before the elevated execute sequence and fail with Windows Installer error `1730` / `1603`.
-- Kept the self-hosted Windows MSI server model with Prisma/SQLite persistence and browser-side vault unlock.
-- SQLCipher remained deferred hardening; sensitive payloads were encrypted before SQLite persistence.
-
-</details>
-
-<details>
-<summary>PassMan 1.5.2</summary>
-
-### Console 1.5.2
-
-- Hardened the self-update path around job progress, target version tracking, stale install reconciliation, helper logs, verbose Windows Installer logs, and local signer messaging.
-- Build output tracing was cleaned so local `.data`, `dist`, tests, signing artifacts, and source folders are not traced into standalone route metadata.
-
-### Extension 3.1.8
-
-- No package behavior change from 1.5.1.
-
-### Decrypter 1.2.0
-
-- No package behavior change from 1.5.1.
-
-### DC Agent 1.0.10
-
-- No package behavior change from 1.5.1.
-
-</details>
-
-<details>
-<summary>PassMan 1.5.1</summary>
-
-### Console 1.5.1
-
-- Active Directory provider selection renders synced OU, group, and user objects as a searchable tree.
-- Login scope and credential import selections are separated with clear checkbox states, branch-level credential selection, and count chips for large domains.
-- Empty, waiting, and no-match states on the AD provider surface clarify whether the blocker is first sync, filtering, or missing users.
-
-### DC Agent 1.0.10
-
-- Fixed service wrapper install failures caused by overwriting `PassManDCAgentService.exe` while an existing service was still running.
-- Added service repair, status, tail-log, online requirement, wrapper compile logging, and redacted logs.
-
-### Extension 3.1.8
-
-- Active-site match badge counts, autofill prompts, save/update login prompts, and notifications remain available.
-
-### Decrypter 1.2.0
-
-- Offline selected-record decryption, file package support, expiry, usage limits, and local-only messaging remain available.
-
-</details>
-
-<details>
-<summary>PassMan 1.5.0</summary>
+<summary>PassMan 1.5.0 enterprise console line</summary>
 
 - Consolidated the PassMan Enterprise Vault Console UI pass.
-- Added dynamic light/dark theme tokens across shell, cards, charts, CTAs, focus states, and gradient surfaces.
+- Added dynamic light/dark theme tokens across shell, cards, charts, CTAs, focus states and gradient surfaces.
 - Added selected-record sharing including file records.
 - Added 15-minute browser-process RAM fast unlock.
 - Refined component version visibility so the main MSI and browser extension are the actionable Update Center cards.
@@ -132,4 +86,4 @@ Release page: https://github.com/ucsahinn/passman-releases/releases/tag/v1.5.5
 
 ## Older History
 
-Earlier 1.0.x through 1.4.x builds established the self-hosted MSI baseline, offline licensing, selected-secret sharing, browser extension management, update manifests, file vault work, RBAC, audit hardening, and enterprise UI polish. Public downloads for those builds are retired; use the latest stable release.
+Earlier 1.0.x through 1.4.x builds established the self-hosted MSI baseline, offline licensing, selected-secret sharing, browser extension management, update manifests, file vault work, RBAC, audit hardening and enterprise UI polish. Public downloads for those builds are retired; use the latest stable release.

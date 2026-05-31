@@ -2,7 +2,7 @@
 
 ## Supported Release
 
-Only the latest public PassMan release is supported for new installations and updates. The current supported public release is **PassMan Enterprise Vault Console 1.5.5**. Older public downloads are retired after their notes are consolidated into `RELEASES.md`.
+Only the latest public PassMan release is supported for new installations and updates. The current supported public release is **PassMan Enterprise Vault Console 1.6.0**. Older public downloads are retired after their notes are consolidated into `RELEASES.md`.
 
 ## Reporting Security Issues
 

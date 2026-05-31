@@ -6,7 +6,7 @@ Bu checklist, temiz ve public-safe support aktarımı hazırlamak için kullanı
 
 | Alan | Örnek format |
 | --- | --- |
-| PassMan version | `1.5.5` |
+| PassMan version | `1.6.0` |
 | Yüzey | Login, installer, update, extension, AD sync, sharing, backup, license, HTTPS veya audit. |
 | Ortam | Windows Server version ve browser family. |
 | Etki | Tek kullanıcı, tüm kullanıcılar, tek vault, tek extension device, tek AD provider, tek update job. |

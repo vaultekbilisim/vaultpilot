@@ -2,15 +2,15 @@
 
 Operatörler girişten hemen sonra `/api/audit`, `/api/secrets/list`, `/api/update/jobs`, `/api/users/list` veya `/api/extension/devices` gibi protected API uçlarında tekrarlı `401` veya `403` görüyorsa bu makaleyi kullan.
 
-## 1.5.5 İçin Beklenen Davranış
+## 1.6.0 İçin Beklenen Davranış
 
-PassMan 1.5.5, girişten sonra kasayı açık saymadan önce `/api/auth/me` doğrulaması yapar. Protected workspace queryleri, tarayıcı session cookie sunucu tarafından görüldükten sonra başlamalıdır. Session doğrulanamazsa UI kilitlenir ve cached protected queryler temizlenir; aynı istekler tekrar tekrar retry edilmez.
+PassMan 1.6.0, girişten sonra kasayı açık saymadan önce `/api/auth/me` doğrulaması yapar ve yenileme sonrası authenticated browser session değerini hedeflenen 15 dakikalık pencere boyunca korur. Protected workspace queryleri, tarayıcı session cookie sunucu tarafından görüldükten sonra başlamalıdır. Session doğrulanamazsa UI kilitlenir ve cached protected queryler temizlenir; aynı istekler tekrar tekrar retry edilmez.
 
 ## İlk Kontroller
 
 | Kontrol | Sağlıklı sonuç |
 | --- | --- |
-| Kurulu version | Konsol `1.5.5` veya daha yeni gösterir. |
+| Kurulu version | Konsol `1.6.0` veya daha yeni gösterir. |
 | Login response | `/api/auth/login` `200` döner. |
 | Session doğrulama | Login sonrası `/api/auth/me` `200` döner. |
 | Protected API'ler | Audit, secrets, extension, update, users ve integrations `/api/auth/me` sonrası `200` döner. |
@@ -38,7 +38,7 @@ Ana parola, cookie, session token değeri, gerçek kayıt içeren screenshot vey
 
 ## Çözüm Yolu
 
-1. `1.5.5` veya daha yeni sürüme yükselt.
+1. `1.6.0` veya daha yeni sürüme yükselt.
 2. Logout yap, stale tabları kapat ve PassMan'i tek canonical URL üzerinden aç.
 3. Browser'ın PassMan hostu için cookie kabul ettiğini doğrula.
 4. Tekrar login ol ve protected route öncesi `/api/auth/me` `200` mü kontrol et.

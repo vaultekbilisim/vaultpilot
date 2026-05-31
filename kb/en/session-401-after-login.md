@@ -2,15 +2,15 @@
 
 Use this article when operators see repeated protected API responses such as `/api/audit`, `/api/secrets/list`, `/api/update/jobs`, `/api/users/list` or `/api/extension/devices` returning `401` or `403` immediately after login.
 
-## Expected Behavior In 1.5.5
+## Expected Behavior In 1.6.0
 
-PassMan 1.5.5 verifies `/api/auth/me` after login before treating the vault as unlocked. Protected workspace queries should start only after the browser session cookie is visible to the server. If the session cannot be verified, the UI locks and clears cached protected queries instead of retrying them repeatedly.
+PassMan 1.6.0 verifies `/api/auth/me` after login before treating the vault as unlocked and keeps the authenticated browser session valid across refreshes for the intended 15-minute window. Protected workspace queries should start only after the browser session cookie is visible to the server. If the session cannot be verified, the UI locks and clears cached protected queries instead of retrying them repeatedly.
 
 ## First Checks
 
 | Check | Healthy result |
 | --- | --- |
-| Installed version | Console reports `1.5.5` or newer. |
+| Installed version | Console reports `1.6.0` or newer. |
 | Login response | `/api/auth/login` returns `200`. |
 | Session verification | `/api/auth/me` returns `200` after login. |
 | Protected APIs | Audit, secrets, extension, update, users and integrations return `200` after `/api/auth/me`. |
@@ -38,7 +38,7 @@ Do not send master passwords, cookies, session token values, screenshots with re
 
 ## Resolution Path
 
-1. Upgrade to `1.5.5` or newer.
+1. Upgrade to `1.6.0` or newer.
 2. Log out, close stale tabs and open PassMan from one canonical URL.
 3. Confirm browser cookies are allowed for the PassMan host.
 4. Log in again and check whether `/api/auth/me` is `200` before protected routes.
