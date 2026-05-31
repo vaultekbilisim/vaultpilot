@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/visuals/social-preview.svg?v=20260531-2" alt="PassMan Enterprise Vault Console" width="100%">
+  <img src="assets/visuals/social-preview.svg?v=20260531-3" alt="PassMan Enterprise Vault Console" width="100%">
 </p>
 
 <h1 align="center">PassMan Enterprise Vault Console</h1>
