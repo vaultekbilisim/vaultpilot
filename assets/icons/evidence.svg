@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Evidence pack">
+  <rect x="12" y="9" width="40" height="48" rx="9" fill="#0c141c" stroke="#5cc8d7" stroke-width="3.5"/>
+  <path d="M22 25h20M22 35h20M22 45h12" stroke="#d4dde3" stroke-width="4" stroke-linecap="round"/>
+  <path d="M24 16h16" stroke="#f0b35c" stroke-width="4" stroke-linecap="round"/>
+</svg>

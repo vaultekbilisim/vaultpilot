@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Directory">
+  <rect x="9" y="14" width="20" height="14" rx="5" fill="#0c141c" stroke="#5cc8d7" stroke-width="3"/>
+  <rect x="35" y="8" width="20" height="14" rx="5" fill="#0c141c" stroke="#5cc8d7" stroke-width="3"/>
+  <rect x="35" y="38" width="20" height="14" rx="5" fill="#0c141c" stroke="#5cc8d7" stroke-width="3"/>
+  <path d="M29 21h8M29 21c7 0 8 24 8 24" fill="none" stroke="#f0b35c" stroke-width="4" stroke-linecap="round"/>
+</svg>

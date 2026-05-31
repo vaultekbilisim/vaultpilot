@@ -45,6 +45,27 @@
   <code>Source private</code>
 </p>
 
+<table>
+  <tr>
+    <td align="center" width="25%">
+      <a href="https://github.com/ucsahinn/passman-releases/releases/latest"><img src="assets/icons/download.svg" width="46" alt="Download icon"><br><strong>Download release</strong></a><br>
+      <sub>MSI, manifest, extension, decrypter and AD agent assets.</sub>
+    </td>
+    <td align="center" width="25%">
+      <a href="docs/en/README.md"><img src="assets/icons/docs.svg" width="46" alt="Documentation icon"><br><strong>Read operator docs</strong></a><br>
+      <sub>Install, verify, operate and recover in EN or TR.</sub>
+    </td>
+    <td align="center" width="25%">
+      <a href="SECURITY.md"><img src="assets/icons/security.svg" width="46" alt="Security icon"><br><strong>Check trust boundary</strong></a><br>
+      <sub>Public-safe repository scope, release trust and secret rules.</sub>
+    </td>
+    <td align="center" width="25%">
+      <a href="SUPPORT.md"><img src="assets/icons/support.svg" width="46" alt="Support icon"><br><strong>Prepare support evidence</strong></a><br>
+      <sub>Redacted evidence packs without secrets or customer data.</sub>
+    </td>
+  </tr>
+</table>
+
 ---
 
 ![PassMan security posture dashboard](assets/screenshots/overview-security-posture.png)
@@ -53,23 +74,23 @@
 
 ![PassMan signed update trust chain](assets/visuals/update-trust-chain.svg)
 
-| Trust signal | Public proof |
-| --- | --- |
-| Release assets stay out of git | MSI, extension ZIP, decrypter ZIP, manifest and agent script are linked from GitHub Releases only. |
-| Update flow is manifest-led | PassMan verifies the signed manifest, release metadata, SHA-256 checksum and MSI signer before update execution. |
-| Source boundary is explicit | This public repository contains docs, sanitized screenshots and release links; private product code and signing material are not published here. |
-| Operator evidence is safe by default | Support paths ask for redacted evidence packs and forbid plaintext secrets, private keys, database files and customer data. |
-| TR/EN docs stay paired | Validation checks paired Turkish and English docs plus local links before publication. |
+| Signal | Trust signal | Public proof |
+| --- | --- | --- |
+| ![Release icon](assets/icons/release.svg) | Release assets stay out of git | MSI, extension ZIP, decrypter ZIP, manifest and agent script are linked from GitHub Releases only. |
+| ![Update icon](assets/icons/update.svg) | Update flow is manifest-led | PassMan verifies the signed manifest, release metadata, SHA-256 checksum and MSI signer before update execution. |
+| ![Vault icon](assets/icons/vault.svg) | Source boundary is explicit | This public repository contains docs, sanitized screenshots and release links; private product code and signing material are not published here. |
+| ![Evidence icon](assets/icons/evidence.svg) | Operator evidence is safe by default | Support paths ask for redacted evidence packs and forbid plaintext secrets, private keys, database files and customer data. |
+| ![Documentation icon](assets/icons/docs.svg) | TR/EN docs stay paired | Validation checks paired Turkish and English docs plus local links before publication. |
 
 ## Visual Operator Map
 
 | Surface | Why it matters | Visual |
 | --- | --- | --- |
-| Security posture | Shows the first operational health view after unlock. | [overview-security-posture.png](assets/screenshots/overview-security-posture.png) |
-| Update Center | Makes the release verification path visible before operators upgrade. | [update-center.png](assets/screenshots/update-center.png) |
-| Browser extension | Shows pairing, managed browser behavior and extension administration. | [browser-extension-management.png](assets/screenshots/browser-extension-management.png) |
-| Active Directory sync | Documents how AD scope appears without exposing AD password values. | [active-directory-sync-tree.png](assets/screenshots/active-directory-sync-tree.png) |
-| External sharing | Shows selected-record packaging and offline decrypter handoff. | [sharing-package-flow.png](assets/screenshots/sharing-package-flow.png) |
+| ![Vault icon](assets/icons/vault.svg)<br>Security posture | Shows the first operational health view after unlock. | [overview-security-posture.png](assets/screenshots/overview-security-posture.png) |
+| ![Update icon](assets/icons/update.svg)<br>Update Center | Makes the release verification path visible before operators upgrade. | [update-center.png](assets/screenshots/update-center.png) |
+| ![Extension icon](assets/icons/extension.svg)<br>Browser extension | Shows pairing, managed browser behavior and extension administration. | [browser-extension-management.png](assets/screenshots/browser-extension-management.png) |
+| ![Directory icon](assets/icons/directory.svg)<br>Active Directory sync | Documents how AD scope appears without exposing AD password values. | [active-directory-sync-tree.png](assets/screenshots/active-directory-sync-tree.png) |
+| ![Share icon](assets/icons/share.svg)<br>External sharing | Shows selected-record packaging and offline decrypter handoff. | [sharing-package-flow.png](assets/screenshots/sharing-package-flow.png) |
 
 ## Start Here
 
@@ -111,13 +132,13 @@ This repository does not contain private source code, license issuer material, u
 
 | Area | Operator value |
 | --- | --- |
-| Enterprise vault console | Passwords, API keys, credentials, secure notes, certificates and file-backed secrets in one self-hosted console. |
-| Zero-knowledge model | Secret payloads are encrypted before storage; unlock material stays in the active browser session. |
-| Security posture | 2FA, audit chain, extension health, license state, update status and priority actions are visible from the overview. |
-| Selected sharing | Only selected records and files are packaged; operators set expiry, maximum opens and recipient handling. |
-| Browser extension | Pairing, active-site record count, autofill, save-login and update-login prompts for paired devices. |
-| Directory integration | PassMan DC Agent Service runs as a Windows service and syncs AD OU, group, user and computer metadata without collecting AD password values. |
-| Operations | Offline licensing, signed updates, backups, diagnostics, HTTPS certificate upload and support-safe logs. |
+| ![Vault icon](assets/icons/vault.svg)<br>Enterprise vault console | Passwords, API keys, credentials, secure notes, certificates and file-backed secrets in one self-hosted console. |
+| ![Security icon](assets/icons/security.svg)<br>Zero-knowledge model | Secret payloads are encrypted before storage; unlock material stays in the active browser session. |
+| ![Evidence icon](assets/icons/evidence.svg)<br>Security posture | 2FA, audit chain, extension health, license state, update status and priority actions are visible from the overview. |
+| ![Share icon](assets/icons/share.svg)<br>Selected sharing | Only selected records and files are packaged; operators set expiry, maximum opens and recipient handling. |
+| ![Extension icon](assets/icons/extension.svg)<br>Browser extension | Pairing, active-site record count, autofill, save-login and update-login prompts for paired devices. |
+| ![Directory icon](assets/icons/directory.svg)<br>Directory integration | PassMan DC Agent Service runs as a Windows service and syncs AD OU, group, user and computer metadata without collecting AD password values. |
+| ![Update icon](assets/icons/update.svg)<br>Operations | Offline licensing, signed updates, backups, diagnostics, HTTPS certificate upload and support-safe logs. |
 
 ## Operator Path
 
@@ -132,13 +153,13 @@ This repository does not contain private source code, license issuer material, u
 
 ## Current Release Assets
 
-| Asset | Purpose | Delivery |
-| --- | --- | --- |
-| [PassMan-1.6.1-x64.msi](https://github.com/ucsahinn/passman-releases/releases/latest/download/PassMan-1.6.1-x64.msi) | Installs or upgrades PassMan Server on Windows. | GitHub Release |
-| [passman-update.json](https://github.com/ucsahinn/passman-releases/releases/latest/download/passman-update.json) | Signed update manifest verified by PassMan. | GitHub Release |
-| [passman-chromium-extension.zip](https://github.com/ucsahinn/passman-releases/releases/latest/download/passman-chromium-extension.zip) | Browser extension fallback package. | GitHub Release |
-| [passman-share-decrypter.zip](https://github.com/ucsahinn/passman-releases/releases/latest/download/passman-share-decrypter.zip) | Offline external-share opening tool. | GitHub Release |
-| [passman-ad-agent.ps1](https://github.com/ucsahinn/passman-releases/releases/latest/download/passman-ad-agent.ps1) | PassMan DC Agent Service installer and repair script. | GitHub Release |
+| Type | Asset | Purpose | Delivery |
+| --- | --- | --- | --- |
+| ![Windows icon](assets/icons/windows.svg) | [PassMan-1.6.1-x64.msi](https://github.com/ucsahinn/passman-releases/releases/latest/download/PassMan-1.6.1-x64.msi) | Installs or upgrades PassMan Server on Windows. | GitHub Release |
+| ![Update icon](assets/icons/update.svg) | [passman-update.json](https://github.com/ucsahinn/passman-releases/releases/latest/download/passman-update.json) | Signed update manifest verified by PassMan. | GitHub Release |
+| ![Extension icon](assets/icons/extension.svg) | [passman-chromium-extension.zip](https://github.com/ucsahinn/passman-releases/releases/latest/download/passman-chromium-extension.zip) | Browser extension fallback package. | GitHub Release |
+| ![Share icon](assets/icons/share.svg) | [passman-share-decrypter.zip](https://github.com/ucsahinn/passman-releases/releases/latest/download/passman-share-decrypter.zip) | Offline external-share opening tool. | GitHub Release |
+| ![Directory icon](assets/icons/directory.svg) | [passman-ad-agent.ps1](https://github.com/ucsahinn/passman-releases/releases/latest/download/passman-ad-agent.ps1) | PassMan DC Agent Service installer and repair script. | GitHub Release |
 
 PassMan-managed updates verify the signed manifest, release asset metadata, SHA-256 checksum and MSI signer thumbprint before starting the MSI flow. A global CA chain is not required for PassMan-managed update trust when the signed manifest pins the local release signer thumbprint. CA-backed or trusted-signing certificates remain recommended for Windows reputation and broad OS-level trust.
 

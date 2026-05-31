@@ -47,17 +47,17 @@ This folder is the public-safe operator wiki for PassMan Enterprise Vault Consol
 
 | Surface | Asset |
 | --- | --- |
-| Operator lifecycle | [operator-lifecycle.svg](../assets/visuals/operator-lifecycle.svg) |
-| Update trust chain | [update-trust-chain.svg](../assets/visuals/update-trust-chain.svg) |
-| Zero-knowledge flow | [zero-knowledge-flow.svg](../assets/visuals/zero-knowledge-flow.svg) |
-| Browser extension demo | [extension-demo.svg](../assets/visuals/extension-demo.svg) |
-| Active Directory topology | [ad-sync-tree.svg](../assets/visuals/ad-sync-tree.svg) |
-| Share lifecycle | [share-lifecycle.svg](../assets/visuals/share-lifecycle.svg) |
-| Security dashboard | [overview-security-posture.png](../assets/screenshots/overview-security-posture.png) |
-| Secret records | [passwords-record-list.png](../assets/screenshots/passwords-record-list.png) |
-| Sharing lifecycle | [sharing-package-flow.png](../assets/screenshots/sharing-package-flow.png) |
-| AD sync tree | [active-directory-sync-tree.png](../assets/screenshots/active-directory-sync-tree.png) |
-| Offline decrypter | [offline-share-decrypter.png](../assets/screenshots/offline-share-decrypter.png) |
+| ![Documentation icon](../assets/icons/docs.svg)<br>Operator lifecycle | [operator-lifecycle.svg](../assets/visuals/operator-lifecycle.svg) |
+| ![Update icon](../assets/icons/update.svg)<br>Update trust chain | [update-trust-chain.svg](../assets/visuals/update-trust-chain.svg) |
+| ![Security icon](../assets/icons/security.svg)<br>Zero-knowledge flow | [zero-knowledge-flow.svg](../assets/visuals/zero-knowledge-flow.svg) |
+| ![Extension icon](../assets/icons/extension.svg)<br>Browser extension demo | [extension-demo.svg](../assets/visuals/extension-demo.svg) |
+| ![Directory icon](../assets/icons/directory.svg)<br>Active Directory topology | [ad-sync-tree.svg](../assets/visuals/ad-sync-tree.svg) |
+| ![Share icon](../assets/icons/share.svg)<br>Share lifecycle | [share-lifecycle.svg](../assets/visuals/share-lifecycle.svg) |
+| ![Vault icon](../assets/icons/vault.svg)<br>Security dashboard | [overview-security-posture.png](../assets/screenshots/overview-security-posture.png) |
+| ![Vault icon](../assets/icons/vault.svg)<br>Secret records | [passwords-record-list.png](../assets/screenshots/passwords-record-list.png) |
+| ![Share icon](../assets/icons/share.svg)<br>Sharing lifecycle | [sharing-package-flow.png](../assets/screenshots/sharing-package-flow.png) |
+| ![Directory icon](../assets/icons/directory.svg)<br>AD sync tree | [active-directory-sync-tree.png](../assets/screenshots/active-directory-sync-tree.png) |
+| ![Evidence icon](../assets/icons/evidence.svg)<br>Offline decrypter | [offline-share-decrypter.png](../assets/screenshots/offline-share-decrypter.png) |
 
 ## Documentation Rules
 

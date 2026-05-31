@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Windows">
+  <path d="M8 12 29 9v21H8zm27-4 21-3v25H35zM8 35h21v20L8 52zm27 0h21v24l-21-3z" fill="#0c141c" stroke="#5cc8d7" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M32 8v48M8 32h48" stroke="#f0b35c" stroke-width="2.5"/>
+</svg>

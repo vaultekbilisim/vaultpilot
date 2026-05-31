@@ -1,28 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="PassMan social preview">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="PassMan public release hub preview">
   <defs>
-    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
       <stop stop-color="#05070a"/>
-      <stop offset=".55" stop-color="#0c141c"/>
+      <stop offset=".46" stop-color="#0c141c"/>
       <stop offset="1" stop-color="#17120c"/>
     </linearGradient>
-    <radialGradient id="r" cx=".78" cy=".12" r=".7">
+    <radialGradient id="halo" cx=".76" cy=".12" r=".72">
       <stop stop-color="#5cc8d7" stop-opacity=".34"/>
-      <stop offset=".52" stop-color="#f0b35c" stop-opacity=".15"/>
+      <stop offset=".5" stop-color="#f0b35c" stop-opacity=".14"/>
       <stop offset="1" stop-color="#05070a" stop-opacity="0"/>
     </radialGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="28" stdDeviation="36" flood-color="#000000" flood-opacity=".42"/>
+    </filter>
   </defs>
-  <rect width="1200" height="630" fill="url(#g)"/>
-  <rect width="1200" height="630" fill="url(#r)"/>
-  <rect x="64" y="64" width="1072" height="502" rx="42" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
-  <circle cx="130" cy="132" r="24" fill="#f0b35c"/>
-  <text x="174" y="143" fill="#f7f2e8" font-family="Segoe UI, sans-serif" font-size="34" font-weight="800">PassMan</text>
-  <text x="110" y="292" fill="#fff5df" font-family="Segoe UI, sans-serif" font-size="74" font-weight="800">Enterprise Vault Console</text>
-  <text x="114" y="354" fill="#c7d0d6" font-family="Segoe UI, sans-serif" font-size="28">Self-hosted zero-knowledge secrets management for Windows Server.</text>
-  <rect x="114" y="416" width="248" height="58" rx="29" fill="#f0b35c"/>
-  <text x="150" y="453" fill="#05070a" font-family="Segoe UI, sans-serif" font-size="22" font-weight="800">Download 1.6.0</text>
-  <rect x="828" y="154" width="212" height="306" rx="34" fill="#0c141c" stroke="#5cc8d7"/>
-  <text x="872" y="218" fill="#f7f2e8" font-family="Segoe UI, sans-serif" font-size="52" font-weight="800">25</text>
-  <text x="944" y="218" fill="#9da8b3" font-family="Segoe UI, sans-serif" font-size="28">/100</text>
-  <text x="872" y="260" fill="#ffd38a" font-family="Segoe UI, sans-serif" font-size="18">Actionable posture</text>
-  <path d="M872 340c38-52 84 32 126-20" stroke="#f0b35c" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#halo)"/>
+  <path d="M90 92h1020v446H90z" fill="#0a1016" opacity=".44"/>
+  <rect x="74" y="70" width="1052" height="490" rx="42" fill="#121922" fill-opacity=".82" stroke="#ffffff" stroke-opacity=".12" filter="url(#softShadow)"/>
+
+  <circle cx="134" cy="132" r="23" fill="#f0b35c"/>
+  <text x="176" y="143" fill="#f7f2e8" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="800">PassMan</text>
+  <text x="936" y="134" fill="#88d8e4" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">PUBLIC RELEASE HUB</text>
+
+  <text x="118" y="238" fill="#fff5df" font-family="Segoe UI, Arial, sans-serif" font-size="74" font-weight="850">Enterprise vault</text>
+  <text x="118" y="315" fill="#fff5df" font-family="Segoe UI, Arial, sans-serif" font-size="74" font-weight="850">release hub</text>
+  <text x="122" y="372" fill="#c8d3db" font-family="Segoe UI, Arial, sans-serif" font-size="25">Zero-knowledge vault for Windows Server operators.</text>
+
+  <rect x="122" y="423" width="232" height="58" rx="29" fill="#f0b35c"/>
+  <text x="154" y="460" fill="#05070a" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="850">Download 1.6.1</text>
+  <rect x="376" y="423" width="174" height="58" rx="29" fill="none" stroke="#5cc8d7" stroke-opacity=".92"/>
+  <text x="420" y="460" fill="#dff7fb" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="750">Docs EN+TR</text>
+
+  <rect x="740" y="174" width="310" height="116" rx="28" fill="#071018" stroke="#5cc8d7" stroke-opacity=".7"/>
+  <circle cx="792" cy="232" r="24" fill="#14313a"/>
+  <path d="M781 233l8 8 18-22" fill="none" stroke="#5cc8d7" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="838" y="224" fill="#f7f2e8" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="800">Signed updates</text>
+  <text x="838" y="258" fill="#9fb0bb" font-family="Segoe UI, Arial, sans-serif" font-size="18">Manifest, hash and signer checks</text>
+
+  <rect x="790" y="326" width="310" height="116" rx="28" fill="#071018" stroke="#f0b35c" stroke-opacity=".68"/>
+  <circle cx="842" cy="384" r="24" fill="#332414"/>
+  <path d="M831 387h22m-18-8h18m-14 16h10" fill="none" stroke="#f0b35c" stroke-width="6" stroke-linecap="round"/>
+  <text x="888" y="376" fill="#f7f2e8" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="800">Operator wiki</text>
+  <text x="888" y="410" fill="#9fb0bb" font-family="Segoe UI, Arial, sans-serif" font-size="18">Install, verify, operate and support</text>
+
+  <path d="M108 524h472" stroke="#ffffff" stroke-opacity=".12"/>
+  <text x="122" y="534" fill="#7fd3df" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">SECURITY</text>
+  <text x="238" y="534" fill="#f0b35c" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">RELEASES</text>
+  <text x="364" y="534" fill="#d4dde3" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">KNOWLEDGE BASE</text>
 </svg>
