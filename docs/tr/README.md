@@ -2,6 +2,8 @@
 
 Bu sayfa PassMan Enterprise Vault Console için Türkçe operatör haritasıdır. Kurulumdan güvenli işletime kadar en kısa yolu göstermek için hazırlanmıştır.
 
+Güncel desteklenen public release: **PassMan Enterprise Vault Console 1.8.19**.
+
 ## Önerilen Sıra
 
 | Adım | Rehber | Sonuç |

@@ -24,4 +24,5 @@ Do not send plaintext secrets, master passwords, AD bind passwords, agent tokens
 - [EN knowledge base](kb/en/README.md)
 - [TR bilgi bankası](kb/tr/README.md)
 - [Login 401/403 after unlock KB](kb/en/session-401-after-login.md)
+- [DC Agent 401/install/repair KB](kb/en/dc-agent-service.md)
 - [Release notes](RELEASES.md)

@@ -2,6 +2,8 @@
 
 This folder is the public-safe operator wiki for PassMan Enterprise Vault Console. Choose a language home first, then follow the lifecycle path that matches the job.
 
+Current supported public release: **PassMan Enterprise Vault Console 1.8.19**.
+
 | Language | Home | Best for |
 | --- | --- | --- |
 | English | [English documentation home](en/README.md) | Installation, operation and support teams working in English. |

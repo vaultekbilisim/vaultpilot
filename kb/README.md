@@ -2,6 +2,8 @@
 
 This knowledge base is the public-safe incident navigator for PassMan Enterprise Vault Console. It is designed for fast diagnosis without exposing customer data, secret values, license material or local infrastructure.
 
+Current supported public release: **PassMan Enterprise Vault Console 1.8.19**.
+
 | Language | Incident navigator |
 | --- | --- |
 | English | [English knowledge base](en/README.md) |
@@ -13,7 +15,7 @@ This knowledge base is the public-safe incident navigator for PassMan Enterprise
 | --- | --- | --- | --- |
 | MSI installation fails | [EN](en/msi-installation-fails.md) | [TR](tr/msi-installation-fails.md) | MSI name, installer log, Windows service state. |
 | Update stays around 76 percent | [EN](en/update-stuck-76.md) | [TR](tr/update-stuck-76.md) | Update job JSON, MSI signature line, Windows Installer event. |
-| DC Agent service cannot connect | [EN](en/dc-agent-service.md) | [TR](tr/dc-agent-service.md) | Service status, agent log, PassMan URL reachability. |
+| DC Agent service cannot connect or returns 401 | [EN](en/dc-agent-service.md) | [TR](tr/dc-agent-service.md) | Service status, agent log, PassMan URL reachability, redacted server auth reason. |
 | Extension pairing remains pending | [EN](en/extension-pairing.md) | [TR](tr/extension-pairing.md) | Pairing code state, device row, browser profile mode. |
 | Login creates 401 or 403 noise after unlock | [EN](en/session-401-after-login.md) | [TR](tr/session-401-after-login.md) | Login time, affected endpoint list, whether `/api/auth/me` returns 200. |
 | Certificate warning | [EN](en/certificate-warning.md) | [TR](tr/certificate-warning.md) | Hostname, certificate SAN, uploaded package type. |

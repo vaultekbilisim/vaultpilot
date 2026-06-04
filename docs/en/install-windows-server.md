@@ -14,7 +14,7 @@ This runbook covers a normal PassMan Server installation or in-place upgrade on 
 
 ## Install
 
-1. Download `PassMan-1.7.5-x64.msi` from the latest GitHub Release.
+1. Download `PassMan-1.8.19-x64.msi` from the latest GitHub Release.
 2. Verify the filename, source, checksum and signer before running it. Use [release asset verification](release-asset-verification.md) when you need the full checklist.
 3. Run the MSI as Administrator.
 4. The installer prepares the standalone server, bundled Node runtime, Prisma/SQLite runtime files, Windows service, firewall rule, data directory and log directory.

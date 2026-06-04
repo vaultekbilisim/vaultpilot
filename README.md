@@ -1,7 +1,7 @@
 <h1 align="center">PassMan Enterprise Vault Console</h1>
 
 <p align="center">
-  <strong>Customer-safe release hub, operator wiki, knowledge base and support boundary for PassMan.</strong>
+  <strong>Production-ready self-hosted password manager release hub, operator wiki, knowledge base and support boundary for PassMan.</strong>
 </p>
 
 <p align="center">
@@ -30,7 +30,7 @@
 </p>
 
 <p align="center">
-  <code>Stable 1.7.5</code>
+  <code>Stable 1.8.19</code>
   &nbsp;
   <code>Windows MSI</code>
   &nbsp;
@@ -86,7 +86,7 @@
 
 ## Start Here
 
-Use this repository as the front desk for PassMan. It should answer the first operational question without exposing source code, secrets, signing material or customer data.
+Use this repository as the front desk for the supported PassMan application. It should answer the first operational question without exposing source code, secrets, signing material or customer data.
 
 | I need to... | Open this | Outcome |
 | --- | --- | --- |
@@ -116,7 +116,7 @@ Use this repository as the front desk for PassMan. It should answer the first op
 
 ## What This Repository Is
 
-This is the public GitHub home for PassMan Enterprise Vault Console. It contains customer-safe documentation, how-to guides, knowledge-base articles, sanitized product screenshots, release notes and links to GitHub Release assets.
+This is the public GitHub home for PassMan Enterprise Vault Console. PassMan is now treated as a stable self-hosted Windows Server application, not an alpha or proof build. This repository contains customer-safe documentation, how-to guides, knowledge-base articles, sanitized product screenshots, release notes and links to GitHub Release assets.
 
 This repository does not contain private source code, internal signing material, customer data, databases, backups, certificates or release binaries committed into git.
 
@@ -135,7 +135,7 @@ This repository does not contain private source code, internal signing material,
 
 | Type | Asset | Purpose | Delivery |
 | --- | --- | --- | --- |
-| ![Windows icon](assets/icons/windows.svg) | [PassMan-1.7.5-x64.msi](https://github.com/ucsahinn/passman/releases/latest/download/PassMan-1.7.5-x64.msi) | Installs or upgrades PassMan Server on Windows. | GitHub Release |
+| ![Windows icon](assets/icons/windows.svg) | [PassMan-1.8.19-x64.msi](https://github.com/ucsahinn/passman/releases/download/v1.8.19/PassMan-1.8.19-x64.msi) | Installs or upgrades PassMan Server on Windows. | GitHub Release |
 | ![Update icon](assets/icons/update.svg) | [passman-update.json](https://github.com/ucsahinn/passman/releases/latest/download/passman-update.json) | Signed update manifest verified by PassMan. | GitHub Release |
 | ![Extension icon](assets/icons/extension.svg) | [passman-chromium-extension.zip](https://github.com/ucsahinn/passman/releases/latest/download/passman-chromium-extension.zip) | Browser extension fallback package. | GitHub Release |
 | ![Share icon](assets/icons/share.svg) | [passman-share-decrypter.zip](https://github.com/ucsahinn/passman/releases/latest/download/passman-share-decrypter.zip) | Offline external-share opening tool. | GitHub Release |
@@ -147,10 +147,10 @@ PassMan-managed updates verify the signed manifest, release asset metadata, SHA-
 
 | Component | Version | Update path |
 | --- | ---: | --- |
-| PassMan Enterprise Vault Console | 1.7.5 | Windows MSI / Update Center |
+| PassMan Enterprise Vault Console | 1.8.19 | Windows MSI / Update Center |
 | Chromium Browser Extension | 1.3.1 | Managed rollout or ZIP fallback |
 | Offline Share Decrypter | 1.2.0 | Bundled support component and release ZIP |
-| PassMan DC Agent Service | 1.1.0 | Bundled support component and release script |
+| PassMan DC Agent Service | 1.2.10 | Bundled support component and release script |
 
 ## Documentation Gateway
 

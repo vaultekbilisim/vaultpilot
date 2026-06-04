@@ -1,8 +1,51 @@
 # PassMan Release Notes
 
-Latest public release: **PassMan Enterprise Vault Console 1.7.5**
+Latest public release: **PassMan Enterprise Vault Console 1.8.19**
 
-Release page: https://github.com/ucsahinn/passman/releases/tag/v1.7.5
+Release page: https://github.com/ucsahinn/passman/releases/tag/v1.8.19
+
+## PassMan 1.8.19
+
+### Console 1.8.19
+
+- Promotes the public release line to the current supported self-hosted Windows Server application release.
+- Fixes AD agent install and repair authorization when a real server process reads the same SQLite provider record through a different `server-secret` or data-directory context.
+- Stores new directory agent bearer tokens with a portable SHA-256 verifier while keeping existing server-secret HMAC token records accepted for upgrade compatibility.
+- Adds redacted directory-agent auth failure reasons in server logs, separating missing provider, revoked token, missing token hash and token mismatch without logging token values.
+- Keeps the existing `pma_` agent id and `pmt_` token command contract for PassMan DC Agent Service 1.2.10.
+
+### Release Assets
+
+- `PassMan-1.8.19-x64.msi`
+- `passman-update.json`
+- `passman-chromium-extension.zip`
+- `passman-share-decrypter.zip`
+- `passman-ad-agent.ps1`
+
+### Verification Summary
+
+- Lint, TypeScript, Vitest, Next standalone build, browser UI smoke checks, Windows MSI packaging, dev signing, update manifest issue/verify, MSI scenario verification, MSI evidence audit, npm audit, pre-commit Gitleaks guard and staged Gitleaks scan passed before publication.
+
+## PassMan 1.8.18
+
+### Console 1.8.18
+
+- Adds credential-backed PassMan login activation and removal from AD credential records, with Users screen source badges for local, synced and credential-backed accounts.
+- Keeps AD password assignment separate from PassMan login access activation.
+- Updates RDP downloads so generated `.rdp` files do not embed passwords and start with broad local resource redirection disabled.
+- Lets DC agent repair update domain controller and bind settings interactively while validating the refreshed PassMan id/token before writing service config.
+
+### Release Assets
+
+- `PassMan-1.8.18-x64.msi`
+- `passman-update.json`
+- `passman-chromium-extension.zip`
+- `passman-share-decrypter.zip`
+- `passman-ad-agent.ps1`
+
+### Verification Summary
+
+- Lint, TypeScript, Vitest, Next standalone build, browser UI smoke checks, Windows MSI packaging, update manifest issue/verify, MSI scenario verification, MSI evidence audit, npm audit and Gitleaks checks passed before publication.
 
 ## PassMan 1.7.5
 

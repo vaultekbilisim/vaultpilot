@@ -6,17 +6,17 @@ Use this page before installing or publishing a PassMan public release asset int
 
 | Component | Version | Asset |
 | --- | ---: | --- |
-| PassMan Enterprise Vault Console | 1.7.5 | `PassMan-1.7.5-x64.msi` |
+| PassMan Enterprise Vault Console | 1.8.19 | `PassMan-1.8.19-x64.msi` |
 | Chromium Browser Extension | 1.3.1 | `passman-chromium-extension.zip` |
 | Offline Share Decrypter | 1.2.0 | `passman-share-decrypter.zip` |
-| PassMan DC Agent Service | 1.1.0 | `passman-ad-agent.ps1` |
-| Update manifest | 1.7.5 channel metadata | `passman-update.json` |
+| PassMan DC Agent Service | 1.2.10 | `passman-ad-agent.ps1` |
+| Update manifest | 1.8.19 channel metadata | `passman-update.json` |
 
 ## Public Asset Set
 
 The public GitHub Release should contain exactly the customer-safe delivery assets:
 
-- `PassMan-1.7.5-x64.msi`
+- `PassMan-1.8.19-x64.msi`
 - `passman-update.json`
 - `passman-chromium-extension.zip`
 - `passman-share-decrypter.zip`
@@ -27,10 +27,10 @@ The git tree should not contain MSI, ZIP, EXE, PFX, P12, DB, SQLite, backup or s
 ## Verification Steps
 
 1. Open the latest release page.
-2. Confirm the release tag is `v1.7.5`.
+2. Confirm the release tag is `v1.8.19`.
 3. Download `passman-update.json`.
-4. Confirm the manifest lists server version `1.7.5`.
-5. Confirm the MSI filename is `PassMan-1.7.5-x64.msi`.
+4. Confirm the manifest lists server version `1.8.19`.
+5. Confirm the MSI filename is `PassMan-1.8.19-x64.msi`.
 6. Confirm each asset URL uses the public `ucsahinn/passman` GitHub Release host.
 7. Confirm the downloaded MSI file size and SHA-256 match the manifest.
 8. Confirm the MSI Authenticode signer metadata matches the manifest signer thumbprint.

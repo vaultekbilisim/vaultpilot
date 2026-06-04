@@ -22,7 +22,7 @@ PassMan DC Agent Service runs near the domain controller and synchronizes direct
 4. Run the install command on the agent machine from an Administrator PowerShell.
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\passman-ad-agent.ps1 -InstallService -PassManUrl "<PASSMAN_URL>" -AgentId "<AGENT_ID>" -AgentToken "<AGENT_TOKEN>"
+powershell -NoProfile -ExecutionPolicy Bypass -File "$env:USERPROFILE\Downloads\passman-ad-agent.ps1" -InstallService -PassManUrl "<PASSMAN_URL>" -AgentId "<AGENT_ID>" -AgentToken "<AGENT_TOKEN>" -TrustPassManCertificate
 ```
 
 The script asks for:
@@ -46,6 +46,8 @@ powershell -ExecutionPolicy Bypass -File .\passman-ad-agent.ps1 -TailLog
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\passman-ad-agent.ps1 -RepairService
 ```
+
+For an installed service, use the Rotate token command from the existing provider card. The generated repair command keeps the same Windows service and can preserve or update the DC host and bind username. In PassMan 1.8.19 and newer, freshly generated or rotated agent tokens are authorized independently of server-secret/data-directory context drift on the server.
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\passman-ad-agent.ps1 -UninstallService
@@ -76,5 +78,6 @@ After sync, the Active Directory tab shows:
 | Service does not install | Run Administrator PowerShell and inspect the service log. |
 | Wrapper compile fails | Use the latest `passman-ad-agent.ps1`; repair stops the old service and rebuilds the wrapper safely. |
 | PassMan URL unreachable | Test the URL from the agent machine and verify firewall/DNS. |
+| Install or repair returns 401 Unauthorized | Upgrade the PassMan server to 1.8.19 or newer, rotate the provider token, and rerun the displayed command. If it still fails, check the server log for the redacted reason: `provider_not_found`, `token_revoked`, `token_missing` or `token_mismatch`. |
 | Sync shows zero objects | Confirm bind account scope and base DN. |
 | Agent connected but tree stale | Use Sync now, then check service and agent logs. |

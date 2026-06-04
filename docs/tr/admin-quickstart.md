@@ -6,8 +6,8 @@ Bu rehber, public release indirmesinden sağlıklı ilk kasaya kadar en kısa g�
 
 | Adım | Aksiyon | Kanıt |
 | --- | --- | --- |
-| 1 | Son GitHub Release üzerinden `PassMan-1.7.5-x64.msi` dosyasını indir. | Dosya adı, boyut ve release tag [asset doğrulama](release-asset-verification.md) sayfasıyla uyumlu. |
-| 2 | Pakete güvenmeden önce imzalı update manifestini doğrula. | `passman-update.json` içinde `1.7.5`, MSI hash, boyut ve signer thumbprint görünür. |
+| 1 | Son GitHub Release üzerinden `PassMan-1.8.19-x64.msi` dosyasını indir. | Dosya adı, boyut ve release tag [asset doğrulama](release-asset-verification.md) sayfasıyla uyumlu. |
+| 2 | Pakete güvenmeden önce imzalı update manifestini doğrula. | `passman-update.json` içinde `1.8.19`, MSI hash, boyut ve signer thumbprint görünür. |
 | 3 | MSI dosyasını elevated Windows oturumundan kur. | `PassMan Server` servisi oluşur ve çalışır. |
 | 4 | `https://<SERVER_HOST>:1903` adresini aç. | Sunucu cevap verir; düz HTTP IP erişiminde secure-context uyarısı görünebilir. |
 | 5 | İlk owner profilini HTTPS veya `localhost` üzerinden oluştur ve varsayılan kasayı aç. | Users ekranında owner görünür, ilk kasa kullanılabilir. |
