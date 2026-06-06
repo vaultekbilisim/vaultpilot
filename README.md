@@ -78,7 +78,7 @@
 
 | Signal | Trust signal | Public proof |
 | --- | --- | --- |
-| ![Release icon](assets/icons/release.svg) | Release assets stay out of git | MSI, extension ZIP, decrypter ZIP, manifest and agent script are linked from GitHub Releases only. |
+| ![Release icon](assets/icons/release.svg) | Release assets stay out of git | MSI, release fallback ZIPs, manifest and agent script are linked from GitHub Releases only; browser extension installs use Chrome Web Store. |
 | ![Update icon](assets/icons/update.svg) | Update flow is manifest-led | PassMan verifies the signed manifest, release metadata, SHA-256 checksum and MSI signer before update execution. |
 | ![Vault icon](assets/icons/vault.svg) | Source boundary is explicit | This public repository contains docs, sanitized screenshots and release links; private product code and signing material are not published here. |
 | ![Evidence icon](assets/icons/evidence.svg) | Operator evidence is safe by default | Support paths ask for redacted evidence packs and forbid plaintext secrets, private keys, database files and customer data. |
@@ -128,7 +128,7 @@ This repository does not contain private source code, internal signing material,
 3. Open `https://<SERVER_HOST>:1903` to verify the service responds. If no trusted certificate is configured yet, expect a managed self-signed certificate warning until the operator installs a PFX/P12 package.
 4. Apply the license and confirm the public host plus HTTPS settings.
 5. Enable 2FA, confirm audit-chain health and review the overview action queue.
-6. Pair the Chromium extension for approved browsers.
+6. Install the Chrome Web Store extension, then pair approved browsers.
 7. Configure PassMan DC Agent Service if AD scope is needed.
 8. Review backup, restore, update and support-evidence procedures.
 
@@ -138,7 +138,8 @@ This repository does not contain private source code, internal signing material,
 | --- | --- | --- | --- |
 | ![Windows icon](assets/icons/windows.svg) | [PassMan-1.8.19-x64.msi](https://github.com/ucsahinn/passman/releases/download/v1.8.19/PassMan-1.8.19-x64.msi) | Installs or upgrades PassMan Server on Windows. | GitHub Release |
 | ![Update icon](assets/icons/update.svg) | [passman-update.json](https://github.com/ucsahinn/passman/releases/latest/download/passman-update.json) | Signed update manifest verified by PassMan. | GitHub Release |
-| ![Extension icon](assets/icons/extension.svg) | [passman-chromium-extension.zip](https://github.com/ucsahinn/passman/releases/latest/download/passman-chromium-extension.zip) | Browser extension fallback package. | GitHub Release |
+| ![Extension icon](assets/icons/extension.svg) | [Chrome Web Store listing](https://chromewebstore.google.com/detail/passman-enterprise-vault/hjkbedlaieikhkoplgpiohlaakgebobi?hl=tr) | Primary browser extension install and update channel. | Chrome Web Store |
+| ![Extension icon](assets/icons/extension.svg) | [passman-chromium-extension.zip](https://github.com/ucsahinn/passman/releases/latest/download/passman-chromium-extension.zip) | Release archive and development fallback only. | GitHub Release |
 | ![Share icon](assets/icons/share.svg) | [passman-share-decrypter.zip](https://github.com/ucsahinn/passman/releases/latest/download/passman-share-decrypter.zip) | Offline external-share opening tool. | GitHub Release |
 | ![Directory icon](assets/icons/directory.svg) | [passman-ad-agent.ps1](https://github.com/ucsahinn/passman/releases/latest/download/passman-ad-agent.ps1) | PassMan DC Agent Service installer and repair script. | GitHub Release |
 
@@ -149,7 +150,7 @@ PassMan-managed updates verify the signed manifest, release asset metadata, SHA-
 | Component | Version | Update path |
 | --- | ---: | --- |
 | PassMan Enterprise Vault Console | 1.8.19 | Windows MSI / Update Center |
-| Chromium Browser Extension | 1.3.1 | Managed rollout or ZIP fallback |
+| Chromium Browser Extension | 1.3.1 | Chrome Web Store |
 | Offline Share Decrypter | 1.2.0 | Bundled support component and release ZIP |
 | PassMan DC Agent Service | 1.2.10 | Bundled support component and release script |
 

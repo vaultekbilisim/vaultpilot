@@ -4,7 +4,7 @@ Last updated: June 5, 2026
 
 This privacy policy applies to the PassMan Enterprise Vault Extension for Chrome and Edge.
 
-PassMan Enterprise Vault Extension is a browser-side helper for users and administrators of a self-hosted PassMan Enterprise Vault server. Its single purpose is to connect an approved browser profile to a user-configured PassMan server for encrypted vault sync, autofill, secure copy, password generation, optional password exposure checks, and managed Chrome/Edge deployment support.
+PassMan Enterprise Vault Extension is a browser-side helper for users and administrators of a self-hosted PassMan Enterprise Vault server. Its single purpose is to connect an approved browser profile to a user-configured PassMan server for encrypted vault sync, autofill, secure copy, password generation, optional password exposure checks, and Chrome Web Store deployment support.
 
 ## Data The Extension May Handle
 
@@ -29,7 +29,7 @@ The extension uses data only to provide or improve its PassMan Enterprise Vault 
 - Protecting local pairing material and the extension private key with the extension PIN.
 - Writing extension audit events through the paired PassMan server APIs.
 - Running optional password exposure checks only when requested by the user.
-- Showing relevant extension notifications and managed update status.
+- Showing relevant extension notifications and Chrome Web Store update status.
 
 ## Data Storage
 

@@ -1,6 +1,6 @@
 # Güncelleme Merkezi
 
-PassMan Güncelleme Merkezi ana Windows MSI paketini yönetir. Tarayıcı eklentisi, Offline Share Decrypter ve PassMan DC Agent Service bileşenleri release notlarında izlenir; MSI veya belgelenmiş release asset'leriyle yenilenir.
+PassMan Güncelleme Merkezi ana Windows MSI paketini yönetir. Tarayıcı eklentisi Chrome Web Store üzerinden kurulur ve güncellenir; Offline Share Decrypter ve PassMan DC Agent Service bileşenleri release notlarında izlenir ve MSI veya belgelenmiş release asset'leriyle yenilenir.
 
 ![PassMan update center](../../assets/screenshots/update-center.png)
 
@@ -34,7 +34,8 @@ Güncel public release şunları içerir:
 
 - `PassMan-1.8.19-x64.msi`
 - `passman-update.json`
-- `passman-chromium-extension.zip`
+- Chrome Web Store eklenti listelemesi: `https://chromewebstore.google.com/detail/passman-enterprise-vault/hjkbedlaieikhkoplgpiohlaakgebobi?hl=tr`
+- `passman-chromium-extension.zip` yalnızca release arşivi ve geliştirme fallback çıktısı
 - `passman-share-decrypter.zip`
 - `passman-ad-agent.ps1`
 
@@ -42,7 +43,7 @@ Manuel doğrulama gerektiğinde kurulumdan veya iç dağıtımdan önce [release
 
 ## Bileşen Notları
 
-Güncelleme Merkezi DC agent ve decrypter için ayrı installer akışı açmamalıdır. Sürüm notları görünür kalır; fakat MSI server paketiyle gelen destek dosyalarını yeniler. Operatörler manuel kurulum veya kurtarma gerektiğinde en güncel release asset'ini yine indirebilir.
+Güncelleme Merkezi tarayıcı eklentisi için ayrı installer akışı açmamalıdır; eklenti kurulum ve güncelleme dağıtımını Chrome Web Store yönetir. DC agent ve decrypter için de ayrı installer akışı açmamalıdır. Sürüm notları görünür kalır; fakat MSI server paketiyle gelen destek dosyalarını yeniler. Operatörler manuel kurulum veya kurtarma gerektiğinde en güncel release asset'ini yine indirebilir.
 
 ## Sorun Giderme
 

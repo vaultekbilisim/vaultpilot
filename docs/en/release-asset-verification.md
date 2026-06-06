@@ -7,7 +7,7 @@ Use this page before installing or publishing a PassMan public release asset int
 | Component | Version | Asset |
 | --- | ---: | --- |
 | PassMan Enterprise Vault Console | 1.8.19 | `PassMan-1.8.19-x64.msi` |
-| Chromium Browser Extension | 1.3.1 | `passman-chromium-extension.zip` |
+| Chromium Browser Extension | 1.3.1 | Chrome Web Store listing; `passman-chromium-extension.zip` release archive |
 | Offline Share Decrypter | 1.2.0 | `passman-share-decrypter.zip` |
 | PassMan DC Agent Service | 1.2.10 | `passman-ad-agent.ps1` |
 | Update manifest | 1.8.19 channel metadata | `passman-update.json` |
@@ -22,6 +22,8 @@ The public GitHub Release should contain exactly the customer-safe delivery asse
 - `passman-share-decrypter.zip`
 - `passman-ad-agent.ps1`
 
+The Chrome Web Store listing is the primary customer install and update channel for the browser extension. The extension ZIP is retained only as a release archive, lab validation package, local development package or emergency fallback artifact.
+
 The git tree should not contain MSI, ZIP, EXE, PFX, P12, DB, SQLite, backup or signing-key files.
 
 ## Verification Steps
@@ -34,7 +36,7 @@ The git tree should not contain MSI, ZIP, EXE, PFX, P12, DB, SQLite, backup or s
 6. Confirm each asset URL uses the public `ucsahinn/passman` GitHub Release host.
 7. Confirm the downloaded MSI file size and SHA-256 match the manifest.
 8. Confirm the MSI Authenticode signer metadata matches the manifest signer thumbprint.
-9. Confirm extension, decrypter and DC Agent package hashes match the manifest before redistribution.
+9. Confirm extension release archive, decrypter and DC Agent package hashes match the manifest before internal redistribution; browser users should install and update the extension from Chrome Web Store.
 
 ## What To Record Internally
 

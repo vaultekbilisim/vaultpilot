@@ -7,7 +7,7 @@ Bir PassMan public release assetini kurmadan veya kurum içinde dağıtmadan ön
 | Bileşen | Sürüm | Asset |
 | --- | ---: | --- |
 | PassMan Enterprise Vault Console | 1.8.19 | `PassMan-1.8.19-x64.msi` |
-| Chromium Browser Extension | 1.3.1 | `passman-chromium-extension.zip` |
+| Chromium Browser Extension | 1.3.1 | Chrome Web Store listing; `passman-chromium-extension.zip` release arşivi |
 | Offline Share Decrypter | 1.2.0 | `passman-share-decrypter.zip` |
 | PassMan DC Agent Service | 1.2.10 | `passman-ad-agent.ps1` |
 | Update manifest | 1.8.19 channel metadata | `passman-update.json` |
@@ -22,6 +22,8 @@ Public GitHub Release yalnızca müşteri güvenli delivery assetlerini içermel
 - `passman-share-decrypter.zip`
 - `passman-ad-agent.ps1`
 
+Chrome Web Store listelemesi tarayıcı eklentisi için birincil müşteri kurulum ve güncelleme kanalıdır. Eklenti ZIP'i yalnızca release arşivi, lab doğrulama paketi, lokal geliştirme paketi veya acil fallback çıktısı olarak tutulur.
+
 Git tree içinde MSI, ZIP, EXE, PFX, P12, DB, SQLite, backup veya signing-key dosyası bulunmamalıdır.
 
 ## Doğrulama Adımları
@@ -34,7 +36,7 @@ Git tree içinde MSI, ZIP, EXE, PFX, P12, DB, SQLite, backup veya signing-key do
 6. Asset URL'lerinin public `ucsahinn/passman` GitHub Release hostunu kullandığını doğrula.
 7. İndirilen MSI boyutu ve SHA-256 değerini manifest ile karşılaştır.
 8. MSI Authenticode signer metadata değerini manifest signer thumbprint ile karşılaştır.
-9. Extension, decrypter ve DC Agent package hash değerlerini kurum içinde dağıtmadan önce doğrula.
+9. Extension release arşivi, decrypter ve DC Agent package hash değerlerini kurum içinde dağıtmadan önce doğrula; tarayıcı kullanıcıları eklentiyi Chrome Web Store'dan kurup güncellemelidir.
 
 ## Kurum İçinde Kaydedilebilecek Kanıt
 

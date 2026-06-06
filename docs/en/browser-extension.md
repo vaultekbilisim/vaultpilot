@@ -1,22 +1,22 @@
-# Chromium Extension
+# Chrome Web Store Extension
 
 PassMan Chromium Extension provides paired-device access to vault records through user-action autofill, save-login prompts, update-login prompts and active-site record-count badges.
 
 ![PassMan browser extension management](../../assets/screenshots/browser-extension-management.png)
 
-## Installation Modes
+## Install From Chrome Web Store
 
-| Mode | Use when |
-| --- | --- |
-| Enterprise policy deployment | You manage Chrome or Chromium-based browsers centrally. |
-| ZIP fallback package | You need manual install, lab validation or emergency rollout. |
-| Managed CRX/Web Store flow | You require browser-native update distribution. |
+The supported customer install path is the Chrome Web Store listing:
 
-Chrome does not allow a normal web page to silently install an extension. Automatic deployment requires enterprise policy, Web Store or a signed CRX update flow.
+`https://chromewebstore.google.com/detail/passman-enterprise-vault/hjkbedlaieikhkoplgpiohlaakgebobi?hl=tr`
+
+For managed fleets, deploy that Web Store extension ID through Chrome or Edge policy. Chrome handles automatic extension update checks from the Web Store. The extension About view can request a Web Store update check, but Chromium may throttle checks and only applies an update when the browser reports one as available.
+
+The release ZIP is kept only for release archives, lab validation, local development, and emergency fallback. Do not use the ZIP as the normal customer installation path.
 
 ## Pairing Flow
 
-1. Install or deploy the extension.
+1. Install PassMan Enterprise Vault Extension from the Chrome Web Store.
 2. Open the extension popup.
 3. Enter the PassMan server origin.
 4. Enter username, device name and extension PIN.
@@ -45,7 +45,7 @@ Chrome does not allow a normal web page to silently install an extension. Automa
 ## Operations Checklist
 
 - Pair only named devices.
-- Keep extension versions aligned with release notes.
-- Use policy deployment for production fleets.
+- Use the Chrome Web Store listing for user installs and updates.
+- For managed fleets, distribute the Web Store extension ID through browser policy.
 - Review the Browser extension screen after updates.
 - Revoke devices that are unused, unknown or no longer compliant.

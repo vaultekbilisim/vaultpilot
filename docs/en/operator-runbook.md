@@ -59,7 +59,7 @@ Use a planned change window for:
 - Public host or certificate changes.
 - License replacement.
 - AD provider or DC Agent changes.
-- Extension managed rollout changes.
+- Extension Chrome Web Store rollout changes.
 - Backup import or restore tests.
 
 Before the change, export a backup and record current version, service state and support contact. After the change, confirm login, license, audit, extension devices, update status and backups.

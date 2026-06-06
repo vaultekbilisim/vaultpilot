@@ -59,7 +59,7 @@ Bu runbook, go-live sonrası PassMan işletimi için tekrar edilebilir enterpris
 - Public host veya certificate değişimi.
 - License değişimi.
 - AD provider veya DC Agent değişimi.
-- Managed extension rollout değişimi.
+- Chrome Web Store eklenti dağıtımı değişimi.
 - Backup import veya restore testi.
 
 Değişiklikten önce backup al, mevcut version, service state ve support contact bilgisini kaydet. Değişiklikten sonra login, license, audit, extension devices, update status ve backup durumunu doğrula.

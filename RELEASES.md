@@ -229,7 +229,7 @@ Release page: https://github.com/ucsahinn/passman/releases/tag/v1.8.19
 - Login forms can show an inline PassMan panel for one-click fill and save/update suggestions.
 - Paired background sessions keep page detection, one-click fill and save/update prompts available without asking for the extension PIN again inside the active 15-minute window.
 - Manual password exposure checks run without a separate build-time flag and send only the SHA-1 prefix to the HIBP k-anonymity range API.
-- The About view checks both managed Chrome/Edge update state and the server-hosted ZIP package. Managed deployments can reload a staged browser update; unmanaged ZIP installs receive a manual download action.
+- The About view exposes extension version and Chrome Web Store update state. Chromium can reload only when the browser reports a staged Web Store update; the ZIP remains a release archive and development fallback.
 - Autofill, save, update, pairing and update notifications avoid plaintext usernames, passwords and secret values.
 
 ### Offline Share Decrypter 1.2.0

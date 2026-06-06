@@ -1,6 +1,6 @@
 # Update Center
 
-PassMan Update Center manages the main Windows MSI package. The browser extension, Offline Share Decrypter and PassMan DC Agent Service are tracked as component release notes and are refreshed by the MSI or their documented release assets.
+PassMan Update Center manages the main Windows MSI package. The browser extension is installed and updated through Chrome Web Store, while Offline Share Decrypter and PassMan DC Agent Service are tracked as component release notes and refreshed by the MSI or their documented release assets.
 
 ![PassMan update center](../../assets/screenshots/update-center.png)
 
@@ -34,7 +34,8 @@ The current public release contains:
 
 - `PassMan-1.8.19-x64.msi`
 - `passman-update.json`
-- `passman-chromium-extension.zip`
+- Chrome Web Store extension listing: `https://chromewebstore.google.com/detail/passman-enterprise-vault/hjkbedlaieikhkoplgpiohlaakgebobi?hl=tr`
+- `passman-chromium-extension.zip` release archive and development fallback only
 - `passman-share-decrypter.zip`
 - `passman-ad-agent.ps1`
 
@@ -42,7 +43,7 @@ For manual verification, use [release asset verification](release-asset-verifica
 
 ## Component Notes
 
-Update Center should not create separate installer flows for the DC agent and decrypter. Their version notes remain visible, but the MSI refreshes the support files shipped by the server package. Operators can still download the latest release asset when they need manual installation or recovery.
+Update Center should not create a browser extension installer flow; Chrome Web Store owns extension install and update distribution. It should also avoid separate installer flows for the DC agent and decrypter. Their version notes remain visible, but the MSI refreshes the support files shipped by the server package. Operators can still download the latest release asset when they need manual installation or recovery.
 
 ## Troubleshooting
 

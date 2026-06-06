@@ -1,22 +1,22 @@
-# Chromium Eklentisi
+# Chrome Web Store Eklentisi
 
 PassMan Chromium eklentisi; eşleştirilmiş cihazlarda kullanıcı aksiyonuyla autofill, login kaydetme, login güncelleme ve aktif site kayıt sayısı rozeti sağlar.
 
 ![PassMan browser extension management](../../assets/screenshots/browser-extension-management.png)
 
-## Kurulum Modları
+## Chrome Web Store'dan Kurulum
 
-| Mod | Ne zaman kullanılır |
-| --- | --- |
-| Enterprise policy deployment | Chrome veya Chromium tabanlı tarayıcıları merkezi yönetiyorsanız. |
-| ZIP fallback paketi | Manuel kurulum, lab doğrulama veya acil dağıtım gerekiyorsa. |
-| Managed CRX/Web Store akışı | Tarayıcı-native update dağıtımı gerekiyorsa. |
+Desteklenen müşteri kurulum yolu Chrome Web Store listelemesidir:
 
-Chrome normal bir web sayfasının eklentiyi sessiz kurmasına izin vermez. Otomatik dağıtım için enterprise policy, Web Store veya signed CRX update akışı gerekir.
+`https://chromewebstore.google.com/detail/passman-enterprise-vault/hjkbedlaieikhkoplgpiohlaakgebobi?hl=tr`
+
+Merkezi yönetilen cihazlarda bu Web Store eklenti ID'sini Chrome veya Edge policy ile dağıtın. Chrome eklenti güncellemelerini Web Store üzerinden otomatik kontrol eder. Eklentinin Hakkında ekranı Web Store güncelleme kontrolü isteyebilir; ancak Chromium kontrolleri sınırlayabilir ve güncelleme yalnızca tarayıcı tarafından hazır bildirildiğinde uygulanır.
+
+Release ZIP yalnızca release arşivi, lab doğrulama, lokal geliştirme ve acil fallback için tutulur. ZIP'i normal müşteri kurulum yolu olarak kullanmayın.
 
 ## Eşleştirme Akışı
 
-1. Eklentiyi kurun veya dağıtın.
+1. PassMan Enterprise Vault Extension'ı Chrome Web Store'dan kurun.
 2. Eklenti popup'ını açın.
 3. PassMan server origin değerini girin.
 4. Kullanıcı adı, cihaz adı ve eklenti PIN'i girin.
@@ -45,7 +45,7 @@ Chrome normal bir web sayfasının eklentiyi sessiz kurmasına izin vermez. Otom
 ## Operasyon Kontrol Listesi
 
 - Yalnızca isimlendirilmiş cihazları eşleştirin.
-- Eklenti sürümlerini release notlarıyla hizalı tutun.
-- Üretim cihazlarında policy deployment kullanın.
+- Kullanıcı kurulumları ve güncellemeler için Chrome Web Store listelemesini kullanın.
+- Merkezi yönetilen cihazlarda Web Store eklenti ID'sini browser policy ile dağıtın.
 - Update sonrası Tarayıcı eklentisi ekranını kontrol edin.
 - Kullanılmayan, bilinmeyen veya uyumsuz cihazları iptal edin.
