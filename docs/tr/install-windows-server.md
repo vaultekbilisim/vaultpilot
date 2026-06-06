@@ -14,7 +14,7 @@ Bu runbook, PassMan Server'ın Windows üzerinde normal kurulumu veya yerinde y�
 
 ## Kurulum
 
-1. En güncel GitHub Release üzerinden `PassMan-1.8.19-x64.msi` dosyasını indirin.
+1. En güncel GitHub Release üzerinden `PassMan-1.8.20-x64.msi` dosyasını indirin.
 2. Çalıştırmadan önce dosya adını, kaynağı, checksum değerini ve signer bilgisini doğrulayın. Tam kontrol listesi için [release asset doğrulama](release-asset-verification.md) sayfasını kullanın.
 3. MSI'ı Administrator olarak çalıştırın.
 4. Kurulum; standalone server, gömülü Node runtime, Prisma/SQLite runtime dosyaları, Windows servisi, firewall kuralı, data dizini ve log dizinini hazırlar.

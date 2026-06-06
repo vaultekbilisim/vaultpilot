@@ -2,7 +2,7 @@
 
 Use this page as the English operator map for PassMan Enterprise Vault Console. It is written for administrators, security operators and support teams who need a direct path from install to secure operation.
 
-Current supported public release: **PassMan Enterprise Vault Console 1.8.19**.
+Current supported public release: **PassMan Enterprise Vault Console 1.8.20**.
 
 ## Recommended Order
 

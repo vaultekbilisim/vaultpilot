@@ -32,7 +32,7 @@ PassMan şunları doğrular:
 
 Güncel public release şunları içerir:
 
-- `PassMan-1.8.19-x64.msi`
+- `PassMan-1.8.20-x64.msi`
 - `passman-update.json`
 - Chrome Web Store eklenti listelemesi: `https://chromewebstore.google.com/detail/passman-enterprise-vault/hjkbedlaieikhkoplgpiohlaakgebobi?hl=tr`
 - `passman-chromium-extension.zip` yalnızca release arşivi ve geliştirme fallback çıktısı

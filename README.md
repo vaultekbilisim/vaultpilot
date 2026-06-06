@@ -30,7 +30,7 @@
 </p>
 
 <p align="center">
-  <code>Stable 1.8.19</code>
+  <code>Stable 1.8.20</code>
   &nbsp;
   <code>Windows MSI</code>
   &nbsp;
@@ -136,7 +136,7 @@ This repository does not contain private source code, internal signing material,
 
 | Type | Asset | Purpose | Delivery |
 | --- | --- | --- | --- |
-| ![Windows icon](assets/icons/windows.svg) | [PassMan-1.8.19-x64.msi](https://github.com/ucsahinn/passman/releases/download/v1.8.19/PassMan-1.8.19-x64.msi) | Installs or upgrades PassMan Server on Windows. | GitHub Release |
+| ![Windows icon](assets/icons/windows.svg) | [PassMan-1.8.20-x64.msi](https://github.com/ucsahinn/passman/releases/download/v1.8.20/PassMan-1.8.20-x64.msi) | Installs or upgrades PassMan Server on Windows. | GitHub Release |
 | ![Update icon](assets/icons/update.svg) | [passman-update.json](https://github.com/ucsahinn/passman/releases/latest/download/passman-update.json) | Signed update manifest verified by PassMan. | GitHub Release |
 | ![Extension icon](assets/icons/extension.svg) | [Chrome Web Store listing](https://chromewebstore.google.com/detail/passman-enterprise-vault/hjkbedlaieikhkoplgpiohlaakgebobi?hl=tr) | Primary browser extension install and update channel. | Chrome Web Store |
 | ![Extension icon](assets/icons/extension.svg) | [passman-chromium-extension.zip](https://github.com/ucsahinn/passman/releases/latest/download/passman-chromium-extension.zip) | Release archive and development fallback only. | GitHub Release |
@@ -149,7 +149,7 @@ PassMan-managed updates verify the signed manifest, release asset metadata, SHA-
 
 | Component | Version | Update path |
 | --- | ---: | --- |
-| PassMan Enterprise Vault Console | 1.8.19 | Windows MSI / Update Center |
+| PassMan Enterprise Vault Console | 1.8.20 | Windows MSI / Update Center |
 | Chromium Browser Extension | 1.3.1 | Chrome Web Store |
 | Offline Share Decrypter | 1.2.0 | Bundled support component and release ZIP |
 | PassMan DC Agent Service | 1.2.10 | Bundled support component and release script |

@@ -1,8 +1,35 @@
 # PassMan Release Notes
 
-Latest public release: **PassMan Enterprise Vault Console 1.8.19**
+Latest public release: **PassMan Enterprise Vault Console 1.8.20**
 
-Release page: https://github.com/ucsahinn/passman/releases/tag/v1.8.19
+Release page: https://github.com/ucsahinn/passman/releases/tag/v1.8.20
+
+## PassMan 1.8.20
+
+### Console 1.8.20
+
+- Routes the Browser Extension screen to the Chrome Web Store listing and supported store extension ID as the primary customer install path.
+- Updates the Update Center component status to describe the Chrome Web Store extension channel instead of treating the local ZIP as the normal browser install path.
+- Keeps the Chromium extension ZIP as a release archive, local development package and emergency fallback artifact only.
+- Keeps the vault, pairing, MSI runtime, zero-knowledge storage and update trust contracts unchanged.
+
+### Chromium Browser Extension 1.3.1
+
+- Shows the installed extension version and Chrome Web Store update check in the extension About view.
+- Lets Chromium apply Web Store updates only when the browser reports a staged update.
+- Packages refreshed 16, 32, 48 and 128 pixel icon assets for archive and fallback builds.
+
+### Release Assets
+
+- `PassMan-1.8.20-x64.msi`
+- `passman-update.json`
+- `passman-chromium-extension.zip`
+- `passman-share-decrypter.zip`
+- `passman-ad-agent.ps1`
+
+### Verification Summary
+
+- Lint, TypeScript, Vitest, Next standalone build, browser UI smoke checks, Windows MSI packaging, dev signing, update manifest issue/verify, MSI scenario verification, MSI evidence audit, npm audit, pre-commit Gitleaks guard and staged Gitleaks scan passed before publication.
 
 ## PassMan 1.8.19
 

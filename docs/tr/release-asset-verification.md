@@ -6,17 +6,17 @@ Bir PassMan public release assetini kurmadan veya kurum içinde dağıtmadan ön
 
 | Bileşen | Sürüm | Asset |
 | --- | ---: | --- |
-| PassMan Enterprise Vault Console | 1.8.19 | `PassMan-1.8.19-x64.msi` |
+| PassMan Enterprise Vault Console | 1.8.20 | `PassMan-1.8.20-x64.msi` |
 | Chromium Browser Extension | 1.3.1 | Chrome Web Store listing; `passman-chromium-extension.zip` release arşivi |
 | Offline Share Decrypter | 1.2.0 | `passman-share-decrypter.zip` |
 | PassMan DC Agent Service | 1.2.10 | `passman-ad-agent.ps1` |
-| Update manifest | 1.8.19 channel metadata | `passman-update.json` |
+| Update manifest | 1.8.20 channel metadata | `passman-update.json` |
 
 ## Public Asset Seti
 
 Public GitHub Release yalnızca müşteri güvenli delivery assetlerini içermelidir:
 
-- `PassMan-1.8.19-x64.msi`
+- `PassMan-1.8.20-x64.msi`
 - `passman-update.json`
 - `passman-chromium-extension.zip`
 - `passman-share-decrypter.zip`
@@ -29,10 +29,10 @@ Git tree içinde MSI, ZIP, EXE, PFX, P12, DB, SQLite, backup veya signing-key do
 ## Doğrulama Adımları
 
 1. Son release sayfasını aç.
-2. Release tag değerinin `v1.8.19` olduğunu doğrula.
+2. Release tag değerinin `v1.8.20` olduğunu doğrula.
 3. `passman-update.json` indir.
-4. Manifestin server version olarak `1.8.19` gösterdiğini doğrula.
-5. MSI filename değerinin `PassMan-1.8.19-x64.msi` olduğunu doğrula.
+4. Manifestin server version olarak `1.8.20` gösterdiğini doğrula.
+5. MSI filename değerinin `PassMan-1.8.20-x64.msi` olduğunu doğrula.
 6. Asset URL'lerinin public `ucsahinn/passman` GitHub Release hostunu kullandığını doğrula.
 7. İndirilen MSI boyutu ve SHA-256 değerini manifest ile karşılaştır.
 8. MSI Authenticode signer metadata değerini manifest signer thumbprint ile karşılaştır.

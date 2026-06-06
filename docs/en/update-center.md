@@ -32,7 +32,7 @@ A global CA chain is not required for PassMan-managed update trust when the sign
 
 The current public release contains:
 
-- `PassMan-1.8.19-x64.msi`
+- `PassMan-1.8.20-x64.msi`
 - `passman-update.json`
 - Chrome Web Store extension listing: `https://chromewebstore.google.com/detail/passman-enterprise-vault/hjkbedlaieikhkoplgpiohlaakgebobi?hl=tr`
 - `passman-chromium-extension.zip` release archive and development fallback only

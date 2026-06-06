@@ -2,7 +2,7 @@
 
 This knowledge base is the public-safe incident navigator for PassMan Enterprise Vault Console. It is designed for fast diagnosis without exposing customer data, secret values, license material or local infrastructure.
 
-Current supported public release: **PassMan Enterprise Vault Console 1.8.19**.
+Current supported public release: **PassMan Enterprise Vault Console 1.8.20**.
 
 | Language | Incident navigator |
 | --- | --- |

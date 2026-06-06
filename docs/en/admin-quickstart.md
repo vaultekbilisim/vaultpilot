@@ -6,8 +6,8 @@ Use this guide when the goal is to move from public release download to a health
 
 | Step | Action | Proof |
 | --- | --- | --- |
-| 1 | Download `PassMan-1.8.19-x64.msi` from the latest GitHub Release. | File name, file size and release tag match [release assets](release-asset-verification.md). |
-| 2 | Verify the signed update manifest before trusting the package. | `passman-update.json` lists version `1.8.19`, MSI hash, size and signer thumbprint. |
+| 1 | Download `PassMan-1.8.20-x64.msi` from the latest GitHub Release. | File name, file size and release tag match [release assets](release-asset-verification.md). |
+| 2 | Verify the signed update manifest before trusting the package. | `passman-update.json` lists version `1.8.20`, MSI hash, size and signer thumbprint. |
 | 3 | Install the MSI from an elevated Windows session. | `PassMan Server` service exists and is running. |
 | 4 | Open `https://<SERVER_HOST>:1903`. | The server responds; managed self-signed HTTPS may show a browser certificate warning until a trusted certificate is configured. |
 | 5 | Create the first owner profile and unlock the default vault through HTTPS or `localhost`. | Owner appears in Users and the first vault is available. |
