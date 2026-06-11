@@ -72,6 +72,16 @@
   <sub>Sanitized product screenshot. Release binaries stay in GitHub Releases; private source code, signing material and customer data stay out of this repository.</sub>
 </p>
 
+## Enterprise Operating Contract
+
+| Contract | How this repository enforces it |
+| --- | --- |
+| Customer-safe public surface | Only docs, sanitized screenshots, release links, knowledge-base articles and public policies live here. |
+| Release assets outside git | MSI files, ZIP packages, manifests and support scripts are delivered through GitHub Releases or the Chrome Web Store. |
+| Operator-first navigation | Quickstart, runbooks, update checks, extension flows, AD agent setup and support evidence paths are linked from the first screen. |
+| TR/EN parity | Turkish and English operator docs are kept as paired routes and validated before publication. |
+| Evidence without secrets | Support handoff asks for redacted context and blocks plaintext credentials, keys, databases, backups and customer data. |
+
 ## Release Trust Path
 
 ![PassMan signed update trust chain](assets/visuals/update-trust-chain.svg)
