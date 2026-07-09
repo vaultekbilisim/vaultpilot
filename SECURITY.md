@@ -2,7 +2,7 @@
 
 ## Supported Release
 
-Only the latest verified public VaultPilot release is supported for new installations and updates. The current supported public release is **VaultPilot Enterprise Vault Console 2.0.0**, published as GitHub Release [`v2.0.0`](https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0) on June 30, 2026.
+Only the latest verified public VaultPilot release is supported for new installations and updates. The current supported public release is **VaultPilot Enterprise Vault Console 2.0.0**, published as GitHub Release [`v2.0.0`](https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.0.0) on June 30, 2026.
 
 PassMan remains a legacy compatibility name for older installed service names, data paths, environment variables, cookies, headers, update aliases, extension protocol strings and rollback decisions. Do not use older PassMan releases for new installations unless support has explicitly approved a rollback.
 
@@ -10,7 +10,7 @@ PassMan remains a legacy compatibility name for older installed service names, d
 
 Report security issues privately through the repository security policy page or the licensed support channel. Do not open public issues that include secrets, exploit payloads, customer data, logs with sensitive values, screenshots containing secret records, agent tokens, license private keys, certificates, or database files.
 
-Use: https://github.com/ucsahinn/vaultpilot/security/policy
+Use: https://github.com/vaultekbilisim/vaultpilot/security/policy
 
 ## Public Repository Boundaries
 

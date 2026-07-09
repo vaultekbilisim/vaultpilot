@@ -32,7 +32,7 @@
 <!-- bilingual-welcome:end -->
 
 <p align="center">
-  <a href="https://github.com/ucsahinn/vaultpilot/releases/latest"><img src="assets/icons/download.svg" width="18" alt=""> <strong>Latest Published Release</strong></a>
+  <a href="https://github.com/vaultekbilisim/vaultpilot/releases/latest"><img src="assets/icons/download.svg" width="18" alt=""> <strong>Latest Published Release</strong></a>
   |
   <a href="docs/en/README.md"><img src="assets/icons/docs.svg" width="18" alt=""> <strong>Docs EN</strong></a>
   |
@@ -52,7 +52,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ucsahinn/vaultpilot/releases/latest"><img alt="Latest published release" src="https://img.shields.io/github/v/release/ucsahinn/vaultpilot?label=latest%20published&color=0f766e"></a>
+  <a href="https://github.com/vaultekbilisim/vaultpilot/releases/latest"><img alt="Latest published release" src="https://img.shields.io/github/v/release/vaultekbilisim/vaultpilot?label=latest%20published&color=0f766e"></a>
   <a href="docs/en/README.md"><img alt="Documentation language coverage" src="https://img.shields.io/badge/docs-EN%20%2B%20TR-2563eb"></a>
   <a href="README.md"><img alt="README language coverage" src="https://img.shields.io/badge/README-6%20languages-0f766e"></a>
   <a href="SECURITY.md"><img alt="Security policy" src="https://img.shields.io/badge/security-public%20policy-b91c1c"></a>
@@ -62,7 +62,7 @@
 </p>
 
 <p align="center">
-  <strong>Current verified public release:</strong> VaultPilot Enterprise Vault Console 2.0.0, published as GitHub Release <a href="https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0">v2.0.0</a> on June 30, 2026.
+  <strong>Current verified public release:</strong> VaultPilot Enterprise Vault Console 2.0.0, published as GitHub Release <a href="https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.0.0">v2.0.0</a> on June 30, 2026.
 </p>
 
 <p align="center">
@@ -80,7 +80,7 @@
 <table>
   <tr>
     <td align="center" width="25%">
-      <a href="https://github.com/ucsahinn/vaultpilot/releases/latest"><img src="assets/icons/download.svg" width="46" alt="Download icon"><br><strong>Open latest published release</strong></a><br>
+      <a href="https://github.com/vaultekbilisim/vaultpilot/releases/latest"><img src="assets/icons/download.svg" width="46" alt="Download icon"><br><strong>Open latest published release</strong></a><br>
       <sub>Current public release: VaultPilot 2.0.0.</sub>
     </td>
     <td align="center" width="25%">
@@ -136,7 +136,7 @@ Use this repository as the public front desk for the supported VaultPilot applic
 
 | Need | Primary route | Why it matters |
 | --- | --- | --- |
-| Download or verify the supported release | [Latest release](https://github.com/ucsahinn/vaultpilot/releases/latest), [release notes](RELEASES.md), [asset verification](docs/en/release-asset-verification.md) | Operators can verify the MSI, manifest, hashes, signer evidence and component assets before internal redistribution. |
+| Download or verify the supported release | [Latest release](https://github.com/vaultekbilisim/vaultpilot/releases/latest), [release notes](RELEASES.md), [asset verification](docs/en/release-asset-verification.md) | Operators can verify the MSI, manifest, hashes, signer evidence and component assets before internal redistribution. |
 | Install and operate VaultPilot | [Documentation gateway](docs/README.md), [EN docs](docs/en/README.md), [TR docs](docs/tr/README.md) | Full install, owner, HTTPS, Server System, Discovery, extension, AD, sharing, backup and update paths live in the wiki. |
 | Open the right in-app `?` help | [Screen help index](docs/en/in-app-screen-help.md), [TR ekran yardımı](docs/tr/in-app-screen-help.md), [screen help target manifest](docs/screen-help-targets.json) | Every topbar help route maps to a dedicated EN/TR screen page with states, pre-action checks and safe evidence guidance. |
 | Diagnose an incident | [Knowledge base](kb/README.md), [EN KB](kb/en/README.md), [TR KB](kb/tr/README.md) | Public-safe diagnosis paths stay grouped by symptom. |

@@ -4,7 +4,7 @@ Bir VaultPilot yayın dosyasını kurmadan veya kurum içinde dağıtmadan önce
 
 ## Release Durumu
 
-Güncel doğrulanmış public release, 30 Haziran 2026'da yayınlanan GitHub Release [`v2.0.0`](https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0).
+Güncel doğrulanmış public release, 30 Haziran 2026'da yayınlanan GitHub Release [`v2.0.0`](https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.0.0).
 
 Herkese açık doğrulama kaynağı olarak GitHub Release asset metadata'sını esas alın. Yayınlanmamış build çıktısı, kopyalanmış paketler, destek eki veya sohbet üzerinden gelen dosyalar release kanıtı değildir.
 
@@ -41,7 +41,7 @@ Git tree içinde MSI, ZIP, EXE, PFX, P12, DB, SQLite, backup veya signing-key do
 
 ## Doğrulama Adımları
 
-1. GitHub Release [`v2.0.0`](https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0) sayfasını aç.
+1. GitHub Release [`v2.0.0`](https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.0.0) sayfasını aç.
 2. Release tag değerinin `v2.0.0` olduğunu ve kurum politikanız özellikle izin vermedikçe draft/prerelease olmadığını doğrula.
 3. O release içinden `vaultpilot-update.json` indir.
 4. Manifestin server version olarak `2.0.0` gösterdiğini doğrula.
@@ -56,7 +56,7 @@ Git tree içinde MSI, ZIP, EXE, PFX, P12, DB, SQLite, backup veya signing-key do
 Bu komutları indirilmiş release dosyalarını içeren geçici bir klasörden çalıştırın. Çıktıyı kurum içi release kanıtıyla saklayın; herkese açık paylaşmadan önce lokal path veya hostname değerlerini redakte edin.
 
 ```powershell
-gh release view v2.0.0 --repo ucsahinn/vaultpilot --json tagName,name,isDraft,isPrerelease,publishedAt,assets,url
+gh release view v2.0.0 --repo vaultekbilisim/vaultpilot --json tagName,name,isDraft,isPrerelease,publishedAt,assets,url
 
 Get-ChildItem -File |
   Where-Object { $_.Name -like 'VaultPilot-2.0.0-x64.msi' -or $_.Name -like 'vaultpilot-*' } |

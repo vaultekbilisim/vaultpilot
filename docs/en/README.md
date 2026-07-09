@@ -2,7 +2,7 @@
 
 Use this page as the English operator map for VaultPilot Enterprise Vault Console. It is written for administrators, security operators and support teams who need a direct path from install to secure operation.
 
-Current verified public release: **VaultPilot Enterprise Vault Console 2.0.0**. It was published as GitHub Release [`v2.0.0`](https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0) on June 30, 2026.
+Current verified public release: **VaultPilot Enterprise Vault Console 2.0.0**. It was published as GitHub Release [`v2.0.0`](https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.0.0) on June 30, 2026.
 
 ## Recommended Order
 

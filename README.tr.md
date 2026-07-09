@@ -10,7 +10,7 @@ VaultPilot, Windows Server üzerine MSI ile kurulan ve kullanıcı tarayıcılar
 
 | Alan | Detay |
 | --- | --- |
-| Güncel doğrulanmış yayın | VaultPilot Enterprise Vault Console 2.0.0, GitHub Release [v2.0.0](https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0). |
+| Güncel doğrulanmış yayın | VaultPilot Enterprise Vault Console 2.0.0, GitHub Release [v2.0.0](https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.0.0). |
 | Kurulum kanalı | MSI ve destek çıktıları GitHub Releases üzerinden; tarayıcı eklentisi Chrome Web Store üzerinden. |
 | Kanonik ürün adı | Yeni doküman ve yayın dili için VaultPilot. |
 | Uyumluluk adı | PassMan yalnızca eski servisler, veri yolları, ortam değişkenleri, çerez, header ve protokol adları, güncelleme takma adları ve rollback bağlamında korunur. |

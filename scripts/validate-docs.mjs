@@ -262,8 +262,8 @@ function validateForbiddenPatterns(filePath, content) {
     [/PassMan-1\.5\.1-x64\.msi/i, 'stale MSI latest asset name'],
     [/Latest stable release:\s+\*\*PassMan 1\.5\.1\*\*/i, 'stale latest release wording'],
     [/github\.io\/passman(?:[\x2d]releases)?/i, 'obsolete static public-site URL'],
-    [/github\.com\/ucsahinn\/passman(?:[/?#]|$)/i, 'obsolete PassMan GitHub repository URL'],
-    [/github\.com\/ucsahinn\/passman-releases(?:[/?#]|$)/i, 'obsolete PassMan release repository URL'],
+    [/github\.com\/vaultekbilisim\/passman(?:[/?#]|$)/i, 'obsolete PassMan GitHub repository URL'],
+    [/github\.com\/vaultekbilisim\/passman-releases(?:[/?#]|$)/i, 'obsolete PassMan release repository URL'],
     [/PASSMAN_[A-Z_]*ADMIN_TOKEN/i, 'obsolete static public-site admin token reference'],
     [/\.github\/workflows\/[a-z]+\.yml/i, 'obsolete static public-site workflow reference'],
     [/\]\([^)]*index\.html[)#?]?/i, 'obsolete static public-site html index link'],
@@ -803,7 +803,7 @@ function validateRequiredPublicReferences() {
       'legacy PassMan compatibility-line',
       'chromium-extension',
       'operator-docs',
-      'https://github.com/ucsahinn/vaultpilot/releases/latest',
+      'https://github.com/vaultekbilisim/vaultpilot/releases/latest',
       'Issues are disabled',
       'Discussions are disabled',
       'Commit and push',
@@ -828,7 +828,7 @@ function validateRequiredPublicReferences() {
       'legacy PassMan compatibility-line',
       'chromium-extension',
       'operator-docs',
-      'https://github.com/ucsahinn/vaultpilot/releases/latest',
+      'https://github.com/vaultekbilisim/vaultpilot/releases/latest',
       'Issues kapalı',
       'Discussions kapalı',
       'commit ve push',
@@ -983,13 +983,13 @@ function validateRequiredPublicReferences() {
       "Status-only client'lar vault assignment olmadan oluşturulabilir."
     ]],
     ['docs/en/release-asset-verification.md', [
-      'gh release view v2.0.0 --repo ucsahinn/vaultpilot',
+      'gh release view v2.0.0 --repo vaultekbilisim/vaultpilot',
       'Get-FileHash .\\VaultPilot-2.0.0-x64.msi -Algorithm SHA256',
       'Get-AuthenticodeSignature .\\VaultPilot-2.0.0-x64.msi',
       'If `gh release view` shows a different tag'
     ]],
     ['docs/tr/release-asset-verification.md', [
-      'gh release view v2.0.0 --repo ucsahinn/vaultpilot',
+      'gh release view v2.0.0 --repo vaultekbilisim/vaultpilot',
       'Get-FileHash .\\VaultPilot-2.0.0-x64.msi -Algorithm SHA256',
       'Get-AuthenticodeSignature .\\VaultPilot-2.0.0-x64.msi',
       '`gh release view` farklı tag'

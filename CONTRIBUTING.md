@@ -68,4 +68,4 @@ If any check fails, use [Public validation fails](kb/en/public-validation-fails.
 
 Report security issues privately through the repository security policy page or licensed support channel. Do not open public issues for vulnerabilities, exploit payloads, secrets, customer data, log bundles, certificates, database files, or screenshots containing secret records. See [SECURITY.md](SECURITY.md).
 
-Use: https://github.com/ucsahinn/vaultpilot/security/policy
+Use: https://github.com/vaultekbilisim/vaultpilot/security/policy

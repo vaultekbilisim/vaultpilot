@@ -34,8 +34,8 @@ Bir sonraki Chrome Web Store yayıncı paneli düzenlemesi için bu aktarım not
 | Kısa açıklama | [Kısa Açıklama](#kisa-aciklama) altındaki metni kullanın. |
 | Detaylı açıklama | PassMan'ı hâlâ güncel sunucu ve ürün adı gibi gösteren canlı `Detailed description` yerine [Detaylı Açıklama](#detayli-aciklama) altındaki metni kullanın. |
 | Privacy data categories | Personally identifiable information, authentication information ve web history. |
-| Privacy policy URL | `https://github.com/ucsahinn/vaultpilot/blob/main/PRIVACY.md` veya dashboard'un gösterdiği raw GitHub URL. |
-| Support URL | `https://github.com/ucsahinn/vaultpilot/blob/main/SUPPORT.md` |
+| Privacy policy URL | `https://github.com/vaultekbilisim/vaultpilot/blob/main/PRIVACY.md` veya dashboard'un gösterdiği raw GitHub URL. |
+| Support URL | `https://github.com/vaultekbilisim/vaultpilot/blob/main/SUPPORT.md` |
 | Mağaza ekran görüntüleri | Yalnız [public screenshot standartları](public-screenshot-standards.md) ile uyumlu, yayına uygun hale getirilmiş sentetik veri ekran görüntülerini kullanın. |
 
 PassMan'ı güncel ürün gibi gösteren canlı `Detailed description` metnini değiştirin. PassMan yalnız eski kurulum uyumluluğu anlatılırken kalmalıdır.

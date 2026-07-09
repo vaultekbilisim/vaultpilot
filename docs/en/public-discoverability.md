@@ -20,7 +20,7 @@ These surfaces require repository-owner access and cannot be completed by a docs
 | --- | --- |
 | Repository name | `vaultpilot` |
 | Description | Public release hub, operator wiki, knowledge base, and support boundary for VaultPilot Enterprise Vault Console. |
-| Homepage | Use `https://github.com/ucsahinn/vaultpilot#readme` as the canonical public homepage. Keep latest-release calls to action inside the README and release docs. |
+| Homepage | Use `https://github.com/vaultekbilisim/vaultpilot#readme` as the canonical public homepage. Keep latest-release calls to action inside the README and release docs. |
 | Topics | Keep useful discovery topics such as `vaultpilot`, `password-manager`, `secrets-manager`, `zero-knowledge`, `self-hosted`, `windows-server`, `msi`, `enterprise-security`, `browser-extension`, `active-directory`, `documentation`, and `knowledge-base`. GitHub topics should use lowercase letters, numbers, and hyphens; keep each topic at 50 characters or fewer and use no more than 20 topics. |
 | Social preview | Upload or select `assets/visuals/social-preview.png` in repository settings. |
 | Security policy | Keep GitHub security policy enabled and pointing to `SECURITY.md`. |
@@ -55,7 +55,7 @@ Track observed owner-gated drift in [Public external surface drift](public-exter
 
 Run this only when the repository owner wants Google indexing evidence. It is not required for normal docs publication:
 
-1. Open a private or signed-out browser and search `site:github.com/ucsahinn/vaultpilot VaultPilot`.
+1. Open a private or signed-out browser and search `site:github.com/vaultekbilisim/vaultpilot VaultPilot`.
 2. Confirm the result title and snippet do not imply private source code, release binaries, customer data, or license terms are published in git.
 3. Open the public repository page and verify the README, social preview, release link, support boundary, and Chrome Web Store link render without account access.
 4. If the owner controls a verified Search Console property for a public VaultPilot docs domain or deployed public site, use URL Inspection only for URLs inside that verified property and record the public result summary only. Do not imply that the GitHub repository path itself is inspectable unless it is part of a property the owner can verify and open in Search Console.

@@ -10,7 +10,7 @@ This is a public documentation repository. It should make the supported release 
 | --- | --- |
 | Repository name | `vaultpilot` |
 | Short description | Public release hub, operator wiki, knowledge base, and support boundary for VaultPilot Enterprise Vault Console. |
-| Website or homepage | `https://github.com/ucsahinn/vaultpilot#readme` |
+| Website or homepage | `https://github.com/vaultekbilisim/vaultpilot#readme` |
 | Topics | `vaultpilot`, `password-manager`, `secrets-manager`, `zero-knowledge`, `self-hosted`, `windows-server`, `msi`, `enterprise-security`, `browser-extension`, `active-directory`, `documentation`, `knowledge-base` |
 | Social preview | Use `assets/visuals/social-preview.png`. |
 | Security policy | Enabled and pointing to `SECURITY.md`. |

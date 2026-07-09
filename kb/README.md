@@ -2,7 +2,7 @@
 
 This knowledge base is the public-safe incident navigator for VaultPilot Enterprise Vault Console. It is designed for fast diagnosis without exposing customer data, secret values, license material or local infrastructure.
 
-Current verified public release: **VaultPilot Enterprise Vault Console 2.0.0**, published as GitHub Release [`v2.0.0`](https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0) on June 30, 2026.
+Current verified public release: **VaultPilot Enterprise Vault Console 2.0.0**, published as GitHub Release [`v2.0.0`](https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.0.0) on June 30, 2026.
 
 | Language | Incident navigator |
 | --- | --- |

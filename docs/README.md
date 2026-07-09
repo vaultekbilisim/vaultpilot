@@ -2,7 +2,7 @@
 
 This folder is the public-safe operator wiki for VaultPilot Enterprise Vault Console. Choose a language home first, then follow the lifecycle path that matches the job.
 
-Current verified public release: **VaultPilot Enterprise Vault Console 2.0.0**, published as GitHub Release [`v2.0.0`](https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0) on June 30, 2026.
+Current verified public release: **VaultPilot Enterprise Vault Console 2.0.0**, published as GitHub Release [`v2.0.0`](https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.0.0) on June 30, 2026.
 
 | Language | Home | Best for |
 | --- | --- | --- |
