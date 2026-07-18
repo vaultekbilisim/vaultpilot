@@ -81,9 +81,19 @@ Credential drilldowns clear protocol, risk, source, search, and smart-filter sta
 
 **Dashboard tools** opens this guide, refreshes data, or enters layout edit mode. Edit mode supports drag-and-drop or arrow-key reordering, hide/restore, save, cancel, and reset. Layout is stored in this browser and changes presentation only. If all four widgets are hidden, use **Restore category widgets**.
 
+<a id="rotation-policy-monitoring"></a>
+
+## Rotation Policy and Monitoring
+
+**Configure rotation** on an Active Directory record supports daily, weekly, monthly, and custom intervals. A custom interval is 1–365 days, 1–52 weeks, or 1–12 months and requires a start date. Monthly selection supports day 1–31 or the last day; a day missing from a shorter month clamps to that month's final day. The policy stores an IANA timezone, does not duplicate a run across daylight-saving changes, and does not replay missed runs in bulk.
+
+Optional triggers can run 5–1440 minutes after secret reveal or when AD `passwordLastSet` reaches an age of 1–365 days. With several triggers enabled, the first due wins. The agent encrypts the generated password to the user's public key; only an authorized browser with the vault unlocked can re-encrypt it into the vault record. An ambiguous result is not retried blindly.
+
+This dashboard is not a bulk policy editor. Open the policy from its record and monitor current and future state under **Tasks > Scheduled**, including next run, last outcome, related execution, and bounded logs.
+
 ## Data Freshness and Limits
 
-**Refresh** invalidates the available vault, audit, diagnostics, execution, directory-provider, license, user, extension, update, and sharing queries. It does not invalidate the directory-action query. The Rotation view activates neither the directory-provider query nor the directory-action query, so Refresh on this screen cannot guarantee that AD action counts are current. An Owner must open a view that activates those queries, allow them to finish, and then return to Rotation when fresh directory evidence is required.
+**Refresh** updates only the visible Rotation summary and drilldown queries. It does not reload the browser or bulk-refresh Integrations, Active Directory actions, Tasks, or other dashboards. For current directory evidence, open **Integrations > Active Directory** or **Tasks > Scheduled** and refresh that screen separately.
 
 Every query still obeys role, license, active-vault, and route-access rules. There is no single snapshot time or last-updated field; values can change as queries finish.
 
@@ -96,7 +106,7 @@ The dashboard does not prove that a credential is still used, that a target acce
 1. Read **61–90 days**, **90+ days**, and **No date** separately.
 2. Use the five-row oldest table only as a starting point.
 3. On Credentials, verify owner, account, target, source, actual last-change evidence, dependencies, and rollback.
-4. Use the organization's approved change process; this dashboard does not schedule or execute rotation.
+4. Use the organization's approved change process; open the policy from the record and monitor its run in Tasks.
 5. After an authorized change elsewhere, refresh and confirm the source timestamp and evidence changed.
 
 ### Investigate failed or waiting directory work

@@ -8,7 +8,7 @@ The public extension identity is:
 | --- | --- |
 | Store listing | `https://chromewebstore.google.com/detail/vaultpilot-browser-vault/hjkbedlaieikhkoplgpiohlaakgebobi` |
 | Extension ID | `hjkbedlaieikhkoplgpiohlaakgebobi` |
-| Current public extension version | `1.3.2` |
+| Current public extension version | `1.3.3` |
 | Manifest version | `3` |
 | Primary install channel | Chrome Web Store |
 | Release archive | `vaultpilot-browser-vault-extension.zip`, retained for release evidence, lab validation, local development, and emergency fallback only |
@@ -18,7 +18,7 @@ The public extension identity is:
 
 Use VaultPilot wording for new publication. Use PassMan only when explaining legacy compatibility.
 
-Public check on 2026-07-09 found the live store title and version aligned with VaultPilot `1.3.2`. The visible overview starts with VaultPilot wording, but the detailed description still repeats PassMan as the current server/product name. Track that owner-gated correction in [Public external surface drift](public-external-surface-drift.md) until the publisher dashboard is updated.
+Public check on 2026-07-17 found the live store title and version aligned with VaultPilot `1.3.3`; the listing reports an update date of July 10, 2026 and size `76.04KiB`. The visible overview starts with VaultPilot wording, but the detailed description still repeats PassMan as the current server/product name. Track that owner-gated wording correction in [Public external surface drift](public-external-surface-drift.md) until the publisher dashboard is updated.
 
 ## Publisher Dashboard Handoff
 
@@ -28,7 +28,7 @@ Use this handoff for the next Chrome Web Store publisher-dashboard edit. It is i
 | --- | --- |
 | Extension name | `VaultPilot Browser Vault Extension` |
 | Extension ID | `hjkbedlaieikhkoplgpiohlaakgebobi` |
-| Public version to verify before submit | `1.3.2` |
+| Required version for the VaultPilot 2.2.0 candidate | `1.3.3` (matches the live listing checked on 2026-07-17) |
 | Short description | Use the text under [Short Description](#short-description). |
 | Detailed description | Replace the live detailed description that still presents PassMan as the current server/product with the text under [Detailed Description](#detailed-description). |
 | Privacy data categories | Personally identifiable information, authentication information, and web history. |
@@ -137,7 +137,7 @@ Never upload screenshots with real vault records, customer hostnames, usernames,
 
 ## Submission Checklist
 
-1. Confirm the release archive contains extension version `1.3.2` or the intended new version.
+1. Confirm the release archive contains the exact candidate extension version `1.3.3` and that the live store still reports `1.3.3`; if either advances, update the release contract and both verification pages before release.
 2. Confirm the listing still uses extension ID `hjkbedlaieikhkoplgpiohlaakgebobi`.
 3. Compare Developer Dashboard privacy practices with [PRIVACY.md](../../PRIVACY.md).
 4. Recheck the packaged `manifest.json` permissions and host permissions.

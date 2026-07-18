@@ -9,6 +9,7 @@ Bu ekranın operatörü **Sahip (Owner)** rolüdür. Yönetici, Denetçi ve Kull
 - Durum rozetini **Aktif kullanıcı**, **Plan**, **Kalan gün**, kapasite çubuğu ve **Plan yetenekleri** ile birlikte okuyun.
 - Deneme sürümündeki 30 gün ve 3 kullanıcı sınırını, imzalı lisansın müşteri ve kullanıcı limitiyle karıştırmayın.
 - Menü görünür olsa bile mevcut plana dahil olmayan modülün kilitli kalabileceğini unutmayın.
+- Tarayıcı eklentisinin ayrı plan kartı olmadığını; **Entegrasyonlar** yeteneğine dahil gösterildiğini bilin.
 - **Mevcut lisansı temizle** işleminin kasa verisini, kullanıcıları, oturumları veya denetim kanıtını değil, sunucuda saklanan tüm lisans kayıtlarını kaldırdığını bilin.
 
 ## Ekranı Nasıl Okumalısınız

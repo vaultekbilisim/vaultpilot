@@ -1,20 +1,20 @@
 blank_issues_enabled: false
 contact_links:
   - name: Private security report
-    url: https://github.com/ucsahinn/vaultpilot/security/policy
+    url: https://github.com/vaultekbilisim/vaultpilot/security/policy
     about: Report vulnerabilities, secrets exposure, exploit details, or customer-sensitive evidence privately.
   - name: Support evidence guide
-    url: https://github.com/ucsahinn/vaultpilot/blob/main/docs/en/support-evidence-pack.md
+    url: https://github.com/vaultekbilisim/vaultpilot/blob/main/docs/en/support-evidence-pack.md
     about: Prepare a redacted support evidence pack before asking for help.
   - name: Public repository boundary
-    url: https://github.com/ucsahinn/vaultpilot/blob/main/docs/en/public-repository-boundary.md
+    url: https://github.com/vaultekbilisim/vaultpilot/blob/main/docs/en/public-repository-boundary.md
     about: Check what belongs in git, GitHub Releases, public issues, and private support.
   - name: Public issue redaction
-    url: https://github.com/ucsahinn/vaultpilot/blob/main/kb/en/public-issue-redaction.md
+    url: https://github.com/vaultekbilisim/vaultpilot/blob/main/kb/en/public-issue-redaction.md
     about: Confirm whether an issue can be safely opened in public before sharing evidence.
   - name: Chrome Web Store listing and privacy
-    url: https://github.com/ucsahinn/vaultpilot/blob/main/docs/en/chrome-web-store-listing.md
+    url: https://github.com/vaultekbilisim/vaultpilot/blob/main/docs/en/chrome-web-store-listing.md
     about: Use the publisher handoff, privacy categories, permission reasons, and screenshot rules for extension listing updates.
   - name: Turkish support evidence guide
-    url: https://github.com/ucsahinn/vaultpilot/blob/main/docs/tr/support-evidence-pack.md
+    url: https://github.com/vaultekbilisim/vaultpilot/blob/main/docs/tr/support-evidence-pack.md
     about: Destek için hassas veri içermeyen kanıt paketi hazırlayın.

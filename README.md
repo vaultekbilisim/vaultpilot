@@ -159,8 +159,7 @@ This repository does not contain private source code, internal signing material,
 4. Apply the license and confirm the public host, HTTPS and Server System settings.
 5. Enable 2FA, confirm audit-chain health and review the overview action queue.
 6. Install the Chrome Web Store extension, then pair approved browsers.
-7. Configure VaultPilot DC Agent Service if AD scope is needed.
-8. Review backup, restore, update and support-evidence procedures.
+7. Configure VaultPilot DC Agent Service if AD scope is needed, then review backup, restore, update and support-evidence procedures.
 
 ## <img src="assets/icons/release.svg" width="22" alt=""> VaultPilot 2.0.0 Release Assets
 
@@ -176,18 +175,20 @@ This repository does not contain private source code, internal signing material,
 | ![Directory icon](assets/icons/directory.svg) | `vaultpilot-dc-agent.ps1` | VaultPilot DC Agent Service installer and repair script. | GitHub Release `v2.0.0` |
 | ![Directory icon](assets/icons/directory.svg) | `vaultpilot-dc-agent.json` | DC Agent release metadata. | GitHub Release `v2.0.0` |
 
-VaultPilot-managed updates verify the signed manifest, release asset metadata, SHA-256 checksum and MSI signer thumbprint before starting the MSI flow. A global CA chain is not required for VaultPilot-managed update trust when the signed manifest pins the local release signer thumbprint. CA-backed or trusted-signing certificates remain recommended for Windows reputation and broad OS-level trust.
+VaultPilot-managed updates verify the signed manifest, release asset metadata, SHA-256 checksum and MSI signer thumbprint before starting the MSI flow. A global CA chain is not required for VaultPilot-managed update trust when the signed manifest pins the local release signer thumbprint. CA-backed or trusted-signing certificates remain recommended for Windows reputation and broad OS-level trust. Older Chrome Web Store URLs may redirect from a historical store slug, but the supported extension identity is the published extension ID `hjkbedlaieikhkoplgpiohlaakgebobi`. Before internal redistribution, verify the GitHub asset list, manifest, SHA-256 values, MSI signer evidence and file sizes against the release page.
 
-Older Chrome Web Store URLs may redirect from a historical store slug, but the supported extension identity is the published extension ID `hjkbedlaieikhkoplgpiohlaakgebobi`. Before internal redistribution, verify the GitHub asset list, manifest, SHA-256 values, MSI signer evidence and file sizes against the release page.
+## <img src="assets/icons/update.svg" width="22" alt=""> Prepared 2.2.0 Component Versions
 
-## <img src="assets/icons/update.svg" width="22" alt=""> Component Versions
+This matrix describes the next prepared release set. It is not a claim that `v2.2.0` is already public; the latest verified public GitHub release remains `v2.0.0` until publication is completed and checked.
 
 | Component | Version | Update path |
 | --- | ---: | --- |
-| VaultPilot Enterprise Vault Console | 2.0.0 | Windows MSI / Update Center |
-| Chromium Browser Extension | 1.3.2 | Chrome Web Store |
-| Offline Share Decrypter | 1.2.0 | Bundled support component and release ZIP |
-| VaultPilot DC Agent Service | 1.2.10 | Bundled support component and release script |
+| VaultPilot Enterprise Vault Console | 2.2.0 | Windows MSI / Update Center |
+| Chromium Browser Extension | 1.3.3 | Chrome Web Store |
+| Offline Share Decrypter | 1.2.1 | Bundled support component and release ZIP |
+| VaultPilot DC Agent Service | 1.2.21 | Bundled support component and release script |
+| VaultPilot Backup Tool | 1.0.1 | Independently versioned tool bundled in the MSI |
+| VaultPilot Log Collector | 1.0.1 | Independently versioned tool bundled in the MSI |
 
 ## <img src="assets/icons/docs.svg" width="22" alt=""> Full Wiki, KB, And Visual References
 

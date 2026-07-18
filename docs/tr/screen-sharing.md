@@ -54,12 +54,12 @@ Alıcı yalnız hazır, `PENDING`, süresi geçmemiş ve kullanım hakkı kalmı
 
 Bu bir kaynak kasaya üyelik veya canlı senkronizasyon değildir. Sonradan değişen kaynak kayıtlar kopyaya aktarılmaz.
 
-Active Directory kimlik bilgisi seçim listesinde görünür; ancak mevcut kabul akışı yeni kaydı oluştururken zorunlu dizin sağlayıcısı/DN kaynak alanlarını iletmez. Bu tür bir kayıt hedef kasaya alınırken sunucu tarafından reddedilebilir. Başarılı olduğu doğrulanmadan Active Directory kaydını dahili paylaşım teslimatı olarak planlamayın.
+Active Directory kimlik bilgisi paylaşılırken sağlayıcı kimliği ve nesne DN bilgisi şifreli kaydın içinden hedef oluşturma işlemine aktarılır. Hedef organizasyonda aynı sağlayıcı ve kullanıcı nesnesi hâlâ bulunmalı, alıcının hedef kasada yazma yetkisi olmalıdır. Sağlayıcı kaldırılmışsa, nesne artık yoksa veya aynı yönetilen kimlik bilgisi hedef kasada zaten varsa işlem güvenli biçimde reddedilir ve bu kabul sırasında oluşturulan kayıtlar geri alınır.
 
 ### Gelen ve giden listeleri
 
 - **Gelen paylaşımlar** geçmiş değildir; yalnız alınabilir durumdaki hazır paketleri gösterir. Kabul edilmiş, geri alınmış, süresi dolmuş, hakkı bitmiş veya hâlâ hazırlanmakta olan paketler burada görünmez.
-- **Son gönderilenler** yalnız en yeni altı dahili paketi gösterir. Sunucu, kullanıcıya ait en yeni 100 gelen/giden paketi döndürür; daha eski paketler bu ekranın görünür geçmişi değildir.
+- **Son gönderilenler** yalnız en yeni altı dahili paketi gösterir. Sunucu paket listesini 50 kayıtlık metadata sayfaları halinde döndürür; şifreli paket gövdesi, sarılmış anahtar ve seçim hash'leri liste yanıtına eklenmez. Tam şifreli gövde yalnız alıcı uygun bir paketi açmayı seçtiğinde tekil, yetki kontrollü detay isteğiyle alınır.
 - Durumlar **Hazırlanıyor**, **Bekliyor**, **Kullanıldı**, **Süresi doldu** ve **Geri alındı** olabilir.
 - Mevcut arayüz, **Geri al** düğmesini yalnız gönderenin kendi `PENDING`, süresi geçmemiş ve hakkı kalmış paketi için gösterir. Bu koşul yalnız düğmenin görünürlüğünü belirler; sunucudaki geri alma yolu şu anda oturum açmış gönderene ait her paketi durumuna, süresine veya kalan hakkına bakmadan kabul eder. Geri alma paketi `REVOKED` durumuna geçirir ve sonraki açılışları engeller; alıcının daha önce kendi kasasına kaydettiği kopyaları veya kaynak kayıtları silmez.
 
@@ -87,7 +87,8 @@ SMTP kullanıldığında dış paket teslimat için VaultPilot sunucusuna geçic
 | --- | --- |
 | Dahili paket | En fazla 250 kayıt, toplam 512 dosya parçası ve 1 GiB düz metin dosya boyutu. |
 | Dahili dosya parçası | Her parça en fazla 2 MiB; parça yükleme isteği en fazla 8 MiB. |
-| Dahili paket oluşturma isteği | En fazla 1,5 MB istek gövdesi. Büyük şifreli kayıt yükleri dosya olmasa da bu sınıra takılabilir. |
+| Dahili paket oluşturma isteği | En fazla 24 MiB istek gövdesi. Aynı gönderen için en fazla 50 bekleyen paket, 128 MiB ayrılmış şifreli alan; organizasyon genelinde 512 MiB bekleyen paylaşım alanı uygulanır. Oluşturma 10 dakikada 6 istekle sınırlıdır. |
+| Şifreli kayıt gövdesi | Standart kayıtlar en fazla 6 MiB, sertifika kayıtları en fazla 24 MiB olabilir. Güncel kayıtlar ve geçmiş sürümleri birlikte kasa başına 512 MiB, organizasyon başına 2 GiB ile sınırlıdır. |
 | Dış paket doğrudan indirme | Seçili dosyaların toplamı en fazla 1 GiB; mevcut 2 MiB dosya parçaları kullanılır. Dahili 250 kayıt/512 toplam parça şeması yerel indirmeye uygulanmaz. |
 | SMTP ile dış paket | Paket içeriği en fazla 12 MiB olabilir; SMTP meta verisindeki kayıt sayısı 250 ile sınırlıdır. Daha büyük yerel paket SMTP ile gönderilemez; onaylı manuel teslimat kullanın. |
 
@@ -96,7 +97,7 @@ SMTP kullanıldığında dış paket teslimat için VaultPilot sunucusuna geçic
 Paylaşımın tüm adımları tek bir atomik işlem içinde yürütülmez:
 
 - **Dahili oluşturma yarım kalırsa:** Paket kaydı ve bazı şifreli dosya parçaları gerçekten oluşturulmuş olabilir. Gönderen listesinde **Hazırlanıyor** görünürken alıcı listesinde görünmez. Yeniden deneme eski paketi sürdürmez, yeni paket oluşturur. Önce mevcut giden paketi ve Denetim Günlüğünü uzlaştırın; gerekiyorsa yarım paketi geri alın.
-- **Gelen paket yarım alınırsa:** Kayıtlar ve dosya parçaları hedef kasaya tek tek yazılır, kullanım sayısı en son güncellenir. Hata bazı yeni kayıtları veya eksik dosyayı kasada bırakabilir; paket hâlâ `PENDING` ve hakkı kullanılmamış görünebilir. Körlemesine yeniden deneme kopya kayıtlar oluşturabilir. Hedef kasayı, gelen/giden durumu ve denetimi karşılaştırın.
+- **Gelen paket yarım alınırsa:** Kayıtlar hedef kasaya tek tek yazılır, dosya yüklemeleri kayıt bazında atomik tamamlanır ve kullanım sayısı en son güncellenir. Bir adım başarısız olduğunda bu kabul sırasında oluşturulan kayıtlar ters sırada geri alınır. Geri alma işlemlerinden biri ayrıca başarısız olursa arayüz bunu açıkça bildirir; yalnız bu durumda hedef kasayı ve denetimi uzlaştırmadan yeniden denemeyin.
 - **Eşzamanlı kabul:** Kullanım sayacı ile hedef kasaya yapılan yazımlar aynı işlem bütünlüğü içinde değildir. Çift tıklama veya iki oturum aynı paketi eşzamanlı açarsa limit güncellenmeden birden fazla kopya oluşabilir. Tek operatör ve tek oturumla ilerleyin.
 - **Dış oluşturma ve denetim ayrılır:** Tarayıcı paket ile parolayı oluşturup sonuç alanına koyduktan sonra genel `SHARE` denetim olayı yazılır. Denetim yazımı başarısızsa arayüz oluşturma hatası gösterebilir ama paket ve parola hâlâ bellekte bulunabilir. Sonuç alanını ve denetimi kontrol etmeden yeniden üretmeyin.
 - **SMTP denetimi iki aşamalıdır:** Kalıcı gönderim-niyeti olayı SMTP'den önce yazılır; bu yazım başarısızsa e-posta gönderilmez. SMTP kabulünden sonraki teslimat kanıtı en iyi çaba ile yazılır ve başarısız olsa bile e-posta gönderilmiş olabilir. Niyet olayı tek başına teslimat kanıtı değildir; teslimat denetimi eksik diye aynı paketi hemen tekrar göndermeyin.
@@ -142,7 +143,7 @@ Paylaşımın tüm adımları tek bir atomik işlem içinde yürütülmez:
 
 ## Ne Zaman Durmalı
 
-Seçim kapsamı belirsizse, hedef kullanıcı/anahtar doğrulanamıyorsa, dosya parçaları eksikse, Active Directory kimlik bilgisi dahili kabuldeyse, mevcut paket **Hazırlanıyor** durumundaysa, hedef kasada kısmi kabul şüphesi varsa, dış paket sonucu denetimle çelişiyorsa, SMTP sonucu belirsizse veya paket/parola aynı kanala girdiyse durun. Yeni paket ya da ikinci kabul üretmeden önce redakte kimlikler, zaman, durum ve denetim kanıtıyla özel inceleme yapın.
+Seçim kapsamı belirsizse, hedef kullanıcı/anahtar doğrulanamıyorsa, dosya parçaları eksikse, Active Directory sağlayıcısı veya hedef nesne artık doğrulanamıyorsa, mevcut paket **Hazırlanıyor** durumundaysa, arayüz geri almanın tamamlanamadığını bildiriyorsa, dış paket sonucu denetimle çelişiyorsa, SMTP sonucu belirsizse veya paket/parola aynı kanala girdiyse durun. Yeni paket ya da ikinci kabul üretmeden önce redakte kimlikler, zaman, durum ve denetim kanıtıyla özel inceleme yapın.
 
 ## Operatör Notları
 

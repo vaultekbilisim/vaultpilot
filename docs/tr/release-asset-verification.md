@@ -13,14 +13,27 @@ Herkese açık doğrulama kaynağı olarak GitHub Release asset metadata'sını 
 | Bileşen | Sürüm | Asset |
 | --- | ---: | --- |
 | VaultPilot Enterprise Vault Console | 2.0.0 | `VaultPilot-2.0.0-x64.msi` |
-| Chromium Browser Extension | 1.3.2 | Chrome Web Store listing; `vaultpilot-browser-vault-extension.zip` release arşivi |
+| Chromium Browser Extension | Chrome Web Store 1.3.3; v2.0.0 arşivi 1.3.2 | Chrome Web Store listing; `vaultpilot-browser-vault-extension.zip` release arşivi |
 | Offline Share Decrypter | 1.2.0 | `vaultpilot-share-decrypter.zip` |
 | VaultPilot DC Agent Service | 1.2.10 | `vaultpilot-dc-agent.ps1` |
 | Update manifest | 2.0.0 channel metadata | `vaultpilot-update.json` |
 
+## Hazırlanan VaultPilot 2.2.0 Adayı — Henüz Yayınlanmadı
+
+Bu tablo yayın hazırlığı sözleşmesidir; `v2.2.0` sürümünün herkese açık olduğu anlamına gelmez. Yayın tamamlanıp bağımsız olarak doğrulanana kadar müşteri indirmelerinde aşağıdaki doğrulanmış `v2.0.0` dosya setini kullanın.
+
+| Bileşen | Aday sürüm | Planlanan teslim yolu |
+| --- | ---: | --- |
+| VaultPilot Enterprise Vault Console | 2.2.0 | Sürümlü Windows MSI ve imzalı güncelleme manifesti |
+| Chromium Browser Extension | 1.3.3 | Chrome Web Store sürümü zaten canlı; v2.2.0 için sürümlü yayın arşivi hazırlanır |
+| Offline Share Decrypter | 1.2.1 | Sürümlü yayın arşivi ve imzalı bileşen manifesti |
+| VaultPilot DC Agent Service | 1.2.21 | Sürümlü PowerShell dosyası ve imzalı bileşen manifesti |
+| VaultPilot Backup Tool | 1.0.1 | Sunucuyla gelen destek bileşeni; ayrı GitHub Release dosyası değildir |
+| VaultPilot Log Collector | 1.0.1 | Sunucuyla gelen destek bileşeni; ayrı GitHub Release dosyası değildir |
+
 ## Public Asset Seti
 
-Public GitHub Release şu müşteri güvenli teslim dosyalarını içerir. Bu tablo 8 Temmuz 2026 tarihinde GitHub Release metadata'sı ile kontrol edildi:
+Public GitHub Release şu müşteri güvenli teslim dosyalarını içerir. Bu tablo 16 Temmuz 2026 tarihinde GitHub Release metadata'sı ile kontrol edildi:
 
 | Asset | Boyut | SHA-256 |
 | --- | ---: | --- |
@@ -33,7 +46,7 @@ Public GitHub Release şu müşteri güvenli teslim dosyalarını içerir. Bu ta
 | `vaultpilot-dc-agent.ps1` | 98,891 | `de8c4df43ff69b9a277e2cfaf4cb14f553512cf13b318eec45b725db1113e0fc` |
 | `vaultpilot-dc-agent.json` | 212 | `9082376283457eeddbffd3aee8d4e6ed1b46674d498d027467a9eff6308f7f4e` |
 
-Chrome Web Store listelemesi tarayıcı eklentisi için birincil müşteri kurulum ve güncelleme kanalıdır. Eklenti ZIP'i yalnızca release arşivi, lab doğrulama paketi, lokal geliştirme paketi veya acil geri dönüş çıktısı olarak tutulur.
+Chrome Web Store listelemesi tarayıcı eklentisi için birincil müşteri kurulum ve güncelleme kanalıdır ve GitHub Release'den bağımsız ilerleyebilir. Canlı mağaza `1.3.3` gösterirken GitHub `v2.0.0` sürümüne eklenen ZIP arşivi `1.3.2` olarak kalır. Eklenti ZIP'i yalnızca release arşivi, lab doğrulama paketi, lokal geliştirme paketi veya acil geri dönüş çıktısı olarak tutulur.
 
 PassMan adlı uyumluluk dosyaları eski client'lar için kurulu ortamlarda, rollback yollarında veya source build çıktısında bulunabilir. Doğrulanan GitHub Release üzerinde görünmedikçe public release asset'i değildir.
 

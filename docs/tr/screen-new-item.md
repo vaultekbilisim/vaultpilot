@@ -17,7 +17,7 @@ Tür şeridinde beş seçenek bulunur:
 | Parola | Başlık ve Parola. | Kullanıcı adı/e-posta, oturum açma adresi, not. |
 | API anahtarı | Başlık ve API anahtarı ya da token. | İstemci/sahip/servis hesabı, konsol adresi, kapsam veya rotasyon notu. |
 | Güvenli not | Başlık ile Şifreli not veya İsteğe bağlı gizli değer alanlarından en az biri. | Sahip/ekip ve ilgili sistem bilgisi. |
-| Sertifika | Başlık ile sertifika veya özel anahtar materyali. | Sahip/servis, uç nokta, not, sona erme tarihi, Subject/CN ve sertifika yetkilisi sınıfı. |
+| Sertifika | Başlık ve en az bir geçerli X.509 sertifikası. | Zincir/intermediate, eşleşen private key, PFX/P12 paketi, sahip/servis, uç nokta, not ve sertifika yetkilisi sınıfı. |
 | Dosya | Başlık ve yeni kayıt için seçilmiş tek dosya. | Sahip/alıcı, ilgili sistem/talep ve dosya notu. |
 
 `CREDENTIAL`, saklanabilen bir sır türüdür ancak elle seçim şeridinde bilerek gösterilmez. Yeni Active Directory kimlik bilgisi kayıtları ajan eşitlemesiyle oluşturulur. Elle kimlik bilgisi oluşturma girişimi reddedilir ve form **Entegrasyonlar > Active Directory** bölümüne yönlendirir. Yeni kayıt ekranını RDP veya SSH kimlik bilgisi oluşturuyormuş gibi anlatmayın.
@@ -29,15 +29,15 @@ Bu formda genel bir Sahip veya Etiketler denetimi yoktur. Hesap alanı türe öz
 - Zorunlu değeri girmeden önce elle oluşturulabilen beş kayıt türünden birini seçin.
 - Açık bir başlık yazın; yalnız kaydı güvenle bulmak ve işletmek için gereken bağlam alanlarını doldurun.
 - Değeri üretin veya yapıştırın. Sunuluyorsa ve kurum ilkesi izin veriyorsa isteğe bağlı sızıntı kontrolünü ayrıca çalıştırın.
-- Sertifika materyalini içe aktarın ya da belgelenen sınırlar içinde tek dosya seçin.
+- Sertifika türünde ana sertifika, zincir/intermediate, private key ve PFX/P12 kaynaklarını ayrı denetimlerden ekleyin; Dosya türünde belgelenen sınırlar içinde tek dosya seçin.
 - **Şifreli kaydı kaydet** seçeneğine basmadan önce aktif kasayı ve yazma yetkisini yeniden kontrol edin.
 - Mevcut formu silip seçili türün listesine dönmek için geri okunu kullanın.
 
-## Tür Değişikliği ve Ortak Taslak Alanları
+## Tür Değişikliği ve Hassas Veri Sınırları
 
-Beş elle kayıt türü arasında geçiş yapmak etiketleri ve özel denetimleri değiştirir; ayrı ve bağımsız yeni bir taslak başlatmaz. Başlık, hesap, gizli değer, adres, not, sertifika bilgileri, dosya bilgisi veya seçimi, kategori, kaynak ve etiketler ortak form durumunda kalabilir; yalnız kimlik bilgisine özgü bağlantı alanları çıkarılır. Bu nedenle sertifika, dosya veya sınıflandırma verisi başka bir türde gizlenebilir, yeniden görünebilir ya da sonraki kaydetmeyi etkileyebilir.
+Sertifika, Kimlik bilgisi ve Dosya ayrı hassas veri sınırlarıdır. Bu türlerden birine geçerken veya bunlardan çıkarken formda gizli değer, sertifika/private-key materyali, dosya seçimi ya da dizin bağlantısı varsa VaultPilot açık onay ister. Onaydan sonra bu hassas alanlar, çalışan sertifika worker'ı ve geçici kaynak parolaları temizlenir; başka bir türde gizlenip sonraki kayda taşınmaz. Başlık, hesap, adres, not, kategori, ortam, sahip ve etiketler gibi genel bağlam alanları korunabilir.
 
-Materyal girmeden önce genel seçiciden doğru türü açın. Sertifika içe aktardıktan, dosya seçtikten veya sertifika yetkilisi sınıfı belirledikten sonra tür değiştiyse en güvenli yol formu sıfırlamak ya da geri dönmek, doğru türü yeniden açmak ve güncel materyali yeniden girmek veya seçmektir. Türü bilerek değiştirdiyseniz Kaydet öncesinde hem görünen alanları hem daha önce girilmiş gizli veriyi yeniden kontrol edin. Form gönderilene kadar hiçbir alan kaydedilmez; otomatik kayıt veya kayıtlı taslak listesi yoktur.
+Parola, API anahtarı ve Güvenli not arasındaki geçişler aynı genel kayıt sınırında kalır ve girilmiş değer korunabilir. Yine de Kaydetmeden önce görünen türü ve değeri yeniden kontrol edin. Tür değişikliğinden vazgeçerseniz mevcut taslak değişmeden kalır. Form gönderilene kadar hiçbir alan kaydedilmez; otomatik kayıt veya kayıtlı taslak listesi yoktur.
 
 ## Değer Üretme, Güç ve Sızıntı Kontrolü
 
@@ -49,9 +49,11 @@ Sızıntı düğmesi gösterildiğinde kontrol ancak operatör düğmeye bastık
 
 ## Sertifika İşleme
 
-Sertifika materyali **Sertifika veya özel anahtar** alanına yapıştırılabilir ya da dosyadan içe aktarılabilir. Dosya seçici PEM, CRT, CER, DER, P7B/P7C, PFX/P12/PKCS12, P8/P8E/PK8 ve KEY biçimlerini sunar. Seçilen sertifika dosyası en fazla 10 MB olabilir.
+Sertifika düzenleyicisi dört ayrı kaynak rolü sunar: **Ana sertifika**, **Zincir / intermediate**, **Private key** ve **PFX / P12**. Her role birden fazla kaynak ekleyebilir, yanlış veya eski kaynağı kendi kaldırma düğmesiyle diğerlerine dokunmadan çıkarabilirsiniz. PEM, CRT, CER, DER, P7/P7B/P7C/CMS, PFX/P12/PKCS12, P8/P8E/PK8, PKCS#1, PKCS#8 ve KEY biçimleri desteklenir; bir kayıtta en fazla 16 kaynak ve toplam 10 MB materyal bulunabilir.
 
-İçe aktarma sırasında tarayıcı SHA-256 özetini hesaplar ve dosyanın özgün baytlarını şifreli kayıt yükünün içine koyar. Metin biçimleri çözümlenir; bulunduğunda basit `Subject`, `Issuer`, `Serial` ve sona erme etiketleri okunur. İkili biçimler base64 materyali olarak sarılır. Bu işlem envantere içe aktarmadır; sertifika zinciri veya özel anahtar için tam doğrulama değildir. **Sertifika dosyası şifreli kayıt alanına alındı.** bildirimi, materyalin mevcut formda bulunduğu anlamına gelir; Kaydet başarılı olana kadar kayıt kalıcı değildir.
+Tarayıcı her kaynağın SHA-256 özetini hesaplar ve gerçek kriptografik ayrıştırma yapar. X.509 sertifikaları ile PKCS#7 zincirlerini okur; PFX/P12 paketlerini açar; desteklenen RSA, EC ve RFC 8410 anahtarlarını tanır. Private key varsa public key bilgisini ana sertifikayla karşılaştırır. En az bir geçerli X.509 sertifikası bulunmadan, anahtar eşleşmeden, parola korumalı kaynak açılamadan veya limit hatası giderilmeden kayıt kaydedilmez. Kaynak baytları yalnız kasa anahtarıyla şifrelenen kayıt yüküne alınır; karttan ham gösterme, kopyalama veya özgün dosya indirme sunulmaz.
+
+Parola korumalı her PFX/P12 ya da private-key kaynağının kendi **Kaynak parolası** alanı vardır. **Parolayı bu kasada şifreli sakla** varsayılan olarak kapalıdır. Açıldığında bile yalnız kriptografik ayrıştırmada gerçekten kullanılan parola şifreli kayda alınır; şifresiz kaynağa yanlışlıkla yazılmış veya hiçbir kaynak tarafından tüketilmemiş değer saklanmaz. Seçenek kapalıysa parola doğrulama boyunca tarayıcı belleğinde kalır ve kilit, oturum, kullanıcı ya da kasa değişiminde temizlenir.
 
 Sona erme tarihi ve Subject/CN formda düzeltilebilir. DigiCert, GoDaddy, GlobalSign, Let's Encrypt, Microsoft CA veya Self-signed seçmek yalnız kaydın sertifika kategorisini ve sınıflandırma etiketlerini değiştirir. İlgili sertifika yetkilisine bağlanmaz; hesabı doğrulamaz; sertifika sipariş etmez, yenilemez, yeniden düzenlemez, iptal etmez veya dağıtmaz.
 
@@ -73,7 +75,7 @@ Tarayıcının yerleşik zorunlu alan doğrulaması; gönderme işleyicisinden, 
 2. Lisans ve aktif kasa rolü yazmaya izin vermelidir.
 3. Yeni Active Directory kimlik bilgisi bu ekrandan oluşturulamaz.
 4. Her tür için Başlık zorunludur.
-5. Parola, API anahtarı ve Sertifika için gizli değer boş bırakılamaz.
+5. Parola ve API anahtarı için gizli değer boş bırakılamaz; Sertifika için ayrıştırılmış en az bir gerçek X.509 sertifikası bulunmalı ve eklenen private key ana sertifikayla eşleşmelidir.
 6. Güvenli not için not içeriği veya isteğe bağlı gizli değer bulunmalıdır.
 7. Yeni Dosya için seçilmiş ya da formda kalmış dosya bilgisi bulunmalı; yeni seçilen dosya 1 GB sınırını aşmamalıdır.
 
@@ -87,7 +89,7 @@ Başarılı oluşturmadan sonra Parola, API anahtarı ve Güvenli not `CREATE`; 
 
 - Geri oku yerel formu sıfırlar ve kaydedilmemiş değişiklik onayı göstermeden seçili türün listesine döner. Gezinme, başlamış sertifika okuma, kaydetme veya yükleme işini durdurmaz. Gezinmeyi iptal yöntemi olarak kullanmayın; tamamlanma ya da hatayı bekleyip listeyi ve Denetim Günlüğünü uzlaştırın.
 - Yeni kayıt için ayrı İptal düğmesi yoktur. **Düzenlemeyi iptal et** yalnız mevcut ve düzenlenebilir bir kayıtta görünür; seçildiğinde düzenleme kipini kapatır ve kayıt listesine dönmek yerine Yeni kayıt ekranında boş bir Parola taslağı bırakır.
-- Sınırı aşan Dosya reddedildiğinde o anki seçici temizlenir ancak önceki dosya bilgisi ortak formda kalabilir. Sınırı aşan veya okunamayan sertifika dosya girişini temizler ancak önceki sertifika materyali, bilgileri veya sınıflandırma etiketleri kalabilir. Bu hatalardan sonra formu sıfırlayın ya da Yeni kayıttan çıkıp yeniden açın; doğru türü ve güncel dosyayı yeniden seçip Kaydet öncesinde özeti doğrulayın.
+- Sınırı aşan Dosya reddedildiğinde o anki seçici temizlenir ancak önceki dosya bilgisi ortak formda kalabilir. Sertifika kaynağı okunamıyor, parola yanlış veya anahtar eşleşmiyorsa sorunlu kaynağı kaldırın ya da değiştirin ve doğrulamayı yeniden çalıştırın; başarılı doğrulama görülmeden Kaydet'e basmayın.
 - Çoğu doğrulama ve kaydetme hatasında form, operatörün düzeltme yapabilmesi için bellekte kalır. Sayfayı yenileme, kilitleme, gezinme sıfırlaması veya geri okunun taslağı saklayacağını düşünmeyin.
 - Başarısız kaydetme ekranda hata ve canlı uygulama bildirimi üretir. Yanıtın tamamını veya form içeriğini herkese açık desteğe yapıştırmayın.
 - Dosya yükleme kayıt oluşturulduktan sonra başarısız olabilir; yeniden denemeye karar vermeden önce Dosyalar ve Denetim Günlüğü ekranlarını kontrol edin.
@@ -106,9 +108,9 @@ Başarılı oluşturmadan sonra Parola, API anahtarı ve Güvenli not `CREATE`; 
 ### Sertifika kaydı içe aktarma
 
 1. Sertifika türünü seçip hassas olmayan bir başlık girin.
-2. Onaylı materyali yapıştırın veya 10 MB'yi aşmayan destekli bir dosya seçin.
-3. SHA-256, biçim, sona erme tarihi, Subject/CN ve sertifika yetkilisi sınıfını inceleyin. İçe aktarıldı bildirimi, doğrulandı veya kaydedildi anlamına gelmez.
-4. Kaydedin ve `IMPORT` denetim olayını doğrulayın.
+2. Ana sertifika, zincir/intermediate, private key ve PFX/P12 materyalini doğru kaynak rolüne ekleyin; parola korumalı her kaynağa kendi parolasını girin.
+3. X.509 ayrıştırmasını, private key eşleşmesini, zincir durumunu, SHA-256 değerlerini, Subject/issuer ve geçerlilik aralığını inceleyin. Gerekmedikçe kaynak parolasını kalıcı saklamayın.
+4. Kaydedin ve `IMPORT` denetim olayını doğrulayın. Kartta ham materyal yerine meta veri, parmak izi ve güvenli üretilmiş zincir paketi/PFX eylemlerinin bulunduğunu unutmayın.
 5. Envanter incelemesi için Sertifikalar ekranını, VaultPilot HTTPS paketi için Sunucu ayarlarını kullanın; bu ekran dağıtım yapmaz.
 
 ### Dosya saklama
@@ -130,7 +132,7 @@ Başarılı oluşturmadan sonra Parola, API anahtarı ve Güvenli not `CREATE`; 
 | Tür değiştirildi | Sertifika, dosya veya etiket işlemi sonrasında sıfırlayıp yeniden açmayı tercih edin; aksi durumda ortak ve gizli verinin tamamını yeniden kontrol edin. |
 | Başlık veya değer eksik | Seçili türün kesin zorunlu alanlarını tamamlayın. |
 | Sertifika içe aktarılıyor | Tarayıcının okuma ve özet alma işlemini bekleyin; henüz kaydedilmiş kayıt değildir. |
-| Sertifika büyük / okunamıyor | Önceki materyal veya bilgiler kalabilir. Sıfırlayıp yeniden açın; ardından 10 MB sınırındaki onaylı dosyayı seçin veya doğrulanmış metni yapıştırın. |
+| Sertifika kaynağı geçersiz | Sorunlu kaynağı kaldırın veya değiştirin; parola, biçim, toplam 10 MB/16 kaynak sınırı ve private key eşleşmesini düzeltip doğrulamayı yeniden çalıştırın. |
 | Dosya seçilmedi | Yeni Dosya kaydını kaydetmeden önce tek dosya seçin. |
 | Dosya büyük / kota aşıldı | Önceki dosya bilgisi kalabilir. Sıfırlayıp yeniden açın; ardından aktif kasadaki kullanıcı toplamını 1 GB içinde tutan dosyayı seçin. |
 | Şifreleniyor / yükleniyor | Sayfayı açık tutun; devam eden işlem için iptal denetimi yoktur ve gezinme işi durdurmaz. |
@@ -159,7 +161,7 @@ Aktif kasa belirsizse, yazma erişimi beklenmedikse, sertifika veya dosyanın ka
 
 ## Operatör Notları
 
-Yeni kayıt, istemci tarafında şifreleme yapan bir formdur; iş akışı motoru değildir. Otomatik kaydetmez, sayfa yenilemeleri arasında taslak tutmaz, kimlik bilgilerini sınamaz, Active Directory kayıtlarını elle oluşturmaz, sertifika güvenini doğrulamaz, sertifika dağıtmaz, dosya taramaz veya dış sistemlerde rotasyon yapmaz.
+Yeni kayıt, istemci tarafında şifreleme yapan bir formdur; iş akışı motoru değildir. Otomatik kaydetmez, sayfa yenilemeleri arasında taslak tutmaz, kimlik bilgilerini sınamaz, Active Directory kayıtlarını elle oluşturmaz, kurumsal sertifika güven zincirine karar vermez, sertifika dağıtmaz, dosya taramaz veya dış sistemlerde rotasyon yapmaz. Kriptografik ayrıştırma ve anahtar eşleşmesi, sertifikanın kurumunuzca güvenilir olduğu anlamına gelmez.
 
 ## İlgili
 

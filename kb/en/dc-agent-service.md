@@ -14,7 +14,7 @@ Display name: VaultPilot DC Agent Service
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\vaultpilot-dc-agent.ps1 -Status
 powershell -ExecutionPolicy Bypass -File .\vaultpilot-dc-agent.ps1 -TailLog
-powershell -ExecutionPolicy Bypass -File .\vaultpilot-dc-agent.ps1 -RepairService
+powershell -ExecutionPolicy Bypass -File .\vaultpilot-dc-agent.ps1 -RepairService -PromptAgentToken
 ```
 
 ## Checks
@@ -23,6 +23,24 @@ powershell -ExecutionPolicy Bypass -File .\vaultpilot-dc-agent.ps1 -RepairServic
 - Bind username uses `DOMAIN\username` or `username@domain.local`.
 - Local logs redact tokens, passwords and secret-like values.
 - Repair mode rebuilds the service wrapper without printing credentials.
+- Install and repair commands contain no token value and use only `-PromptAgentToken`.
+
+<a id="sync-works-actions-disabled"></a>
+
+## Sync Works but Actions Are Disabled
+
+Successful sync proves only that OU, group, and user metadata can be read. It does not prove sensitive-action capability or upgrade the agent. **Unlock account**, **Require password change**, **Assign random password now**, and **Disable account** in prepared VaultPilot 2.2.0 require all of the following:
+
+- provider health is `CONNECTED`;
+- service and PowerShell worker are `ready`;
+- both report the current packaged version `1.2.21`;
+- the matching agent capability is present;
+- Owner role, writable license, and a resolvable USER target;
+- target is not a built-in identity or the bind identity.
+
+An agent older than `1.2.20` can sync while safely keeping identity-bound actions unavailable. The current package is `1.2.21`; it retains the 1.2.20 identity boundary and adds safer configuration recovery, idempotent result delivery, audited review for ambiguous delivery, and bounded diagnostics. Verify the version in **Status**, then rotate the token on the existing provider and repair with the current script. Do not create a second provider. If the installed server still downloads an old script, verify its static download asset and cache.
+
+**Require password change** does not generate a password; it sets the next-sign-in flag. **Assign random password now** changes AD immediately. **Reveal secret** works only when the vault already contains an encrypted value, because the agent cannot read the current AD password.
 
 ## 401 Unauthorized during install or repair
 
@@ -36,6 +54,8 @@ If the failure remains, inspect the VaultPilot server log for the redacted reaso
 - `token_mismatch`: the command uses an old or wrong token.
 
 Do not paste the real `pma_` agent id or `pmt_` token into public support channels. Use placeholders and rotate the token if it was exposed.
+
+Rotating the token invalidates the old value immediately. Do not add the replacement to the command; copy it separately and paste it only into the local secure PowerShell prompt.
 
 ## Related
 

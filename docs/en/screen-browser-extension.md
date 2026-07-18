@@ -4,7 +4,7 @@ The topbar `?` opens this context-specific guide while **Integrations > Browser 
 
 ## Access, Role, and License Boundary
 
-The **Integrations** navigation path is available only to **Owner** and requires the **Integration** license capability. The extension-specific shortcut follows a different path: it requires Owner and the separate **Extension** capability, but does not recheck Integration. After Integrations is already open, choosing the in-page **Browser extension** tab does not recheck Extension. Seeing the tab is therefore not proof that both capabilities are licensed. Admin, Auditor, and User do not reach this management panel through the current navigation.
+The **Integrations** navigation path is available only to **Owner** and requires the **Integration** license capability. Browser Extension is included in that capability; newly issued licenses do not have a separate **Extension** capability. Customers whose legacy signed license contains only `extension` retain Browser Extension access for compatibility, but that compatibility does not grant External API or Active Directory access. Admin, Auditor, and User do not reach this management panel through the current navigation.
 
 The extension-origin pairing-start route is not driven by a console session; it can target an active Owner, Admin, or User username. The authenticated list, approve, and revoke endpoints accept Owner, Admin, and User, reject Auditor, and scope device rows to the authenticated user's own records. Treat Owner operation through this panel as the supported console workflow; do not assume that seeing another user's name elsewhere grants access to that user's pairing request.
 

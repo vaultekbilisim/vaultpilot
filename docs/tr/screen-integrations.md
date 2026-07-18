@@ -6,7 +6,7 @@
 
 Entegrasyonlar ekranı yalnız VaultPilot **Sahip** sistem rolüne gösterilir. Yönetici, Denetçi ve Kullanıcı rolleri API istemcilerini veya dizin sağlayıcılarını bu ekrandan listeleyemez ve yönetemez. Sol menüde ekranın açılması için lisansın **Entegrasyon** yeteneğini içermesi gerekir; kapsam yoksa menü devre dışı kalır ve Sahip lisans ekranına yönlendirilir.
 
-Salt okunur lisans yeni API istemcisi ve AD ajanı oluşturmayı; dizin kapsamı kaydetme, anlık eşitleme, ajan işlemi, ajan erişim anahtarı yenileme/iptal etme, sağlayıcı silme ve kasaya AD kaydı aktarma gibi yazma işlemlerini kapatır. Güvenlik amacıyla mevcut bir API istemcisini veya tarayıcı eklentisi cihazını iptal etme yolu salt okunur lisans altında da kullanılabilir. Tarayıcı eklentisi kısayolu ayrıca lisansın **Eklenti** yeteneğini kontrol eder.
+Salt okunur lisans yeni API istemcisi ve AD ajanı oluşturmayı; dizin kapsamı kaydetme, anlık eşitleme, ajan işlemi, ajan erişim anahtarı yenileme/iptal etme, sağlayıcı silme ve kasaya AD kaydı aktarma gibi yazma işlemlerini kapatır. Güvenlik amacıyla mevcut bir API istemcisini veya tarayıcı eklentisi cihazını iptal etme yolu salt okunur lisans altında da kullanılabilir. Tarayıcı eklentisi ayrı lisanslanmaz; **Entegrasyon** yeteneğine dahildir. Eski imzalı `extension` lisansları yalnız eklenti erişimini geriye dönük olarak korur ve Dış API veya Active Directory kapsamını açmaz.
 
 ## Burada Ne Yapılır
 
@@ -50,6 +50,8 @@ Gizli değer ekranda maskeli kalır. 120 saniyelik sayaç sonunda veya **Temizle
 
 **Erişimi iptal et** onaydan sonra istemciyi `REVOKED` durumuna taşır. İptal edilmiş kayıt defterde kanıt olarak kalır, yeniden etkinleştirilemez ve aynı gizli değer döndürülemez. Değişim gerekiyorsa dar kapsamlı yeni istemciyi oluşturun, tüketen sistemi yeni kimlik bilgisine geçirin ve ardından eski istemciyi iptal edin.
 
+<a id="active-directory-agent"></a>
+
 ## Active Directory
 
 ### Veri ve parola sınırı
@@ -73,11 +75,15 @@ HTTPS üzerinden açılan konsol, etkin VaultPilot sertifikasının parmak izini
 
 Sağlayıcı kartı DC, Base DN, ajan sürümü, bind kullanıcı adı, son bağlantı, son eşitleme ve eşitleme aralığını gösterir. Durum etiketi **AJAN BEKLENİYOR**, **BAĞLI**, **BAĞLANTI ESKİ**, **ÇEVRİMDIŞI** veya **ANAHTAR İPTAL** olabilir. Bağlı bir ajan ayrıca **EŞİTLENİYOR**, **EŞİTLEME KUYRUKTA** veya **HATA** gösterebilir. **Şimdi eşitle** yalnız komutu kuyruğa alır; sonuç için sağlayıcı durumunu ve İşlemler ekranını izleyin.
 
-**Dizin ağacında ara** alanı OU, grup, kullanıcı, UPN ve DN içinde arar. **Ağaç**, **OU**, **Gruplar** ve **Kullanıcılar** görünümleri yalnız listeyi süzer. Kullanıcıların VaultPilot ile giriş seçimi anında ayrı giriş kapsamına kaydedilir; Active Directory kayıt aktarımı için yapılan dal/kullanıcı seçimleri taslak olarak kalır. Önce **Kapsamı kaydet**, sonra **Seçilenleri kasaya aktar** kullanın. Aktarım için etkin kasada Düzenleyici veya Yönetici erişimi ve yazılabilir lisans gerekir; seçili kullanıcı zaten aynı kasada varsa atlanır.
+**Dizin ağacında ara** alanı OU, grup, kullanıcı, UPN ve DN içinde arar. **Ağaç**, **OU**, **Gruplar** ve **Kullanıcılar** görünümleri yalnız listeyi süzer. Kullanıcıların VaultPilot ile giriş seçimi anında ayrı giriş kapsamına kaydedilir; Active Directory kayıt aktarımı için yapılan dal/kullanıcı seçimleri taslak olarak kalır. Önce **Kapsamı kaydet**, sonra **Seçilenleri kasaya aktar** kullanın. Aktarım için etkin kasada Düzenleyici veya Yönetici erişimi ve yazılabilir lisans gerekir.
 
-**Ajan yetenekleri** şeridi yalnız ajanın bildirdiği desteği gösterir: **Parola durumu**, **Kilidi aç**, **Parola değişimi iste** ve **Parolayı değiştir**. Bu şerit işlem başlatmaz. Hassas ajan işlemleri yalnız Sahip, yazılabilir lisans, `CONNECTED` ajan sağlığı ve ilgili yetenek birlikte varsa çalışır. Hedef kullanıcı ayrıcalıklı olarak işaretlenmişse hesabı kapatma, kilit açma, parola değişimi isteme ve **Parolayı değiştir** işlemleri hem arayüzde kapatılır hem sunucuda kesin olarak reddedilir. Sonuçlar **Ajan işlemleri** zaman çizgisinde görünür.
+Hazırlanan VaultPilot 2.2.0 sürümünde seçilmiş kullanıcı aynı kasada zaten varsa kayıt atlanmak yerine kimlik ve AD durum meta verisiyle uzlaştırılır. Bu adım yalnız ilgili yazılabilir kasa yetkili tarayıcıda açıkken tamamlanabilir; ajan ve sunucu şifreli kaydı açamaz. Mevcut parola boş dizin verisiyle değiştirilmez, kapsamdan çıkan veya dizinde bulunamayan kullanıcı kaydı kendiliğinden silinmez. Sağlayıcı eşitlemesi başarılı olsa bile kasa uzlaştırması kısmi sonuç verebilir; satır bazlı sonucu inceleyin.
+
+**Ajan yetenekleri** şeridi yalnız ajanın bildirdiği desteği gösterir: **Parola durumu**, **Kilidi aç**, **Parola değişimi iste**, **Şimdi rastgele parola ata** ve **Hesabı kapat**. Bu şerit işlem başlatmaz. Sahip rolü, yazılabilir lisans, `CONNECTED` ajan sağlığı, hazır çalışan ve ilgili yetenek birlikte doğrulanmadıkça hassas ajan işlemleri fail-closed kalır. Kimliğe bağlı bu işlemler için servis ile çalışanın `1.2.20` veya daha yeni sürüm bildirmesi gerekir; güncel indirme ve onarım hedefi `1.2.21` sürümüdür ve başarılı eşitleme eski ajanı yükseltmez. Yerleşik hesaplar ve bind hesabı her durumda korunur. Ayrıcalıklı diğer hedefler elle işlemde ikinci onay, otomatik rotasyonda ayrıca kalıcı ilke onayı ister. Sonuçlar **Ajan işlemleri** zaman çizgisinde görünür.
 
 **Erişim anahtarını yenile** eski anahtarı hemen geçersiz kılar ve yeni anahtarı yalnız geçerli sonuç panelinde verir. **Tehlikeli işlemler** altındaki **Erişim anahtarını iptal et**, ajanı yeniden kayıt/onarıma kadar eşitlemeden çıkarır. **Sağlayıcıyı kaldır**, sağlayıcı kaydını siler; Windows ajanı yeniden bağlanmak için yeni kayıt ve erişim anahtarı ister.
+
+Kurulum ve onarım komutunda erişim anahtarının kendisi bulunmaz; komut `-PromptAgentToken` kullanır. Anahtarı ayrı kopyalayın ve yalnız yönetici PowerShell'deki yerel gizli isteme yapıştırın. Komuta düz metin erişim anahtarı eklemeyin.
 
 ## Tarayıcı Eklentisi
 

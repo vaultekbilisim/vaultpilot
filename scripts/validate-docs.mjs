@@ -789,7 +789,6 @@ function validateRequiredPublicReferences() {
       'public-external-surface-drift.md'
     ]],
     ['docs/en/public-external-surface-drift.md', [
-      '2026-07-09',
       'hjkbedlaieikhkoplgpiohlaakgebobi',
       'v2.0.0',
       'Release-body correction is not currently tracked',
@@ -797,7 +796,7 @@ function validateRequiredPublicReferences() {
       'Documentation Gateway',
       'Knowledge Base Gateway',
       'Product Walkthrough',
-      '69.07KiB',
+      '76.04KiB',
       'limited-use declarations',
       'Fresh 2.0 captures',
       'legacy PassMan compatibility-line',
@@ -814,7 +813,6 @@ function validateRequiredPublicReferences() {
       'openGraphImageUrl'
     ]],
     ['docs/tr/public-external-surface-drift.md', [
-      '2026-07-09',
       'hjkbedlaieikhkoplgpiohlaakgebobi',
       'v2.0.0',
       'Release-body düzeltmesi şu anda takip edilmiyor',
@@ -822,7 +820,7 @@ function validateRequiredPublicReferences() {
       'Documentation Gateway',
       'Knowledge Base Gateway',
       'Product Walkthrough',
-      '69.07KiB',
+      '76.04KiB',
       '`Limited Use` beyanlarını',
       'Fresh 2.0 captures',
       'legacy PassMan compatibility-line',
@@ -983,20 +981,20 @@ function validateRequiredPublicReferences() {
       "Status-only client'lar vault assignment olmadan oluşturulabilir."
     ]],
     ['docs/en/release-asset-verification.md', [
-      'gh release view v2.0.0 --repo vaultekbilisim/vaultpilot',
-      'Get-FileHash .\\VaultPilot-2.0.0-x64.msi -Algorithm SHA256',
-      'Get-AuthenticodeSignature .\\VaultPilot-2.0.0-x64.msi',
+      'gh release view v',
+      'Get-FileHash .\\VaultPilot-',
+      'Get-AuthenticodeSignature .\\VaultPilot-',
       'If `gh release view` shows a different tag'
     ]],
     ['docs/tr/release-asset-verification.md', [
-      'gh release view v2.0.0 --repo vaultekbilisim/vaultpilot',
-      'Get-FileHash .\\VaultPilot-2.0.0-x64.msi -Algorithm SHA256',
-      'Get-AuthenticodeSignature .\\VaultPilot-2.0.0-x64.msi',
+      'gh release view v',
+      'Get-FileHash .\\VaultPilot-',
+      'Get-AuthenticodeSignature .\\VaultPilot-',
       '`gh release view` farklı tag'
     ]],
     ['docs/en/chrome-web-store-listing.md', [
       'hjkbedlaieikhkoplgpiohlaakgebobi',
-      '1.3.2',
+      '1.3.3',
       'PRIVACY.md',
       'Publisher Dashboard Handoff',
       'visible overview starts with VaultPilot wording',
@@ -1015,7 +1013,7 @@ function validateRequiredPublicReferences() {
     ]],
     ['docs/tr/chrome-web-store-listing.md', [
       'hjkbedlaieikhkoplgpiohlaakgebobi',
-      '1.3.2',
+      '1.3.3',
       'PRIVACY.md',
       'kanonik İngilizce privacy policy',
       'Yayıncı Paneli Aktarım Notu',
@@ -1364,6 +1362,273 @@ function validateScreenHelpDocs() {
   }
 }
 
+function validateReleaseContract() {
+  const contractPath = path.join(root, 'release-contract.json')
+  if (!existsSync(contractPath)) {
+    fail('required file is missing: release-contract.json')
+    return
+  }
+
+  let contract
+  try {
+    contract = JSON.parse(readFileSync(contractPath, 'utf8'))
+  } catch (error) {
+    fail(`release-contract.json is not valid JSON: ${error.message}`)
+    return
+  }
+
+  if (!['candidate', 'published'].includes(contract.state)) {
+    fail('release-contract.json state must be candidate or published')
+  }
+
+  const requiredTargetKeys = [
+    'server',
+    'extension',
+    'shareDecrypter',
+    'dcAgent',
+    'backupTool',
+    'logCollector'
+  ]
+  const requiredObservedKeys = [
+    'server',
+    'extension',
+    'extensionArchive',
+    'shareDecrypter',
+    'dcAgent'
+  ]
+  const semverPattern = /^\d+\.\d+\.\d+$/
+  for (const key of requiredTargetKeys) {
+    if (!semverPattern.test(contract.target?.[key] ?? '')) {
+      fail(`release-contract.json target.${key} must be an explicit semantic version`)
+    }
+  }
+  for (const key of requiredObservedKeys) {
+    if (!semverPattern.test(contract.observedPublic?.[key] ?? '')) {
+      fail(`release-contract.json observedPublic.${key} must be an explicit semantic version`)
+    }
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(contract.observedPublic?.checkedAt ?? '')) {
+    fail('release-contract.json observedPublic.checkedAt must use YYYY-MM-DD')
+  }
+
+  if (errors.some((message) => message.startsWith('release-contract.json'))) {
+    return
+  }
+
+  const target = contract.target
+  const observed = contract.observedPublic
+  const requireText = (relativePath, snippets) => {
+    const fullPath = path.join(root, ...relativePath.split('/'))
+    if (!existsSync(fullPath)) {
+      fail(`release contract target is missing: ${relativePath}`)
+      return
+    }
+    const content = readFileSync(fullPath, 'utf8')
+    for (const snippet of snippets) {
+      if (!content.includes(snippet)) {
+        fail(`${relativePath} must match release-contract.json: ${snippet}`)
+      }
+    }
+  }
+  const forbidText = (relativePath, snippets) => {
+    const fullPath = path.join(root, ...relativePath.split('/'))
+    if (!existsSync(fullPath)) {
+      fail(`release contract target is missing: ${relativePath}`)
+      return
+    }
+    const content = readFileSync(fullPath, 'utf8')
+    for (const snippet of snippets) {
+      if (content.includes(snippet)) {
+        fail(`${relativePath} must not retain provisional release wording after publication: ${snippet}`)
+      }
+    }
+  }
+
+  let packageManifest
+  try {
+    packageManifest = JSON.parse(readFileSync(path.join(root, 'package.json'), 'utf8'))
+  } catch (error) {
+    fail(`package.json is not valid JSON: ${error.message}`)
+    return
+  }
+  if (packageManifest.version !== target.server) {
+    fail(`package.json version ${packageManifest.version} must match release-contract.json target.server ${target.server}`)
+  }
+
+  const candidateRows = [
+    `| VaultPilot Enterprise Vault Console | ${target.server} |`,
+    `| Chromium Browser Extension | ${target.extension} |`,
+    `| Offline Share Decrypter | ${target.shareDecrypter} |`,
+    `| VaultPilot DC Agent Service | ${target.dcAgent} |`,
+    `| VaultPilot Backup Tool | ${target.backupTool} |`,
+    `| VaultPilot Log Collector | ${target.logCollector} |`
+  ]
+  for (const relativePath of [
+    'README.md',
+    'RELEASES.md'
+  ]) {
+    requireText(relativePath, candidateRows)
+  }
+
+  requireText('README.md', [`releases/tag/v${observed.server}`])
+  requireText('RELEASES.md', [
+    `DC Agent \`${target.dcAgent}\``,
+    `independent \`${target.backupTool}\` component versions`
+  ])
+
+  for (const language of ['en', 'tr']) {
+    const extensionObservedRow = language === 'tr'
+      ? `| Chromium Browser Extension | Chrome Web Store ${observed.extension}; v${observed.server} arşivi ${observed.extensionArchive} |`
+      : `| Chromium Browser Extension | Chrome Web Store ${observed.extension}; v${observed.server} archive ${observed.extensionArchive} |`
+    requireText(`docs/${language}/release-asset-verification.md`, [
+      `releases/tag/v${observed.server}`,
+      `| VaultPilot Enterprise Vault Console | ${observed.server} |`,
+      extensionObservedRow,
+      `| Offline Share Decrypter | ${observed.shareDecrypter} |`,
+      `| VaultPilot DC Agent Service | ${observed.dcAgent} |`,
+      `| VaultPilot Backup Tool | ${target.backupTool} |`,
+      `| VaultPilot Log Collector | ${target.logCollector} |`,
+      `gh release view v${observed.server} --repo vaultekbilisim/vaultpilot`,
+      `Get-FileHash .\\VaultPilot-${observed.server}-x64.msi -Algorithm SHA256`,
+      `Get-AuthenticodeSignature .\\VaultPilot-${observed.server}-x64.msi`
+    ])
+    requireText(`docs/${language}/active-directory-agent.md`, [
+      target.server,
+      target.dcAgent,
+      '`objectGUID`',
+      '`objectSid`',
+      '`tokenGroups`',
+      '`primaryGroupID`',
+      'fail-closed'
+    ])
+    requireText(`docs/${language}/screen-integrations.md`, [
+      target.server,
+      target.dcAgent,
+      'fail-closed'
+    ])
+    for (const relativePath of [
+      `docs/${language}/backups-and-restore.md`,
+      `docs/${language}/screen-server-settings.md`,
+      `docs/${language}/server-system.md`
+    ]) {
+      requireText(relativePath, [
+        '`VaultPilotBackupTool.exe`',
+        `\`${target.backupTool}\``,
+        '`VaultPilotLogCollector.exe`',
+        `\`${target.logCollector}\``
+      ])
+    }
+  }
+
+  requireText('docs/en/chrome-web-store-listing.md', [
+    `| Current public extension version | \`${observed.extension}\` |`,
+    observed.checkedAt
+  ])
+  requireText('docs/tr/chrome-web-store-listing.md', [
+    `| Güncel public eklenti sürümü | \`${observed.extension}\` |`,
+    observed.checkedAt
+  ])
+  for (const language of ['en', 'tr']) {
+    requireText(`docs/${language}/public-external-surface-drift.md`, [
+      observed.checkedAt,
+      `version \`${observed.extension}\``.replace('version', language === 'tr' ? 'sürüm' : 'version'),
+      '76.04KiB'
+    ])
+  }
+
+  if (contract.state === 'candidate') {
+    requireText('docs/en/chrome-web-store-listing.md', [
+      `| Required version for the VaultPilot ${target.server} candidate | \`${target.extension}\``,
+      `exact candidate extension version \`${target.extension}\``
+    ])
+    requireText('docs/tr/chrome-web-store-listing.md', [
+      `| VaultPilot ${target.server} adayı için gereken sürüm | \`${target.extension}\``,
+      `tam olarak aday eklenti sürümü \`${target.extension}\``
+    ])
+    for (const relativePath of [
+      'docs/en/release-asset-verification.md',
+      'docs/tr/release-asset-verification.md'
+    ]) {
+      requireText(relativePath, candidateRows)
+    }
+    requireText('README.md', [
+      `Prepared ${target.server} Component Versions`,
+      `remains \`v${observed.server}\` until publication`
+    ])
+    requireText('RELEASES.md', [
+      `Prepared VaultPilot ${target.server} candidate`,
+      'not published'
+    ])
+    requireText('docs/en/release-asset-verification.md', [
+      `Prepared VaultPilot ${target.server} Candidate`,
+      'Not Published'
+    ])
+    requireText('docs/tr/release-asset-verification.md', [
+      `Hazırlanan VaultPilot ${target.server} Adayı`,
+      'Henüz Yayınlanmadı'
+    ])
+    return
+  }
+
+  const publishedVersionPairs = [
+    ['server', 'server'],
+    ['extension', 'extension'],
+    ['extensionArchive', 'extension'],
+    ['shareDecrypter', 'shareDecrypter'],
+    ['dcAgent', 'dcAgent']
+  ]
+  for (const [observedKey, targetKey] of publishedVersionPairs) {
+    if (observed[observedKey] !== target[targetKey]) {
+      fail(`published release-contract.json observedPublic.${observedKey} must match target.${targetKey}`)
+    }
+  }
+  requireText('docs/en/chrome-web-store-listing.md', [
+    `| Required version for the published VaultPilot ${target.server} release | \`${target.extension}\``,
+    `exact published extension version \`${target.extension}\``
+  ])
+  requireText('docs/tr/chrome-web-store-listing.md', [
+    `| Yayınlanan VaultPilot ${target.server} sürümü için gereken sürüm | \`${target.extension}\``,
+    `tam olarak yayınlanan eklenti sürümü \`${target.extension}\``
+  ])
+  forbidText('docs/en/chrome-web-store-listing.md', [
+    `VaultPilot ${target.server} candidate`,
+    `candidate extension version \`${target.extension}\``
+  ])
+  forbidText('docs/tr/chrome-web-store-listing.md', [
+    `VaultPilot ${target.server} adayı`,
+    `aday eklenti sürümü \`${target.extension}\``
+  ])
+  requireText('README.md', [
+    `Current verified public release:</strong> VaultPilot Enterprise Vault Console ${target.server}`,
+    `releases/tag/v${target.server}`
+  ])
+  requireText('RELEASES.md', [`## VaultPilot ${target.server}`])
+  requireText('docs/en/release-asset-verification.md', [
+    `current verified public release is GitHub Release [\`v${target.server}\`]`
+  ])
+  requireText('docs/tr/release-asset-verification.md', [
+    `Güncel doğrulanmış public release`,
+    `[\`v${target.server}\`]`
+  ])
+  forbidText('README.md', [
+    `Prepared ${target.server} Component Versions`,
+    `until publication`,
+    `This matrix describes the next prepared release set. It is not a claim that \`v${target.server}\` is already public; the latest verified public GitHub release remains \`v${observed.server}\` until publication is completed and checked.`
+  ])
+  forbidText('RELEASES.md', [
+    `Prepared VaultPilot ${target.server} candidate`,
+    'Status: locally prepared for release review. This section is not a GitHub Release announcement'
+  ])
+  forbidText('docs/en/release-asset-verification.md', [
+    `Prepared VaultPilot ${target.server} Candidate`,
+    `This matrix is a release-preparation contract, not evidence that \`v${target.server}\` is public. Until the release is published and independently checked, use the verified \`v${target.server}\` asset set below for customer downloads.`
+  ])
+  forbidText('docs/tr/release-asset-verification.md', [
+    `Hazırlanan VaultPilot ${target.server} Adayı`,
+    `Bu tablo yayın hazırlığı sözleşmesidir; \`v${target.server}\` sürümünün herkese açık olduğu anlamına gelmez. Yayın tamamlanıp bağımsız olarak doğrulanana kadar müşteri indirmelerinde aşağıdaki doğrulanmış \`v${target.server}\` dosya setini kullanın.`
+  ])
+}
+
 function validateRootReadmeShape() {
   const file = path.join(root, 'README.md')
   const content = readFileSync(file, 'utf8')
@@ -1587,6 +1852,7 @@ const files = walk(root)
 validateRequiredFiles()
 validateRequiredPublicReferences()
 validateScreenHelpDocs()
+validateReleaseContract()
 validateRootReadmeShape()
 validateRemovedSiteFiles()
 validateRemovedScreenshotFiles()

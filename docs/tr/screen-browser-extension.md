@@ -4,7 +4,7 @@
 
 ## Erişim, Rol ve Lisans Sınırı
 
-**Entegrasyonlar** menü yolu yalnız **Sahip** rolüne açıktır ve lisansın **Entegrasyon** yeteneğini ister. Eklentiye özel kısayol farklı çalışır: Sahip rolünü ve ayrı **Eklenti** yeteneğini kontrol eder, ancak Entegrasyon yeteneğini yeniden denetlemez. Entegrasyonlar ekranı zaten açıldıktan sonra sayfa içindeki **Tarayıcı eklentisi** sekmesine geçiş de Eklenti yeteneğini yeniden kontrol etmez. Bu nedenle sekmenin görünmesi iki yeteneğin de lisanslı olduğunu kanıtlamaz. Yönetici, Denetçi ve Kullanıcı rolleri mevcut menüden bu yönetim paneline ulaşamaz.
+**Entegrasyonlar** menü yolu yalnız **Sahip** rolüne açıktır ve lisansın **Entegrasyon** yeteneğini ister. Tarayıcı eklentisi bu yeteneğin içindedir; yeni lisanslarda ayrı bir **Eklenti** yeteneği bulunmaz. Eski imzalı lisansında yalnız `extension` bulunan müşteriler geriye dönük olarak eklenti ekranına erişmeye devam eder, ancak bu uyumluluk Dış API veya Active Directory erişimi vermez. Yönetici, Denetçi ve Kullanıcı rolleri mevcut menüden bu yönetim paneline ulaşamaz.
 
 Eklenti kaynağından çağrılan eşleştirme başlangıç ucu konsol oturumuyla çalışmaz; etkin bir Sahip, Yönetici veya Kullanıcı adını hedefleyebilir. Kimlik doğrulaması isteyen listeleme, onaylama ve iptal uçları Sahip, Yönetici ve Kullanıcı rollerini kabul eder, Denetçi'yi reddeder ve yalnız oturum kullanıcısına ait cihaz kayıtlarını işler. Desteklenen arayüz akışı olarak bu panelde Sahip işlemini esas alın; başka bir yerde kullanıcı adı görmek o kişinin eşleştirme isteğini yönetme yetkisi vermez.
 

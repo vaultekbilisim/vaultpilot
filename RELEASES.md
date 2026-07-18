@@ -19,6 +19,26 @@ This page is a selected public release history for customer-facing milestones an
 | Compatibility | Gold | Legacy alias, migration, rollback, or old-client behavior intentionally kept. |
 | Removed | Red | A visible action or old path intentionally removed from the daily flow. |
 
+## Prepared VaultPilot 2.2.0 candidate — not published
+
+Status: locally prepared for release review. This section is not a GitHub Release announcement and does not replace the verified public `v2.0.0` record below.
+
+| Component | Prepared version |
+| --- | ---: |
+| VaultPilot Enterprise Vault Console | 2.2.0 |
+| Chromium Browser Extension | 1.3.3 |
+| Offline Share Decrypter | 1.2.1 |
+| VaultPilot DC Agent Service | 1.2.21 |
+| VaultPilot Backup Tool | 1.0.1 |
+| VaultPilot Log Collector | 1.0.1 |
+
+### Candidate highlights
+
+- Certificate, Discovery, audit, execution, integration, rotation, notification, and server-settings surfaces use clearer progressive disclosure and evidence-first detail views.
+- Identity-bound directory actions require DC Agent `1.2.20` or newer. The prepared package ships DC Agent `1.2.21`, which also preserves custom configuration paths through service recovery, delivers mutation results idempotently, moves ambiguous delivery to audited review, and bounds diagnostic logging.
+- Backup Tool and Log Collector now carry independent `1.0.1` component versions instead of inheriting the console package label; their independent history began at `1.0.0`.
+- This candidate still requires public signing, signed update manifests, matching install/repair evidence, clean-machine acceptance, and explicit publication approval before it can become the latest public release.
+
 ## VaultPilot 2.0.0
 
 Release date: 2026-06-30

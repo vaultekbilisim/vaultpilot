@@ -8,10 +8,27 @@ These pages are operator guides, not product brochures. They explain what must b
 
 The table below maps each screen to its guide and the decision that guide supports. If you open a guide directly from this index, verify the active screen and tab in VaultPilot before acting. When implementation and documentation disagree, preserve a redacted screen summary and report documentation drift; do not change a production setting based on an assumption in the guide.
 
-Two tab-level routes intentionally override their base workspace:
+<a id="contextual-help-routing"></a>
+
+### Context-aware help routing
+
+Some tabs and record contexts open the relevant section rather than the base workspace guide:
 
 - With **Integrations > Browser extension** active, `?` opens [Browser Extension Screen](screen-browser-extension.md), not the general Integrations guide.
+- With **Integrations > Active Directory** active, `?` opens the [Active Directory section](screen-integrations.md#active-directory-agent) of the Integrations guide.
+- With **Tasks > Scheduled** active, `?` opens the [scheduled operations section](screen-executions.md#scheduled-operations) of the Executions guide.
+- With **Server Settings > General** active, `?` opens the [general settings section](screen-server-settings.md#general-settings) of the Server Settings guide.
 - With **Server Settings > Sign-in security** active, `?` opens [Sign-In Security Screen](screen-sign-in-security.md), not the general Server Settings guide.
+
+Choosing **Go to agent** from a record detail or Active Directory card navigates to **Integrations > Active Directory** and focuses the matching provider. It does not create an agent, start a sync, or change the open record.
+
+<a id="scoped-workspace-refresh"></a>
+
+### Top-bar refresh
+
+The refresh control in the top bar does not reload the browser page. It refreshes only the visible workspace and selected tab. For example, **Tasks > Scheduled** does not refresh the Runs list, **Integrations > Active Directory** does not refresh API clients, and one Server Settings tab does not refresh unrelated tabs. Local search and filter state, open form drafts, and vault lock state remain intact.
+
+Move to each workspace and refresh it separately when an investigation spans several areas. Do not treat this control as a full-server reload or a service restart.
 
 | Screen | Help page | Use this guide when... |
 | --- | --- | --- |

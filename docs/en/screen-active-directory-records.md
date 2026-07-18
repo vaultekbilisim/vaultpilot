@@ -6,7 +6,7 @@ The topbar `?` opens this guide from the Active Directory records screen. This s
 
 Normal navigation requires the **integration** license feature, an unlocked active vault, and its browser-held vault key. Owner, Admin, and User system roles can use vault-secret screens; Auditor cannot. Within the active vault, **Viewer** can read, reveal, copy, inspect, and launch a stored record. **Editor** or **Manager** plus a writable license is required for vault-record writes such as delete or supported edits.
 
-Directory-provider data and DC Agent actions have a narrower boundary. Only Owner loads the current provider/action workspace and can change VaultPilot sign-in access or queue directory actions. A directory action additionally requires a writable license, a currently resolved user target, a **Connected** agent, the matching advertised capability, and a non-privileged target. The server and agent repeat the sensitive-target checks; a disabled client control is not the security boundary.
+Directory-provider data and DC Agent actions have a narrower boundary. Only Owner loads the current provider/action workspace and can change VaultPilot sign-in access or queue directory actions. A directory action additionally requires a writable license, a currently resolved user target, a **Connected** ready agent, and the matching capability. Built-in and bind identities remain blocked; other privileged targets use additional approval. The server and agent repeat the sensitive-target checks; a disabled client control is not the security boundary.
 
 A read-only license removes licensed feature navigation and blocks vault and directory writes. A record can remain readable from already loaded state, but read-only mode is not permission to change AD, VaultPilot sign-in access, or encrypted record custody.
 
@@ -71,6 +71,7 @@ The row can expose these primary actions:
 The actions menu can include:
 
 - **View record details**;
+- **Open history** and, for an Active Directory source, **Go to agent**;
 - **Allow VaultPilot sign-in** or **Remove from VaultPilot sign-in**;
 - eligible DC Agent actions described below;
 - **Copy secret value**, **Reveal secret**, and the user-triggered breach check when a value exists;
@@ -78,6 +79,8 @@ The actions menu can include:
 - **Edit secret** and **Delete secret** when the active vault is writable.
 
 Reveal requires confirmation, makes the value temporarily visible in the browser, and attempts a `VIEW` audit event. Copy and launch actions use short-lived clipboard handling where applicable and write `COPY` or `VIEW` audit evidence. A failed audit notice must be investigated; it does not make a value safe to expose elsewhere.
+
+**Reveal secret** works only when the encrypted vault record actually contains a password. Because the agent cannot read the current AD password, this action cannot fetch one for an empty directory record. Use the authorized **Assign random password now** action or an approved rotation policy when a new value is required.
 
 Generic edit is not an AD mutation. Directory-controlled credential records are protected by server source rules and can be rejected by the generic editor even when the menu is visible. **Delete secret** removes the encrypted record from the active vault after confirmation and writes `DELETE`; it does not delete, disable, unlock, or change the source AD account.
 
@@ -99,14 +102,24 @@ The four sensitive record actions appear only when the encrypted record can be r
 | --- | --- | --- |
 | **Unlock account** | Clears the account lockout. | Enable a disabled account, change its password, or grant access. |
 | **Require password change** | Requires a password change at the next logon. | Generate a password, unlock the account, or change VaultPilot sign-in by itself. |
-| **Change password** | The agent generates a managed password, resets the AD password, and returns the generated value encrypted to the requesting Owner's VaultPilot public key. | Automatically require another change at next logon. Use the separate action if policy requires it. |
+| **Assign random password now** | The agent generates a value under the global password policy, resets the AD password immediately, and returns the value encrypted to the requesting Owner's VaultPilot public key. | Automatically require another change at next logon. Use the separate action if policy requires it. |
 | **Disable account** | Disables the AD user. | Delete the AD object or remove the encrypted vault record. |
 
 Every sensitive action requires enterprise confirmation and is queued rather than completed synchronously. The matching capability must be advertised by the connected agent: `UNLOCK_ACCOUNT`, `REQUIRE_PASSWORD_CHANGE`, `RESET_TEMP_PASSWORD`, or `DISABLE_ACCOUNT`. Track `PENDING`, agent-processing, success, failure, review-required, or cancelled outcomes in Integrations and Executions.
 
-Privileged or built-in targets are a hard stop. The client disables actions from the current privileged snapshot; the server re-resolves the target and rejects sensitive actions for a privileged user; the agent checks built-in and privileged group state again before changing AD. Do not work around any of these checks by editing requests, provider data, or the local action database.
+Built-in identities and the agent bind identity are hard stops; the server and agent reject them in every case. A manual action against a privileged but non-built-in target requires a second explicit confirmation. Automated rotation additionally requires a durable privileged-target approval on the policy, and disabling the policy clears that approval. Do not bypass these checks by editing requests, provider data, or the local action database.
 
-After **Change password** succeeds in AD, the encrypted action result and the vault-record update are separate outcomes. The browser attempts to decrypt the generated value for the requesting user and re-encrypt it into the referenced vault record when the vault key and write access are available. Confirm both the agent success and a separate record-update success notice, updated record, and audit evidence. If they disagree, treat the new AD password as changed but the vault record as unconfirmed and stop before retrying.
+After **Assign random password now** succeeds in AD, the encrypted action result and the vault-record update are separate outcomes. The browser attempts to decrypt the generated value for the requesting user and re-encrypt it into the referenced vault record when the vault key and write access are available. Confirm both the agent success and a separate record-update success notice, updated record, and audit evidence. If they disagree, treat the new AD password as changed but the vault record as unconfirmed and stop before retrying.
+
+<a id="record-history-and-rotation"></a>
+
+## Record History and Rotation
+
+**Open history** shows each revision's time, actor, source, and encrypted revision state. An authorized user can restore an earlier revision as a new current revision without deleting the intervening evidence. For an Active Directory password, restore changes only the vault record; it does not automatically roll the AD password back. Follow with an explicit agent action or approved rotation to avoid directory/vault drift.
+
+**Configure rotation** can schedule a calendar run daily, weekly, monthly, or at a custom interval. A custom interval supports 1–365 days, 1–52 weeks, or 1–12 months and requires a start date. Optional triggers can run 5–1440 minutes after secret reveal or when AD `passwordLastSet` reaches 1–365 days. When several triggers are enabled, the first one due wins; a daylight-saving transition does not create the same run twice, and missed runs are not replayed in bulk.
+
+An ambiguous rotation result is not retried blindly. Inspect status and bounded logs under **Tasks > Scheduled**. **Go to agent** in the record or history panel opens the matching provider under **Integrations > Active Directory**.
 
 This screen exposes no direct LDAP bind action, arbitrary PowerShell action, PAM approval, session recording, or privilege elevation. Provider enrollment, selection, sync, health, capabilities, and agent token work belong to **Integrations > Active Directory**.
 
@@ -128,7 +141,8 @@ Treat the record row, detail drawer, action notice, Integrations action history,
 | Provider or USER target not resolved | The encrypted record remains visible, but current directory actions are absent. Check provider selection and sync in Integrations. |
 | Agent stale, offline, awaiting, or revoked | Directory actions remain disabled. Restore the approved agent connection; do not treat the record snapshot as live. |
 | Capability missing | The corresponding action is disabled even with a connected agent. Upgrade or repair the approved agent rather than bypassing capability checks. |
-| Privileged target | Sensitive directory actions are disabled and server/agent checks reject them. Use the organization's privileged-account procedure. |
+| Built-in or bind identity | Sensitive directory actions are disabled and server/agent checks reject them. Do not bypass the block. |
+| Privileged non-built-in target | Confirm the second prompt for a manual action or the explicit durable approval for automated rotation. |
 | Viewer or read-only license | Read operations can remain available, but vault writes, sign-in changes, and directory actions are blocked. |
 | Action queued | Follow the action in Integrations or Executions; do not repeat it while the first action is active. |
 | AD action succeeded, vault update unconfirmed | Preserve the encrypted action result and audit evidence. Do not issue a second password reset until custody is reconciled. |
@@ -139,7 +153,7 @@ Treat the record row, detail drawer, action notice, Integrations action history,
 - Confirm the intended active vault, system role, vault role, integration feature, and writable license.
 - Compare record source, provider, domain, account, last sync, and last seen before treating metadata as current.
 - Confirm the provider is connected, the exact capability is present, and the current object resolves as a USER.
-- Stop on a privileged or built-in target; do not use another endpoint to evade the block.
+- Stop on a built-in or bind identity; do not use another endpoint to evade the block. Confirm the required second approval for other privileged targets.
 - Distinguish a vault-record operation from an AD action and from VaultPilot sign-in enrollment.
 - For password change, prepare a custody path and verify AD outcome, encrypted result, vault update, and audit separately.
 - Before changing VaultPilot sign-in access, define Users/sign-in state, provider login selection, and Audit Log as the reconciliation evidence required before any retry.

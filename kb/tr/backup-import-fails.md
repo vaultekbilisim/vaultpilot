@@ -2,6 +2,16 @@
 
 VaultPilot backup import başarısız oluyorsa, archive hatası dönüyorsa, büyük upload reddediliyorsa veya import başarılı olduğu halde aktif oturumlar kapanıyorsa bu makaleyi kullanın.
 
+<a id="identify-backup-type"></a>
+
+## Önce Yedek Türünü Belirleyin
+
+- **Hızlı Kurtarma**, `.vpr.json` dosyası ile ayrı 40 karakterlik anahtar kullanır. FILE kayıtlarını, sürüm geçmişini, lisansı, sunucu ayarlarını ve günlükleri içermez.
+- **Tam Backup Tool yedeği**, onaylı ZIP ve manifest yapısını kullanır. ZIP kabı parola korumalı değildir; dosyayı herkese açık kanala göndermeyin.
+- **Bakım yedeği**, yalnız `AUDIT`, `DISCOVERY` veya `EXECUTIONS` kategorisidir ve sunucu profili içe aktarımında kullanılamaz.
+
+Yanlış türü başka türün içe aktarma alanına yüklemeyin. Hızlı Kurtarma anahtarı kayıpsa dosyanın şifresi açılamaz; anahtarı logdan veya sunucudan geri almaya çalışmayın.
+
 ## İlk Kontroller
 
 | Kontrol | Sağlıklı sonuç |
@@ -20,10 +30,11 @@ VaultPilot backup import başarısız oluyorsa, archive hatası dönüyorsa, bü
 | `CONTENT_LENGTH_REQUIRED` | Multipart upload `Content-Length` içermiyor. | VaultPilot UI veya onaylı browser yolu üzerinden tekrar deneyin. |
 | `BACKUP_ARCHIVE_INVALID` | Archive bozuk, güvensiz, boş, çok fazla entry içeriyor veya ZIP işleme limitlerini aşıyor. | Durdurun ve backup'ın onaylı araç tarafından üretildiğini doğrulayın. |
 | `BACKUP_ARCHIVE_UNSUPPORTED` | Archive içinde desteklenen VaultPilot backup payload bulunmadı. | Doğru backup export veya Backup Tool archive dosyasını kullanın. |
+| Hızlı Kurtarma şifre çözme hatası | `.vpr.json`, ayrı anahtar veya manifesto birbiriyle eşleşmiyor. | Dosya ile doğru anahtarı eşleştirin; değeri tahmin etmeyin veya dosyayı düzenlemeyin. |
 
 ## Başarılı Import Yan Etkisi
 
-Başarılı import server profilini backup'tan yeniden kurar ve tüm aktif oturumları kapatır. Import tamamlandıktan sonra kullanıcılar canonical VaultPilot URL üzerinden yeniden giriş yapmalıdır.
+Başarılı tam yedek veya Hızlı Kurtarma içe aktarımı sunucu profilini yeniden kurar ve tüm aktif oturumları kapatır. Kullanıcılar kanonik VaultPilot adresinden yeniden giriş yapmalıdır. Hızlı Kurtarma yalnız sınırlı kapsamı geri getirir; eksik FILE, geçmiş, lisans ve sunucu ayarı verisini başarısızlık sanmayın.
 
 ## Güvenli Kanıt
 

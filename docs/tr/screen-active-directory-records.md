@@ -6,7 +6,7 @@
 
 Normal gezinme için **entegrasyon** lisans özelliği, kilidi açık aktif kasa ve kasanın tarayıcıda tutulan anahtarı gerekir. Sistem düzeyinde Owner, Admin ve User kasa sırrı ekranlarını kullanabilir; Auditor kullanamaz. Aktif kasada **Viewer** saklanan kaydı okuyabilir, gösterebilir, kopyalayabilir, inceleyebilir ve bağlantı paketi hazırlayabilir. Silme veya desteklenen düzenleme gibi kasa kaydı yazma işlemleri için **Editor** ya da **Manager** rolü ile yazılabilir lisans gerekir.
 
-Dizin sağlayıcısı ve DC Agent işlemlerinin sınırı daha dardır. Güncel sağlayıcı/işlem çalışma alanını yalnız Owner yükler; VaultPilot giriş erişimini yalnız Owner değiştirebilir ve dizin işlemlerini yalnız Owner kuyruğa alabilir. Dizin işlemi ayrıca yazılabilir lisans, güncel olarak çözümlenen kullanıcı hedefi, **Bağlı** ajan, ilgili yetenek ve ayrıcalıklı olmayan hedef gerektirir. Hassas hedef denetimleri sunucuda ve ajanda tekrarlanır; arayüzdeki kapalı düğme güvenlik sınırının kendisi değildir.
+Dizin sağlayıcısı ve DC Agent işlemlerinin sınırı daha dardır. Güncel sağlayıcı/işlem çalışma alanını yalnız Sahip yükler; VaultPilot giriş erişimini yalnız Sahip değiştirebilir ve dizin işlemlerini yalnız Sahip kuyruğa alabilir. Dizin işlemi ayrıca yazılabilir lisans, güncel olarak çözümlenen kullanıcı hedefi, **Bağlı** ve hazır ajan ile ilgili yeteneği gerektirir. Yerleşik ve bind hesapları engellenir; ayrıcalıklı diğer hedeflerde ek onay uygulanır. Hassas hedef denetimleri sunucuda ve ajanda tekrarlanır; arayüzdeki kapalı düğme güvenlik sınırının kendisi değildir.
 
 Salt okunur lisans, lisanslı özellik gezinmesini kaldırır ve kasa/dizin yazmalarını engeller. Önceden yüklenmiş kayıt okunabilir durumda kalabilir; ancak salt okunur kip AD'yi, VaultPilot giriş erişimini veya şifreli kayıt sahipliğini değiştirme izni vermez.
 
@@ -71,6 +71,7 @@ Satırda şu birincil işlemler bulunabilir:
 İşlem menüsü şunları içerebilir:
 
 - **Kayıt ayrıntılarını aç**;
+- **Geçmişi aç** ve kayıt Active Directory kaynağına bağlıysa **Ajana git**;
 - **VaultPilot girişine al** veya **VaultPilot girişinden çıkar**;
 - aşağıda açıklanan uygun DC Agent işlemleri;
 - değer varsa **Gizli değeri kopyala**, **Gizli değeri göster** ve kullanıcı tarafından başlatılan sızıntı kontrolü;
@@ -78,6 +79,8 @@ Satırda şu birincil işlemler bulunabilir:
 - aktif kasa yazılabiliyorsa **Kaydı düzenle** ve **Kaydı sil**.
 
 Gösterme işlemi onay ister, değeri tarayıcıda geçici olarak görünür yapar ve `VIEW` denetim olayı yazmayı dener. Kopyalama ve bağlantı işlemleri gerektiğinde kısa ömürlü pano kullanır; `COPY` veya `VIEW` kanıtı yazar. Denetim bildirimi başarısızsa nedeni inceleyin; bu durum değeri başka yerde paylaşmayı güvenli yapmaz.
+
+**Gizli değeri göster**, yalnız şifreli kasa kaydında gerçekten bir parola varsa çalışır. Ajan mevcut AD parolasını okuyamadığı için boş değerli dizin kaydında parolayı AD'den getiremez. Yeni değer gerekiyorsa yetkili **Şimdi rastgele parola ata** işlemini veya onaylı rotasyon ilkesini kullanın.
 
 Genel düzenleme AD değişikliği değildir. Dizin kontrollü kimlik bilgisi kayıtları sunucudaki kaynak kurallarıyla korunur ve menü görünse bile genel düzenleyici tarafından reddedilebilir. **Kaydı sil**, onaydan sonra şifreli kaydı aktif kasadan kaldırır ve `DELETE` olayı yazar; kaynak AD hesabını silmez, kapatmaz, kilidini açmaz veya parolasını değiştirmez.
 
@@ -99,14 +102,24 @@ Dört hassas kayıt işlemi yalnız şifreli kayıt, Owner tarafından görüleb
 | --- | --- | --- |
 | **Kilidi aç** | Hesap kilidini temizler. | Kapalı hesabı açmaz, parolayı değiştirmez veya erişim vermez. |
 | **Parola değişimi iste** | Bir sonraki oturum açmada parola değişikliğini zorunlu kılar. | Parola üretmez, hesabın kilidini açmaz ve tek başına VaultPilot girişini değiştirmez. |
-| **Parolayı değiştir** | Ajan yönetilen parola üretir, AD parolasını sıfırlar ve üretilen değeri isteği yapan Owner'ın VaultPilot açık anahtarına şifreleyerek döndürür. | Sonraki oturumda yeniden parola değişikliğini otomatik zorunlu kılmaz; kurum ilkesi istiyorsa ayrı işlemi kullanın. |
+| **Şimdi rastgele parola ata** | Ajan genel parola ilkesine uygun değer üretir, AD parolasını hemen sıfırlar ve değeri isteği yapan Sahip kullanıcının VaultPilot açık anahtarına şifreleyerek döndürür. | Sonraki oturumda yeniden parola değişikliğini otomatik zorunlu kılmaz; kurum ilkesi istiyorsa ayrı işlemi kullanın. |
 | **Hesabı kapat** | AD kullanıcısını kapatır. | AD nesnesini veya şifreli kasa kaydını silmez. |
 
 Her hassas işlem kurumsal onay ister ve eşzamanlı tamamlanmak yerine kuyruğa alınır. Bağlı ajan ilgili yeteneği bildirmelidir: `UNLOCK_ACCOUNT`, `REQUIRE_PASSWORD_CHANGE`, `RESET_TEMP_PASSWORD` veya `DISABLE_ACCOUNT`. Bekleyen, ajanın işlediği, başarılı, başarısız, inceleme gerekli veya iptal edilmiş sonucu Entegrasyonlar ve İşlemler ekranlarında izleyin.
 
-Ayrıcalıklı veya yerleşik hedef kesin durma nedenidir. İstemci, güncel ayrıcalık anlık görüntüsüne göre işlemleri kapatır; sunucu hedefi yeniden çözümler ve ayrıcalıklı kullanıcıda hassas işlemi reddeder; ajan değişiklikten önce yerleşik hesap ve ayrıcalıklı grup durumunu tekrar denetler. İstek, sağlayıcı verisi veya yerel işlem veritabanı düzenleyerek bu kontrolleri aşmayın.
+Yerleşik hesaplar ve ajanın bind hesabı kesin durma nedenidir; sunucu ile ajan bunları her durumda reddeder. Ayrıcalıklı fakat yerleşik olmayan hedefte elle başlatılan işlem ikinci ve açık onay ister. Otomatik rotasyon ayrıca ilke üzerinde kalıcı ayrıcalıklı-hedef onayı olmadan çalışmaz; ilke kapatıldığında bu onay temizlenir. İstek, sağlayıcı verisi veya yerel işlem veritabanı düzenleyerek kontrolleri aşmayın.
 
-**Parolayı değiştir** AD üzerinde başarılı olduktan sonra şifreli işlem sonucu ile kasa kaydının güncellenmesi ayrı sonuçlardır. Kasa anahtarı ve yazma erişimi varsa tarayıcı, üretilen değeri isteği yapan kullanıcı için çözmeyi ve başvurulan kasa kaydına yeniden şifrelemeyi dener. Hem ajan başarısını hem de ayrı kayıt güncelleme bildirimini, güncel kaydı ve denetim kanıtını doğrulayın. Sonuçlar uyuşmuyorsa AD parolasını değişmiş, kasa kaydını ise doğrulanmamış kabul edin; yeniden denemeden önce durun.
+**Şimdi rastgele parola ata** AD üzerinde başarılı olduktan sonra şifreli işlem sonucu ile kasa kaydının güncellenmesi ayrı sonuçlardır. Kasa anahtarı ve yazma erişimi varsa tarayıcı, üretilen değeri isteği yapan kullanıcı için çözmeyi ve başvurulan kasa kaydına yeniden şifrelemeyi dener. Hem ajan başarısını hem de ayrı kayıt güncelleme bildirimini, güncel kaydı ve denetim kanıtını doğrulayın. Sonuçlar uyuşmuyorsa AD parolasını değişmiş, kasa kaydını ise doğrulanmamış kabul edin; yeniden denemeden önce durun.
+
+<a id="record-history-and-rotation"></a>
+
+## Kayıt Geçmişi ve Rotasyon
+
+**Geçmişi aç**, her sürümün tarihini, değişikliği yapan kişiyi, kaynağı ve şifreli sürüm durumunu gösterir. Yetkili kullanıcı önceki sürümü yeni güncel sürüm olarak geri getirebilir; aradaki kanıtlar silinmez. Active Directory parolasında geri getirme yalnız kasa kaydını değiştirir, AD parolasını kendiliğinden geri almaz. Dizin ile kasa değerinin ayrışmaması için ardından açık bir ajan işlemi veya onaylı rotasyon çalıştırın.
+
+**Rotasyon ayarla** günlük, haftalık, aylık veya özel aralıkla takvim çalışması kurabilir. Özel aralık 1–365 gün, 1–52 hafta ya da 1–12 ay olabilir ve başlangıç tarihi ister. Ayrıca gizli değer gösterildikten 5–1440 dakika sonra veya AD `passwordLastSet` yaşına göre 1–365 gün içinde çalışma tetiklenebilir. Birden çok tetikleyici seçilirse ilk vadesi gelen çalışır; yaz saati değişiminde aynı çalışma iki kez üretilmez ve kaçırılan çalışmalar topluca oynatılmaz.
+
+Rotasyon sonucu belirsizse sistem körlemesine yeniden denemez. **Görevler > Zamanlanmış** görünümündeki durum ve sınırlı logları inceleyin. Kayıt veya geçmiş panelindeki **Ajana git**, ilgili sağlayıcıyı **Entegrasyonlar > Active Directory** içinde açar.
 
 Bu ekranda doğrudan LDAP bind işlemi, rastgele PowerShell çalıştırma, PAM onayı, oturum kaydı veya ayrıcalık yükseltme yoktur. Sağlayıcı kaydı, seçim, eşitleme, sağlık, yetenek ve ajan token işlemleri **Entegrasyonlar > Active Directory** ekranına aittir.
 
@@ -128,7 +141,8 @@ Kayıt satırını, ayrıntı panelini, işlem bildirimini, Entegrasyonlar işle
 | Sağlayıcı veya USER hedefi çözümlenemiyor | Şifreli kayıt görünür kalır ancak güncel dizin işlemleri görünmez. Entegrasyonlar'da sağlayıcı seçimini ve eşitlemeyi inceleyin. |
 | Ajan eski, çevrimdışı, bağlantı bekliyor veya iptal edilmiş | Dizin işlemleri kapalı kalır. Onaylı ajan bağlantısını düzeltin; kayıt anlık görüntüsünü canlı saymayın. |
 | Yetenek eksik | Ajan bağlı olsa bile ilgili işlem kapalıdır. Yeteneği atlamak yerine onaylı ajanı yükseltin veya onarın. |
-| Ayrıcalıklı hedef | Hassas dizin işlemleri kapalıdır; sunucu ve ajan denetimleri isteği reddeder. Kurumun ayrıcalıklı hesap prosedürünü kullanın. |
+| Yerleşik veya bind hesabı | Hassas dizin işlemleri kapalıdır; sunucu ve ajan isteği reddeder. Başka bir yol kullanarak engeli aşmayın. |
+| Ayrıcalıklı, yerleşik olmayan hedef | Elle işlem için ikinci onayı; otomatik rotasyon için açık ve kalıcı ilke onayını doğrulayın. |
 | Viewer veya salt okunur lisans | Okuma işlemleri kalabilir; kasa yazmaları, giriş değişiklikleri ve dizin işlemleri engellenir. |
 | İşlem kuyruğa alındı | İşlemi Entegrasyonlar veya İşlemler ekranında izleyin; ilk işlem etkinken tekrar başlatmayın. |
 | AD işlemi başarılı, kasa güncellemesi doğrulanmadı | Şifreli işlem sonucunu ve denetim kanıtını koruyun. Sahiplik uzlaştırılmadan ikinci parola sıfırlaması yapmayın. |
@@ -139,7 +153,7 @@ Kayıt satırını, ayrıntı panelini, işlem bildirimini, Entegrasyonlar işle
 - Hedef aktif kasayı, sistem rolünü, kasa rolünü, entegrasyon özelliğini ve yazılabilir lisansı doğrulayın.
 - Meta veriyi güncel saymadan önce kayıt kaynağını, sağlayıcıyı, alan adını, hesabı, son eşitlemeyi ve son görülmeyi karşılaştırın.
 - Sağlayıcının bağlı olduğunu, kesin yeteneğin bulunduğunu ve güncel nesnenin USER olarak çözümlendiğini doğrulayın.
-- Ayrıcalıklı veya yerleşik hedefte durun; başka uç nokta kullanarak engeli aşmayın.
+- Yerleşik veya bind hesabında durun; başka uç nokta kullanarak engeli aşmayın. Ayrıcalıklı diğer hedeflerde gerekli ikinci onayı doğrulayın.
 - Kasa kaydı işlemini, AD işlemini ve VaultPilot girişine alma işlemini birbirinden ayırın.
 - Parola değişiminden önce üretilen değerin hangi kasa kaydına ve hangi yetkiyle yazılacağını netleştirin; AD sonucunu, şifreli sonucu, kasa güncellemesini ve denetimi ayrı ayrı doğrulayın.
 - VaultPilot giriş erişimi değişecekse Kullanıcılar'daki kimlik durumunu, sağlayıcı giriş seçimini ve Denetim Günlüğünü yeniden deneme ölçütü olarak belirleyin.

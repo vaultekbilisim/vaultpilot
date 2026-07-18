@@ -20,15 +20,19 @@ This runbook is the recurring operating rhythm for VaultPilot after go-live. It 
 | License | License page | Active state, capacity and expiry are expected. |
 | Extension devices | Extension page | Paired devices are known; no unexpected pending device. |
 | Update jobs | Update Center | No blocked or stale update job. |
+| Scheduled work | Tasks > Scheduled | No unexplained `BLOCKED`, long-running `DUE`, or persistent `RETRYING` item. |
+| Directory agent | Integrations > Active Directory | Health is `CONNECTED`; service and worker report the expected version and `ready`. |
 
 ## Weekly Checks
 
 | Check | Expected action |
 | --- | --- |
-| Backup export | Export encrypted backup and store it in the approved operator location. |
+| Full backup | Keep the Backup Tool ZIP outside the server disk, offline and access-restricted; assume the ZIP container is not password protected. |
+| Quick recovery | Confirm the `.vpr.json` file and 40-character key are separate and documented as not being a full backup. |
 | Restore drill | Validate restore in staging or a disposable profile when policy requires it. |
 | User review | Confirm disabled users, role assignments and 2FA state. |
-| AD sync review | Confirm provider health, last sync and selected login/credential scope. |
+| AD sync review | Confirm provider health, last sync, sign-in and vault scope, and reconciliation results for selected existing records. |
+| Rotation review | Confirm next run and bounded logs for daily, weekly, monthly, and custom policies. |
 | Extension review | Revoke stale devices and confirm fallback ZIP version. |
 | Release review | Compare installed version to latest public release. |
 
@@ -51,6 +55,24 @@ This runbook is the recurring operating rhythm for VaultPilot after go-live. It 
 4. Redact hosts, users, internal URLs and timestamps when needed.
 5. Do not attach databases, backups, PFX/P12 files, private keys or screenshots containing real vault records.
 6. Escalate through the private support channel with the [support evidence pack](support-evidence-pack.md).
+
+<a id="directory-action-triage"></a>
+
+## Active Directory Action Triage
+
+1. Do not use sync success as proof that sensitive actions are ready. In **Status**, verify service and PowerShell worker separately, including version.
+2. If the agent token must be rotated, plan for immediate invalidation of the old value. The command must contain only `-PromptAgentToken`; paste the token into the local secure PowerShell prompt.
+3. Distinguish **Require password change** from **Assign random password now**. The first sets the next-sign-in flag; the second changes AD immediately and reports vault reconciliation separately.
+4. Do not repeat an ambiguous result blindly. Reconcile task, agent, and vault-update evidence first.
+5. Stop for built-in and bind identities. For other privileged targets, confirm the second manual prompt or durable automated-rotation approval.
+
+<a id="recovery-choice"></a>
+
+## Choose the Correct Recovery Path
+
+- Use Quick Recovery `.vpr.json` for a bounded profile bootstrap; FILE data, history, license, server settings, and logs are excluded.
+- Use the Backup Tool ZIP for full-server recovery. Verify source and integrity, and plan for every session to close after successful import.
+- Never treat an `AUDIT`, `DISCOVERY`, or `EXECUTIONS` maintenance backup as a full backup. It restores only its category and can replace newer records in that category.
 
 ## Change Windows
 

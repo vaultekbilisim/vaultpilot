@@ -1,15 +1,43 @@
 # Sunucu Ayarları Ekranı
 
-Üst çubuktaki `?`, **Erişim & HTTPS**, **SMTP** veya **Bakım ve Loglar** sekmesi açıkken bu kılavuzu açar. **Giriş güvenliği** sekmesinde ise aynı düğme kişisel giriş güvenliği kılavuzuna gider.
+Üst çubuktaki `?`, **Genel**, **Erişim & HTTPS**, **SMTP** veya **Bakım ve Loglar** sekmesi açıkken bu kılavuzu açar. **Giriş güvenliği** sekmesinde ise aynı düğme kişisel giriş güvenliği kılavuzuna gider.
 
-Sunucu ayarlarını; kullanıcıların açacağı HTTPS adresini belirlemek, SMTP teslim kanalını kurmak, kurtarma veya geçiş verisi almak, kontrollü servis yeniden başlatması kuyruğa koymak ve belirli operasyon geçmişlerini yedekleyip temizlemek ya da geri yüklemek için kullanın. Bu ekranda günlük döndürme, günlük saklama veya denetim kaydı saklama değerlerini değiştiren bir kontrol yoktur.
+Sunucu ayarlarını; üretilen parolaların ortak ilkesini belirlemek, çalışma günlük düzeyini seçmek, kurtarma araçlarını yönetmek, HTTPS ve SMTP yapılandırmasını kaydetmek ve kontrollü bakım yürütmek için kullanın. Üst çubuktaki yenileme yalnız açık sekmenin verisini tazeler; tarayıcı sayfasını veya bütün sunucu ayarlarını yeniden yüklemez.
 
 ## Erişim ve Yetki
 
-- Sahip, Yönetici ve Denetçi rolleri üç sistem sekmesini okuyabilir. Kullanıcı rolü kişisel **Giriş güvenliği** alanına yönlendirilir.
+- Sahip, Yönetici ve Denetçi rolleri sistem sekmelerini okuyabilir. Kullanıcı rolü kişisel **Giriş güvenliği** alanına yönlendirilir.
 - Erişim veya SMTP ayarlarını kaydetme, sertifika yükleme, SMTP testi gönderme, sunucu yedeği içe aktarma, servisi yeniden başlatma ve bakım yedeklerini çalıştırıp geri yükleme yalnız Sahip rolüne açıktır.
 - Salt okunur lisans, Sahip rolüne ait bu sunucu işlemlerini kapatmaz. Ancak kasaya geçiş verisi almak için lisansın yazılabilir, aktif kasanın kilidinin açık ve kasa rolünün **Editor** veya **Manager** olması gerekir.
 - Yönetici ve Denetçi görünümü inceleme amaçlıdır. Arayüzdeki kapalı düğmeler sunucudaki Sahip denetimini aşmaz.
+
+<a id="general-settings"></a>
+
+## Genel
+
+Genel sekmesi sık kullanılan sunucu ilkelerini ve kurtarma işlemlerini tek yerde toplar.
+
+### Üretilen parola ilkesi
+
+Elle başlatılan Active Directory parola ataması ile otomatik rotasyon aynı ilkenin değiştirilemez anlık görüntüsünü kullanır. Uzunluk 16–128 karakter arasında seçilir. Küçük harf, büyük harf, rakam ve sembol sınıfları ayrı açılır; seçilen her sınıftan en az bir karakter üretilir. Sembol profili **Güvenli** veya **Genişletilmiş** olabilir ve benzer görünen karakterler dışarıda bırakılabilir. Çalışma kaydı ilke parmak izini saklar; sonradan yapılan genel ayar değişikliği başlamış işi geriye dönük değiştirmez.
+
+### Çalışma günlük düzeyi
+
+`DEBUG`, `INFO`, `WARN` veya `ERROR` seçilebilir ve etkin düzey ayrıca gösterilir. Bu seçim servis çalışma günlüklerinin ayrıntısını değiştirir; değiştirilemez denetim olaylarının kapsamını azaltmaz. `DEBUG` bile parola, token, kasa anahtarı veya düz metin gizli değer yazmaz. Daha ayrıntılı kayıt yalnız kontrollü inceleme süresince açık tutulmalıdır.
+
+### Şifreli Hızlı Kurtarma
+
+**Hızlı kurtarma paketi oluştur** yalnız Sahip tarafından kullanılabilir. Sunucu profil ve erişilebilir kasa verisini hazırlar; tarayıcı FILE olmayan kayıtları ayrı üretilen 40 karakterlik anahtarla PBKDF2-SHA-256 (420.000 tur) ve AES-GCM kullanarak şifreler. Manifest şifrelemeye ek veri olarak bağlanır. Sonuç `.vpr.json` dosyasıdır. Anahtar maskeli gösterilir, kopyalanabilir ve beş dakika sonra ekrandan temizlenir; dosya ile anahtarı ayrı yerlerde saklayın.
+
+Paket FILE kayıtlarını, dosya parçalarını, sürüm geçmişini, denetim geçmişini, lisansı, sunucu yapılandırmasını ve çalışma günlüklerini içermez. Boş bir sunucu profilini kısa sürede ayağa kaldırmak içindir; içe aktarma tüm oturumları kapatır. Tam VaultPilot Backup Tool yedeğinin yerine geçmez.
+
+### Yönetim araçları, tam yedek ve servis
+
+- **Backup Tool** indirmesi `VaultPilotBackupTool.exe` sürüm `1.0.1`, **Log Collector** indirmesi `VaultPilotLogCollector.exe` sürüm `1.0.1` adını taşır. İki aracın sürümü de bağımsızdır ve sunucu sürümünü devralmaz. Eski PassMan adları yalnız uyumluluk takma adıdır.
+- İndirme yalnız paketlenmiş üretim yapıtı sunucuda varsa ve Sahip yetkisiyle çalışır. Geliştirme ortamında dosya yoksa düğme kullanılabilir görünmemelidir.
+- Backup Tool tam sunucu kurtarma ZIP'i üretir. ZIP kabının kendisi parola korumalı değildir; şifreli içerik taşısa da erişimi sınırlı, çevrimdışı konumda saklayın.
+- **Sunucu yedeğini içe aktar**, onaylı Backup Tool ZIP'i veya desteklenen şifreli JSON yedeğini bütünlük ve eski biçim onaylarıyla geri yükler. Birleştirme yapmaz ve başarılı olduğunda bütün oturumları kapatır.
+- **Sunucu servisini yeniden başlat**, yalnız kaydedilmemiş ayar yokken açılır ve yalnız kaydedilmiş yapılandırmayı devreye alır. İşlem tamamlanmış sağlık denetimini beklemez; bağlantı geri geldiğinde servis, HTTPS adresi ve yeni giriş doğrulanmalıdır.
 
 ## Erişim & HTTPS
 
@@ -18,9 +46,11 @@ Sunucu ayarlarını; kullanıcıların açacağı HTTPS adresini belirlemek, SMT
 İki sertifika kaynağından birini seçin:
 
 - **Otomatik sertifika**, sunucunun yönettiği sertifika kaynağını korur.
-- **Kurumsal sertifika**, en fazla 2 MiB boyutunda `.pfx` veya `.p12` dosyası kabul eder. Kaydetme sırasında dosya sunucunun yönettiği sertifika dizinine yüklenir ve yönetilen dosya yolu ayarlara yazılır.
+- **Kurumsal sertifika**, en fazla 2 MiB boyutunda `.pfx` veya `.p12` kimlik paketi ve paket için ayrı **PFX/P12 kaynak parolası** kabul eder. Kayıtlı parola ekranda geri gösterilmez; alan boş bırakılırsa mevcut şifreli parola korunabilir, yeni değer girilirse yalnız sunucu gizli anahtarıyla şifreli ayara yazılır.
 
-Yükleme alanı sertifika parolası istemez; sertifika makamını, güven zincirini, bitiş tarihini, özel anahtarın varlığını, alan adı eşleşmesini veya çalışan HTTPS bağlantısını doğrulamaz. Paketi genel kanalların dışında doğrulayın; yeniden başlatma sonrasında gerçek HTTPS adresini ayrıca sınayın.
+Önce **Paketi doğrula** kullanılır. Sunucu parolayı kullanarak PFX/P12 paketini açar, sertifika ile private key eşleşmesini ve geçerlilik aralığını denetler, izole geçici bağ üzerinde gerçek TLS el sıkışması yapar ve Subject, issuer, tarih ile SHA-256 parmak izini gösterir. Doğrulama canlı sertifikayı değiştirmez; on dakikalık, tek kullanımlık, kullanıcı ve organizasyona bağlı staging token üretir. Yeni paket yalnız **Ayarları kaydet** sırasında atomik olarak etkin yola alınır. Ayar veya denetim yazımı başarısız olursa önceki ayar, PFX ve çalışma durumu geri yüklenir.
+
+Bu doğrulama kurumsal CA güvenini veya yayın adresinin tüm SAN kapsamını kurum adına onaylamaz. Kaynağı ve beklenen alan adlarını özel kanaldan doğrulayın; kaydetme ve servis yeniden başlatma sonrasında gerçek HTTPS adresini ayrı bir istemciden sınayın.
 
 Yayın adresi, port veya kurumsal sertifika değişikliği yeniden başlatmadan sonra tarayıcı erişimini kesebilir. Kaydetmeden önce çalışan adresi not edin ve onaylı bir sunucu konsolu ya da kurtarma bağlantısı hazırlayın.
 
@@ -39,21 +69,23 @@ Yayın adresi, port veya kurumsal sertifika değişikliği yeniden başlatmadan 
 
 ## Ortak Kaydetme ve Sıfırlama Davranışı
 
-Erişim ve SMTP ayrı sekmeler gibi görünür; ancak aynı formu ve aynı taslağı paylaşır:
+Genel, Erişim ve SMTP ayrı sekmeler gibi görünür; ancak sunucu ilkesi alanları aynı formu ve aynı taslağı paylaşır:
 
-- **Ayarları kaydet**, yayın adresini, sertifika seçimini, SMTP yapılandırmasını ve sunucudan yüklenmiş fakat ekranda gösterilmeyen günlük ilkesi değerlerini birlikte gönderir.
+- **Ayarları kaydet**, parola ilkesini, günlük düzeyini, yayın adresini, sertifika seçimini ve SMTP yapılandırmasını birlikte gönderir.
 - Bu nedenle açık durumdaki eksik SMTP yapılandırması, **Erişim & HTTPS** sekmesinden başlatılan kaydetmeyi engelleyebilir. Geçersiz yayın adresi veya port da **SMTP** sekmesinden başlatılan kaydetmeyi durdurabilir.
-- **Formu sıfırla**, iki sekmedeki kaydedilmemiş taslağı birlikte bırakır ve sunucunun son döndürdüğü ayarları yeniden yükler. Sunucuda geri alma işlemi yapmaz.
+- **Formu sıfırla**, üç sekmedeki kaydedilmemiş taslağı birlikte bırakır ve sunucunun son döndürdüğü ayarları yeniden yükler. Sunucuda geri alma işlemi yapmaz.
 - Bakım sekmesi kendi işlemlerini çalıştırır; bu sekmede Kaydet veya Sıfırla alt çubuğu yoktur.
 - Kaydetme başarısı ayar dosyasının yazıldığını gösterir. Arayüz, yeni değerlere güvenmeden önce servisin yeniden başlatılmasını ister.
 
-Kurumsal sertifika seçildiyse dosya, ayar kaydından önce yüklenir. Sonraki doğrulama, kalıcılık veya denetim yazımı başarısız olsa bile yüklenen dosya sunucuda kalabilir. Yeniden denemeden önce Sunucu ayarlarını tekrar okuyun ve sertifika yükleme olayını denetim kaydında arayın.
+Kurumsal sertifika seçildiyse yalnız önceden doğrulanmış staging token kaydetmeye gönderilir. PFX yükseltmesi, şifreli parola/ayar kaydı ve başarı denetimi aynı geri alma sınırındadır; kalıcılık veya denetim başarısızsa önceki etkin PFX ile ayarlar geri yüklenir. Süresi dolan veya daha önce kullanılan token reddedilir; dosyayı yeniden doğrulayın.
+
+<a id="maintenance-and-logs"></a>
 
 ## Bakım ve Loglar
 
-Bu sekme geçerli veritabanı yolunu, veritabanı koruma durumunu ve servis günlük dosyasının yolunu gösterir. Bunlar tanı değeridir; düzenlenebilir alan değildir. Güncel arayüzde günlük boyutu, destek paketi günlük sınırı, günlük saklama veya denetim kaydı saklama kontrolü bulunmaz.
+Bu sekme geçerli veritabanı yolunu, veritabanı koruma durumunu, servis günlük yolunu, geçiş içe aktarımını ve kategori bazlı bakım yedeklerini gösterir. Bunlar tanı ve bakım alanlarıdır. Sunucu yedeği içe aktarma ile servis yeniden başlatma kartları **Genel** sekmesindedir; çalışma günlük düzeyi de **Genel** üzerinden seçilir.
 
-### Sunucu yedeğini içe aktarma
+### Genel sekmesindeki sunucu yedeğini içe aktarma
 
 **Sunucu yedeğini içe aktar**, VaultPilot Backup Tool ZIP arşivini veya şifreli JSON dışa aktarımını kabul eder. Bu işlem birleştirme değil, tüm profili geri döndürme işlemidir:
 
@@ -71,7 +103,7 @@ Bu ekranda tüm sunucu yedeği oluşturan veya dışa aktaran bir düğme yoktur
 
 Önizleme, kalıcı kayıt anlamına gelmez. Son içe aktarma için aktif kasanın kilidi açık olmalı; lisans yazılabilir, kasa rolü Editor veya Manager olmalıdır. Satırlar seçilen çakışma kuralına göre sırayla oluşturulur ya da güncellenir. Sonraki bir satır hata verdiğinde önceki satırlar kaydedilmiş olabilir. Yeniden denemeden önce sonuç adetlerini ve kayıt bazındaki denetim olaylarını karşılaştırın.
 
-### Sunucu servisini yeniden başlatma
+### Genel sekmesindeki sunucu servisini yeniden başlatma
 
 **Yeniden başlat**, yalnız Sahip rolünde ve Sunucu ayarları taslağında kaydedilmemiş değişiklik yokken açılır. Uyarı onayından sonra uygulama `VaultPilotServer` veya eski kurulumlarla uyumlu `PassManServer` servisi için yeniden başlatma kuyruğu oluşturur. Sağlık denetiminin tamamlanmasını beklemez. Konsol kısa süre bağlantıyı kaybedebilir; yalnız kaydedilmiş ayarlar devreye girebilir.
 
@@ -101,7 +133,7 @@ Bu sekme açıkken üst çubuktaki `?`, bilinçli olarak bu sayfa yerine [Giriş
 
 Bu işlemlerde asıl etki, izleyen bütün kanıtlar yazılmadan önce oluşabilir. Hata yanıtı her zaman hiçbir şey yapılmadığı anlamına gelmez:
 
-- Sertifika dosyası, ayarlar kaydedilmeden önce sunucuda saklanabilir.
+- Kurumsal PFX yalnız doğrulanmış, tek kullanımlık staging token ile atomik kayıtta etkinleştirilebilir; başarısız kaydetme önceki PFX'i korur.
 - Ayarlar, denetim olayı eklenmeden önce yazılmış olabilir.
 - Test e-postası, denetim olayı eklenmeden önce teslim edilmiş olabilir.
 - Servis yeniden başlatması, denetim olayı eklenmeden önce kuyruğa alınmış olabilir.

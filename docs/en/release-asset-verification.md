@@ -13,14 +13,27 @@ Treat the GitHub Release asset metadata as the public source of truth. Unpublish
 | Component | Version | Asset |
 | --- | ---: | --- |
 | VaultPilot Enterprise Vault Console | 2.0.0 | `VaultPilot-2.0.0-x64.msi` |
-| Chromium Browser Extension | 1.3.2 | Chrome Web Store listing; `vaultpilot-browser-vault-extension.zip` release archive |
+| Chromium Browser Extension | Chrome Web Store 1.3.3; v2.0.0 archive 1.3.2 | Chrome Web Store listing; `vaultpilot-browser-vault-extension.zip` release archive |
 | Offline Share Decrypter | 1.2.0 | `vaultpilot-share-decrypter.zip` |
 | VaultPilot DC Agent Service | 1.2.10 | `vaultpilot-dc-agent.ps1` |
 | Update manifest | 2.0.0 channel metadata | `vaultpilot-update.json` |
 
+## Prepared VaultPilot 2.2.0 Candidate — Not Published
+
+This matrix is a release-preparation contract, not evidence that `v2.2.0` is public. Until the release is published and independently checked, use the verified `v2.0.0` asset set below for customer downloads.
+
+| Component | Candidate version | Intended delivery |
+| --- | ---: | --- |
+| VaultPilot Enterprise Vault Console | 2.2.0 | Versioned Windows MSI and signed update manifest |
+| Chromium Browser Extension | 1.3.3 | Chrome Web Store version already live; versioned release archive prepared for v2.2.0 |
+| Offline Share Decrypter | 1.2.1 | Versioned release archive and signed component manifest |
+| VaultPilot DC Agent Service | 1.2.21 | Versioned PowerShell asset and signed component manifest |
+| VaultPilot Backup Tool | 1.0.1 | Bundled server support component; not a separate GitHub Release asset |
+| VaultPilot Log Collector | 1.0.1 | Bundled server support component; not a separate GitHub Release asset |
+
 ## Public Asset Set
 
-The public GitHub Release contains these customer-safe delivery assets. This table was checked against GitHub Release metadata on July 8, 2026:
+The public GitHub Release contains these customer-safe delivery assets. This table was checked against GitHub Release metadata on July 16, 2026:
 
 | Asset | Size | SHA-256 |
 | --- | ---: | --- |
@@ -33,7 +46,7 @@ The public GitHub Release contains these customer-safe delivery assets. This tab
 | `vaultpilot-dc-agent.ps1` | 98,891 | `de8c4df43ff69b9a277e2cfaf4cb14f553512cf13b318eec45b725db1113e0fc` |
 | `vaultpilot-dc-agent.json` | 212 | `9082376283457eeddbffd3aee8d4e6ed1b46674d498d027467a9eff6308f7f4e` |
 
-The Chrome Web Store listing is the primary customer install and update channel for the browser extension. The extension ZIP is retained only as a release archive, lab validation package, local development package or emergency fallback artifact.
+The Chrome Web Store listing is the primary customer install and update channel for the browser extension and can advance independently from a GitHub Release. The live store reports `1.3.3`; the archived ZIP attached to GitHub `v2.0.0` remains `1.3.2`. The extension ZIP is retained only as a release archive, lab validation package, local development package or emergency fallback artifact.
 
 PassMan-named compatibility files can exist in installed environments, rollback paths or source build output for legacy clients. They are not public release assets unless they appear on the GitHub Release being verified.
 

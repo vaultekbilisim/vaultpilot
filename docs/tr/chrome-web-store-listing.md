@@ -8,7 +8,7 @@ Herkese açık eklenti kimliği:
 | --- | --- |
 | Mağaza kaydı | `https://chromewebstore.google.com/detail/vaultpilot-browser-vault/hjkbedlaieikhkoplgpiohlaakgebobi?hl=tr` |
 | Extension ID | `hjkbedlaieikhkoplgpiohlaakgebobi` |
-| Güncel public eklenti sürümü | `1.3.2` |
+| Güncel public eklenti sürümü | `1.3.3` |
 | Manifest sürümü | `3` |
 | Birincil kurulum kanalı | Chrome Web Store |
 | Yayın arşivi | `vaultpilot-browser-vault-extension.zip`, yalnız release kanıtı, lab doğrulama, lokal geliştirme ve acil fallback için korunur |
@@ -20,7 +20,7 @@ Herkese açık eklenti kimliği:
 
 Yeni yayında VaultPilot dili kullanın. PassMan adını yalnızca eski uyumluluk açıklarken kullanın.
 
-2026-07-09 public kontrolünde canlı mağaza başlığı ve sürümü VaultPilot `1.3.2` ile uyumluydu. Mağaza kartında görünen kısa açıklama VaultPilot diliyle başlıyor; ancak yayıncı panelindeki `Detailed description` alanı hâlâ PassMan'ı güncel sunucu ve ürün adı gibi tekrar ediyor. Yayıncı paneli güncellenene kadar owner onayı gerektiren bu düzeltmeyi [Dış public yüzey farkları](public-external-surface-drift.md) içinde takip edin.
+2026-07-17 public kontrolünde canlı mağaza başlığı ve sürümü VaultPilot `1.3.3` ile uyumluydu; listeleme 10 Temmuz 2026 güncelleme tarihini ve `76.04KiB` boyutunu gösteriyordu. Mağaza kartında görünen kısa açıklama VaultPilot diliyle başlıyor; ancak yayıncı panelindeki `Detailed description` alanı hâlâ PassMan'ı güncel sunucu ve ürün adı gibi tekrar ediyor. Yayıncı paneli güncellenene kadar owner onayı gerektiren bu metin düzeltmesini [Dış public yüzey farkları](public-external-surface-drift.md) içinde takip edin.
 
 ## Yayıncı Paneli Aktarım Notu
 
@@ -30,7 +30,7 @@ Bir sonraki Chrome Web Store yayıncı paneli düzenlemesi için bu aktarım not
 | --- | --- |
 | Extension name | `VaultPilot Browser Vault Extension` |
 | Extension ID | `hjkbedlaieikhkoplgpiohlaakgebobi` |
-| Gönderim öncesi doğrulanacak public sürüm | `1.3.2` |
+| VaultPilot 2.2.0 adayı için gereken sürüm | `1.3.3` (2026-07-17 tarihinde canlı mağazayla aynı) |
 | Kısa açıklama | [Kısa Açıklama](#kisa-aciklama) altındaki metni kullanın. |
 | Detaylı açıklama | PassMan'ı hâlâ güncel sunucu ve ürün adı gibi gösteren canlı `Detailed description` yerine [Detaylı Açıklama](#detayli-aciklama) altındaki metni kullanın. |
 | Privacy data categories | Personally identifiable information, authentication information ve web history. |
@@ -143,7 +143,7 @@ Gerçek kasa kaydı, müşteri hostname'i, kullanıcı adı, log, token, lisans 
 
 ## Submission Kontrol Listesi
 
-1. Release arşivinde extension version `1.3.2` veya hedef yeni sürüm olduğunu doğrulayın.
+1. Yayın arşivinin tam olarak aday eklenti sürümü `1.3.3` içerdiğini ve canlı mağazanın hâlâ `1.3.3` gösterdiğini doğrulayın; taraflardan biri ilerlediyse yayın öncesinde sürüm sözleşmesini ve iki doğrulama sayfasını güncelleyin.
 2. Listing'in hâlâ `hjkbedlaieikhkoplgpiohlaakgebobi` extension ID kullandığını doğrulayın.
 3. Developer Dashboard privacy practices alanını [PRIVACY.md](../../PRIVACY.md) ile karşılaştırın.
 4. Paketlenmiş `manifest.json` permissions ve host permissions değerlerini yeniden kontrol edin.

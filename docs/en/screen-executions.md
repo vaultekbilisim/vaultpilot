@@ -19,6 +19,36 @@ Viewing is not gated by a separate license feature, and a read-only license does
 
 There is no general **Retry** action on this screen. Do not restart an update, Discovery run, maintenance operation, or failed AD action here. Preserve and inspect the evidence first, then start a new run only if the relevant source screen provides that action.
 
+<a id="runs-and-scheduled-tabs"></a>
+
+## Runs and Scheduled Tabs
+
+The **Tasks** workspace has two separate views:
+
+- **Runs** shows work that has started or reached a terminal state and refreshes about every 2.5 seconds while active.
+- **Scheduled** shows future policies and retry-waiting work and refreshes about every 15 seconds while active.
+
+Top-bar refresh reruns only the selected tab's query. With **Scheduled** active it does not refresh Runs, and with **Runs** active it does not refresh scheduled work or any other workspace. It does not reload the browser page, and filters remain intact.
+
+<a id="scheduled-operations"></a>
+
+## Scheduled Operations
+
+Scheduled combines Active Directory rotation (`DIRECTORY_ROTATION`), directory sync (`DIRECTORY_SYNC`), certificate lifecycle (`CERTIFICATE_LIFECYCLE`), and the durable SMTP outbox (`SMTP_OUTBOX`). Each card identifies its source, trigger, cadence, next run, last run, last outcome, related execution, and bounded log summary when available.
+
+Because of the zero-knowledge boundary, certificate lifecycle scanning runs only in an authorized, unlocked browser session. VaultPilot does not fabricate a last or next run as though an independent server-side certificate-payload runner existed. The card can show hourly cadence with `CLIENT_SESSION_REQUIRED`; completed 15-, 7-, 3-, and 1-day threshold and expired events come from redacted audit history.
+
+| State | Meaning |
+| --- | --- |
+| **Ready** (`READY`) | The policy is enabled and waiting for its next time. |
+| **Due** (`DUE`) | Work is waiting for a runner lease. |
+| **Running** (`RUNNING`) | The related execution is active. |
+| **Retrying** (`RETRYING`) | The source is applying a controlled wait after failure. |
+| **Blocked** (`BLOCKED`) | Authority, agent health, vault state, or a durable error prevents progress. |
+| **Paused** (`PAUSED`) | An operator or source policy has paused the schedule. |
+
+Filters are **All**, **Active**, **Attention**, **Ready**, and **Paused**. Cadence can be daily, weekly, monthly, custom interval, hourly certificate scan, or a source retry interval. A trigger can be **Calendar**, **Secret reveal**, or **Password age**. **Open source** opens the matching rotation policy, Active Directory provider, Certificates workspace, or SMTP setting without starting a new run.
+
 ## Data Sources and Scope
 
 The server combines up to 80 entries, most recently updated first:
@@ -51,7 +81,7 @@ Category and state filters narrow rows together, but button counts do not repres
 | State filter | Included row states |
 | --- | --- |
 | **All states** | Every state. |
-| **Active** | **Pending** and **Running**. |
+| **Active** | **Pending**, **Running**, and **Cancel requested** while runner acknowledgement is pending. |
 | **Problem** | **Failed**, **Blocked**, and **Review**. |
 | **Completed** | **Succeeded**, **Recorded**, and **Cancelled**. |
 
@@ -76,6 +106,7 @@ The card does not expose execution ID, start time, or completion time as separat
 | **Succeeded** | An update completed or an AD agent action returned success. Verify the intended result on the source screen. |
 | **Failed** | An AD agent action ended in error. Preserve the message and redacted detail; there is no retry here. |
 | **Blocked** | An update job cannot advance. Inspect its step and log detail, then open Update Center. |
+| **Cancel requested** | `CANCEL_REQUESTED` is recorded but the runner has not reported a terminal state. Treat it as active and wait for acknowledgement. |
 | **Cancelled** | An AD agent action was stopped by an Owner. Completed execution and audit evidence are not deleted. |
 | **Review** | The directory action's `STALE_REVIEW_REQUIRED` state. Do not treat it as success or ordinary queue delay; review agent health and the target operation. |
 | **Recorded** | A tracked audit event was persisted. This alone does not prove that an associated external action was delivered or completed successfully. |
@@ -84,7 +115,7 @@ The card does not expose execution ID, start time, or completion time as separat
 
 **Refresh** reruns only the list query; it does not start an operation. While fetching, the button is disabled and labelled **Refreshing**. In an authorized, unlocked session, the query also runs about every 2.5 seconds while Executions is active.
 
-**Stop execution** appears only for an `AD agent action` in **Pending** or **Running**, and only to an Owner. After confirmation, the pending or leased action is changed to `CANCELLED`. Completed executions and audit evidence are not deleted. Update jobs and audit-event rows cannot be stopped from Executions.
+**Stop execution** appears only for an `AD agent action` in **Pending** or **Running**, and only to an Owner. Confirmation first records `CANCEL_REQUESTED`. The execution is not complete or cancelled until the runner acknowledges the request and reports a terminal state. A stale former runner cannot write a later result. Completed executions and audit evidence are not deleted; update jobs and audit-event rows cannot be stopped from Executions.
 
 There is no retry action here. **Open source** does not rerun anything; it only navigates to the relevant workspace. In particular, a **Recorded** Discovery or maintenance event is not a control for cancelling or restarting a live job.
 

@@ -2,6 +2,16 @@
 
 Use this when a VaultPilot backup import fails, returns an archive error, rejects an oversized upload, or succeeds but active sessions are closed.
 
+<a id="identify-backup-type"></a>
+
+## Identify the Backup Type First
+
+- **Quick Recovery** uses a `.vpr.json` file and separate 40-character key. It excludes FILE records, revision history, license, server settings, and logs.
+- A **full Backup Tool backup** uses the approved ZIP and manifest shape. The ZIP container is not password protected; never send it through a public channel.
+- A **maintenance backup** contains only `AUDIT`, `DISCOVERY`, or `EXECUTIONS` and cannot restore a server profile.
+
+Do not upload one type into another type's import control. If the Quick Recovery key is lost, the file cannot be decrypted; do not attempt to recover it from logs or the server.
+
 ## First Checks
 
 | Check | Healthy result |
@@ -20,10 +30,11 @@ Use this when a VaultPilot backup import fails, returns an archive error, reject
 | `CONTENT_LENGTH_REQUIRED` | Multipart upload did not include `Content-Length`. | Retry through the VaultPilot UI or an approved browser path. |
 | `BACKUP_ARCHIVE_INVALID` | Archive content is malformed, unsafe, empty, has too many entries, or exceeds ZIP processing limits. | Stop and verify the backup was produced by the approved tool. |
 | `BACKUP_ARCHIVE_UNSUPPORTED` | No supported VaultPilot backup payload was found in the archive. | Use the correct backup export or Backup Tool archive. |
+| Quick Recovery decrypt error | The `.vpr.json`, separate key, or manifest do not match. | Match the file to the correct key; do not guess the value or edit the file. |
 
 ## Successful Import Side Effect
 
-A successful import rebuilds the server profile from the backup and closes all active sessions. Users must sign in again through the canonical VaultPilot URL after the import completes.
+A successful full-backup or Quick Recovery import rebuilds the server profile and closes all active sessions. Users must sign in again through the canonical VaultPilot URL. Quick Recovery restores only its bounded scope; missing FILE data, history, license, or server settings are expected rather than an import failure.
 
 ## Safe Evidence
 

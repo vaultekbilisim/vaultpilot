@@ -9,6 +9,7 @@ The **Owner** is the operator of this screen. Admin, Auditor, and User roles may
 - Read the status badge together with **Active users**, **Plan**, **Days remaining**, the capacity bar, and **Plan capabilities**.
 - Distinguish the 30-day, 3-user trial from a signed license with customer and user-limit data.
 - A navigation item can remain visible while its module is unavailable under the current plan.
+- Browser Extension has no separate plan card; it is shown as part of the **Integrations** capability.
 - Clearing removes all stored license records; it does not delete vault data, users, sessions, or audit evidence.
 
 ## How to Read the Screen

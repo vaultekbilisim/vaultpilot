@@ -6,7 +6,7 @@ The topbar `?` opens this guide from the **External API** and **Active Directory
 
 The Integrations screen is shown only to the VaultPilot **Owner** system role. Admin, Auditor, and User roles cannot list or manage API clients or directory providers here. The license must include the **Integration** capability before the screen can be opened from the sidebar; without it, the item is disabled and the Owner is directed to License.
 
-A read-only license blocks creating API clients and AD agents, saving directory scope, requesting immediate sync, running agent actions, rotating or revoking an agent token, deleting a provider, and importing AD records into a vault. Revoking an existing API client or browser-extension device remains available as a security action under a read-only license. The browser-extension shortcut also checks the separate **Extension** license capability.
+A read-only license blocks creating API clients and AD agents, saving directory scope, requesting immediate sync, running agent actions, rotating or revoking an agent token, deleting a provider, and importing AD records into a vault. Revoking an existing API client or browser-extension device remains available as a security action under a read-only license. Browser Extension is not licensed separately; it is included in the **Integration** capability. Legacy signed `extension` licenses preserve Browser Extension access only and do not unlock External API or Active Directory.
 
 ## Work Here
 
@@ -50,6 +50,8 @@ The ledger shows status, name, compact Client ID, permissions, vault/scope/log c
 
 After confirmation, **Revoke access** moves the client to `REVOKED`. The revoked record remains in the ledger as evidence, cannot be reactivated, and cannot return the same secret. To replace a client, issue a new least-privilege client, move the consumer to the new credential, and then revoke the old one.
 
+<a id="active-directory-agent"></a>
+
 ## Active Directory
 
 ### Data and password boundary
@@ -73,11 +75,15 @@ For **Copy token** and **Copy command** on a token, install command, or repair c
 
 The provider card shows DC, Base DN, agent version, bind username, last seen, last sync, and sync interval. Its state can be **AGENT WAITING**, **CONNECTED**, **STALE**, **OFFLINE**, or **TOKEN REVOKED**. A connected agent can additionally show **SYNCING**, **SYNC QUEUED**, or **ERROR**. **Sync now** only queues a command; follow the provider state and Executions screen for the result.
 
-**Search directory tree** searches OU, group, user, UPN, and DN. **Tree**, **OU**, **Groups**, and **Users** filter only the displayed tree. Per-user VaultPilot sign-in selections are saved immediately to a separate sign-in scope. Branch and user selections for AD record import remain a draft: choose **Save scope** before **Import selected to vault**. Import requires Editor or Manager access to the active vault and a writable license; a selected user already present in that vault is skipped.
+**Search directory tree** searches OU, group, user, UPN, and DN. **Tree**, **OU**, **Groups**, and **Users** filter only the displayed tree. Per-user VaultPilot sign-in selections are saved immediately to a separate sign-in scope. Branch and user selections for AD record import remain a draft: choose **Save scope** before **Import selected to vault**. Import requires Editor or Manager access to the active vault and a writable license.
 
-The **Agent capabilities** strip reports support for **Password state**, **Unlock account**, **Require password change**, and **Change password**. The strip does not start those actions. Sensitive agent actions require Owner access, a writable license, `CONNECTED` health, and the reported capability. If the target user is marked privileged, Disable account, Unlock account, Require password change, and **Change password** are disabled in the UI and hard-rejected by the server. Results appear in the **Agent actions** timeline.
+In prepared VaultPilot 2.2.0, a selected user already present in the same vault is reconciled instead of skipped, updating identity and AD-state metadata. This can complete only while the matching writable vault is unlocked in an authorized browser; the agent and server cannot decrypt the record. The existing password is never replaced with blank directory data, and a user removed from scope or missing from the directory is not silently deleted. Provider sync can succeed while vault reconciliation returns a partial result; inspect each item outcome.
+
+The **Agent capabilities** strip reports support for **Password state**, **Unlock account**, **Require password change**, **Assign random password now**, and **Disable account**. The strip does not start those actions. Sensitive actions remain fail-closed unless Owner access, a writable license, `CONNECTED` health, a ready worker, and the reported capability are all present. Identity-bound actions require both service and worker to report `1.2.20` or newer; the current download and repair target is `1.2.21`, and successful sync does not upgrade an older agent. Built-in identities and the bind identity always remain protected. Other privileged targets require a second confirmation for manual work and an additional durable policy approval for automated rotation. Results appear in the **Agent actions** timeline.
 
 **Rotate token** invalidates the old token immediately and shows the replacement only in the current result panel. Under **Danger actions**, **Revoke token** prevents further sync until repair or re-enrollment. **Delete provider** removes the provider record; the Windows agent then needs a new enrollment and token before it can reconnect.
+
+Install and repair commands never contain the token value; they use `-PromptAgentToken`. Copy the token separately and paste it only into the local secure prompt in elevated PowerShell. Never add a plaintext token to the command.
 
 ## Browser Extension
 

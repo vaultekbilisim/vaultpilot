@@ -17,7 +17,7 @@ The type rail exposes five types:
 | Password | Title and Password. | Username/email, sign-in URL, note. |
 | API key | Title and API key or token. | Client/owner/service account, console URL, scope or rotation note. |
 | Secure note | Title and at least one of Encrypted note or Optional hidden value. | Owner/team and related-system reference. |
-| Certificate | Title and Certificate or private key material. | Owner/service, endpoint, note, expiry, Subject/CN, and CA classification. |
+| Certificate | Title and at least one valid X.509 certificate. | Chain/intermediates, matching private key, PFX/P12 bundle, owner/service, endpoint, note, and CA classification. |
 | File | Title and one selected file for a new record. | Owner/recipient, related system/ticket, and file note. |
 
 `CREDENTIAL` is a supported stored secret type, but it is deliberately absent from the manual type rail. New Active Directory credential records are created through agent sync. If manual credential creation is attempted, the form rejects it and routes to **Integrations > Active Directory**. Do not describe the New item page as creating RDP or SSH credentials.
@@ -29,15 +29,15 @@ There is no general Owner or Tags control on this form. The account field is typ
 - Select one of the five manual record types before entering its required value.
 - Enter a clear title and only the context fields needed to find and operate the record safely.
 - Generate or paste a value, then use the optional breach check when it is offered and organizational policy permits it.
-- Import certificate material or select one file within the documented limits.
+- For Certificate, append leaf, chain/intermediate, private-key, and PFX/P12 sources through separate controls; for File, select one file within the documented limits.
 - Review the active vault and write eligibility before selecting **Save encrypted record**.
 - Use the back arrow to discard the current form and return to the list for the selected type.
 
-## Type Changes and Shared Draft Fields
+## Type Changes and Sensitive Data Boundaries
 
-Changing among the five manual types changes labels and special controls but does not start a new independent draft. Title, account, hidden value, URL, note, certificate metadata, file metadata or selection, category, source, and tags can remain in shared form state; only credential-specific connection fields are removed. Certificate, file, or classification data can therefore become hidden when another type is selected and reappear or affect a later save.
+Certificate, Credential, and File are separate sensitive-data boundaries. When entering or leaving one of these types while the form contains a hidden value, certificate/private-key material, a file selection, or directory binding, VaultPilot asks for explicit confirmation. After confirmation it clears those sensitive fields, the running certificate worker, and temporary source passphrases, so they cannot remain hidden and flow into a later record. General context such as title, account, URL, note, category, environment, owner, and tags may remain.
 
-Choose the intended type from the global chooser before entering material. If the type changes after a certificate import, file selection, or authority classification, the safest path is to reset or go back, reopen the intended type, and re-enter or reselect the current material. Otherwise, recheck both visible fields and any previously entered hidden data before Save. No field is saved until the form is submitted, and there is no autosave or saved-draft list.
+Password, API key, and Secure note stay within the same general-record boundary and can preserve the entered value when switching. Recheck the visible type and value before Save. Cancelling the confirmation leaves the current draft unchanged. No field is saved until the form is submitted, and there is no autosave or saved-draft list.
 
 ## Value Generation, Strength, and Breach Check
 
@@ -49,9 +49,11 @@ When the breach button is present, it runs only after the operator selects it. T
 
 ## Certificate Handling
 
-Certificate material can be pasted into **Certificate or private key** or imported from a file. The file picker advertises PEM, CRT, CER, DER, P7B/P7C, PFX/P12/PKCS12, P8/P8E/PK8, and KEY formats. A selected certificate file is limited to 10 MB.
+The certificate editor has four distinct source roles: **Leaf certificate**, **Chain / intermediate**, **Private key**, and **PFX / P12**. Multiple sources can be appended to a role, and an incorrect or obsolete source can be removed without disturbing the others. PEM, CRT, CER, DER, P7/P7B/P7C/CMS, PFX/P12/PKCS12, P8/P8E/PK8, PKCS#1, PKCS#8, and KEY are supported; one record accepts at most 16 sources and 10 MB in total.
 
-On import, the browser calculates SHA-256 and stores the original file bytes inside the encrypted record payload. Text formats are decoded and simple `Subject`, `Issuer`, `Serial`, and expiry labels are read when present. Binary formats are wrapped as base64 material. This is inventory import, not full certificate-chain or private-key validation. **Certificate file imported into the encrypted record** means the material is in the current form; the record is not persisted until Save succeeds.
+The browser calculates SHA-256 for each source and performs real cryptographic parsing. It reads X.509 certificates and PKCS#7 chains, opens PFX/P12 packages, and recognizes supported RSA, EC, and RFC 8410 keys. When a private key is present, its public component is compared with the leaf certificate. Save is blocked until at least one valid X.509 certificate exists, the key matches, protected sources can be opened, and all limits pass. Source bytes exist only inside the vault-key-encrypted payload; cards do not reveal or copy raw material or download the imported original file.
+
+Each protected PFX/P12 or private-key source has its own **Source passphrase**. **Store passphrase encrypted in this vault** is off by default. Even when enabled, VaultPilot retains only a passphrase actually consumed by cryptographic parsing; a value typed for an unencrypted source or consumed by no source is not stored. With the option off, the passphrase remains only in browser memory for validation and is cleared on lock, logout, user change, or vault change.
 
 Expiry and Subject/CN can be corrected in the form. Selecting DigiCert, GoDaddy, GlobalSign, Let's Encrypt, Microsoft CA, or Self-signed changes the record's certificate category and classification tags only. It does not contact that CA, validate an account, order, renew, reissue, revoke, or deploy a certificate.
 
@@ -73,7 +75,7 @@ Browser-native required-field validation runs before the submit handler, browser
 2. The license and active-vault role must permit writes.
 3. New Active Directory credentials are rejected from this page.
 4. Title is required for every type.
-5. Password, API key, and Certificate require a non-blank hidden value.
+5. Password and API key require a non-blank hidden value; Certificate requires at least one parsed X.509 certificate, and any added private key must match the leaf.
 6. Secure note requires either note content or an optional hidden value.
 7. A new File requires selected or retained file metadata, and a newly selected file must remain within the 1 GB limit.
 
@@ -87,7 +89,7 @@ After successful creation, Password, API key, and Secure note write a `CREATE` a
 
 - The back arrow resets the local form and returns to the selected type's list without an unsaved-change confirmation. Navigation does not abort certificate reading, save, or upload work that has already started. Do not navigate away as a cancellation method; wait for completion or failure, then reconcile the list and Audit Log.
 - There is no separate Cancel button for a new record. **Cancel edit** appears only for an existing editable record; selecting it ends edit mode and leaves a blank Password draft on the New item screen rather than returning to the record list.
-- Rejecting an oversized File clears the current picker selection but can leave earlier file metadata in the shared form. An oversized or unreadable certificate clears its file input but can leave earlier certificate material, metadata, or classification tags. After any of these errors, reset or leave and reopen New item, reselect the intended type and current file, and verify the summary before Save.
+- Rejecting an oversized File clears the current picker selection but can leave earlier file metadata in the shared form. If a certificate source is unreadable, its passphrase is wrong, or its key does not match, remove or replace that source and run validation again; do not save until the editor reports a valid result.
 - Most validation and save errors leave the current form in memory so the operator can correct it. A page reload, lock, navigation reset, or back-arrow reset should not be treated as draft storage.
 - A failed save produces an on-screen error and live application notification. Do not paste the full response or form contents into public support.
 - A file upload can fail after record creation; verify Files and Audit Log before deciding whether to retry.
@@ -106,9 +108,9 @@ After successful creation, Password, API key, and Secure note write a `CREATE` a
 ### Import a certificate record
 
 1. Choose Certificate and enter a non-sensitive title.
-2. Paste approved material or choose a supported file no larger than 10 MB.
-3. Review SHA-256, format, expiry, Subject/CN, and authority classification. Imported does not mean validated or saved.
-4. Select Save and confirm an `IMPORT` audit event.
+2. Add leaf, chain/intermediate, private-key, and PFX/P12 material to the correct source roles; enter a separate passphrase for every protected source.
+3. Review X.509 parsing, private-key match, chain state, SHA-256 values, Subject/issuer, and validity. Do not retain source passphrases unless the operating process requires it.
+4. Select Save and confirm an `IMPORT` audit event. Certificate cards expose metadata, fingerprints, and securely generated chain-bundle/PFX actions—not raw material or original-file download.
 5. Use the Certificates screen for inventory review and Server settings for the VaultPilot HTTPS package; this page does not deploy it.
 
 ### Store a file
@@ -130,7 +132,7 @@ After successful creation, Password, API key, and Secure note write a `CREATE` a
 | Type changed | Prefer reset and reopen after certificate, file, or tag work; otherwise recheck all shared and hidden data. |
 | Missing title or value | Complete the exact required fields for the selected type. |
 | Certificate importing | Wait for browser read and hash completion; this is not yet a saved record. |
-| Certificate too large / unreadable | Prior payload or metadata can remain. Reset and reopen, then select an approved file within 10 MB or paste verified text material. |
+| Invalid certificate source | Remove or replace the source; correct its passphrase, format, 10 MB/16-source total, or private-key match, then run validation again. |
 | No file selected | Choose one file before saving a new File record. |
 | File too large / quota exceeded | Prior file metadata can remain. Reset and reopen, then select a file that keeps the active-vault user total within 1 GB. |
 | Encrypting / uploading | Keep the page open; there is no active-operation cancel control, and navigation does not abort the work. |
@@ -159,7 +161,7 @@ Stop when the active vault is uncertain, write access is unexpected, certificate
 
 ## Operator Notes
 
-New item is a client-side encryption form, not a workflow engine. It does not autosave, preserve drafts across reloads, test credentials, create Active Directory records manually, validate certificate trust, deploy certificates, scan files, or rotate external systems.
+New item is a client-side encryption form, not a workflow engine. It does not autosave, preserve drafts across reloads, test credentials, create Active Directory records manually, decide organizational certificate trust, deploy certificates, scan files, or rotate external systems. Cryptographic parsing and key matching do not establish that your organization trusts the certificate.
 
 ## Related
 

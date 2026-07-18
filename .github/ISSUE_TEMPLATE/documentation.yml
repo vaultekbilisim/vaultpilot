@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Do not include secrets, customer data, logs, screenshots with real vault records, tokens, certificates, or private infrastructure details. For boundary and redaction rules, see [public repository boundary](https://github.com/ucsahinn/vaultpilot/blob/main/docs/en/public-repository-boundary.md) and [public issue redaction](https://github.com/ucsahinn/vaultpilot/blob/main/kb/en/public-issue-redaction.md). For Chrome Web Store text, privacy categories, permission reasons, or screenshot rules, use [Chrome Web Store listing and privacy](https://github.com/ucsahinn/vaultpilot/blob/main/docs/en/chrome-web-store-listing.md) and [Chrome Web Store review KB](https://github.com/ucsahinn/vaultpilot/blob/main/kb/en/chrome-web-store-review.md).
+        Do not include secrets, customer data, logs, screenshots with real vault records, tokens, certificates, or private infrastructure details. For boundary and redaction rules, see [public repository boundary](https://github.com/vaultekbilisim/vaultpilot/blob/main/docs/en/public-repository-boundary.md) and [public issue redaction](https://github.com/vaultekbilisim/vaultpilot/blob/main/kb/en/public-issue-redaction.md). For Chrome Web Store text, privacy categories, permission reasons, or screenshot rules, use [Chrome Web Store listing and privacy](https://github.com/vaultekbilisim/vaultpilot/blob/main/docs/en/chrome-web-store-listing.md) and [Chrome Web Store review KB](https://github.com/vaultekbilisim/vaultpilot/blob/main/kb/en/chrome-web-store-review.md).
   - type: dropdown
     id: surface
     attributes:

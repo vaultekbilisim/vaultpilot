@@ -81,9 +81,19 @@ Credential ayrıntıları **Yönetilen**, **Yönetilmeyen** veya **Süresi dolan
 
 **Dashboard araçları** bu rehberi açar, veriyi yeniler veya yerleşim düzenleme moduna geçer. Düzenleme modunda sürükle-bırak ya da ok tuşlarıyla sıralama, gizleme ve geri alma, kaydetme, vazgeçme ve varsayılan yerleşime dönme bulunur. Yerleşim bu tarayıcıda tutulur ve yalnız görünümü değiştirir. Dört widget da gizlenirse **Kategori widgetlarını geri getir** seçeneğini kullanın.
 
+<a id="rotation-policy-monitoring"></a>
+
+## Rotasyon İlkesi ve İzleme
+
+Active Directory kaydındaki **Rotasyon ayarla** penceresi günlük, haftalık, aylık ve özel aralığı destekler. Özel aralık 1–365 gün, 1–52 hafta ya da 1–12 aydır ve başlangıç tarihi ister. Aylık seçim 1–31 veya ayın son günü olabilir; seçilen gün kısa ayda yoksa ayın son gününe sıkıştırılır. Saat dilimi IANA adıyla saklanır, yaz saati geçişi aynı çalışmayı iki kez üretmez ve kaçırılmış çalışmalar topluca çalıştırılmaz.
+
+Takvime ek olarak gizli değer gösterildikten 5–1440 dakika sonra ve AD `passwordLastSet` değeri 1–365 günlük yaşa ulaştığında tetikleme seçilebilir. Birden çok tetikleyicide ilk vadesi gelen çalışır. Ajanın ürettiği parola kullanıcı açık anahtarına şifrelenir; yalnız yetkili ve kilidi açık tarayıcı değeri kasa kaydına yeniden şifreleyebilir. Belirsiz sonuç körlemesine yeniden denenmez.
+
+Bu dashboard toplu ilke düzenleyicisi değildir. İlkeleri kayıt ekranından açın; çalışan ve gelecekteki durumları **Görevler > Zamanlanmış** içinde izleyin. Orada sonraki çalışma, son sonuç, ilişkili yürütme ve sınırlı loglar görünür.
+
 ## Veri Güncelliği ve Sınırlar
 
-**Yenile**, oturumun erişebildiği kasa, denetim, tanılama, yürütme, dizin sağlayıcı, lisans, kullanıcı, eklenti, güncelleme ve paylaşım sorgularını geçersiz kılar; dizin işlemi sorgusunu geçersiz kılmaz. Rotasyon görünümü ne dizin sağlayıcı ne de dizin işlemi sorgusunu etkinleştirir. Bu nedenle bu ekrandaki Yenile, AD işlemi sayılarının güncel olduğunu garanti etmez. Güncel dizin kanıtı gerekiyorsa Sahip, bu sorguları etkinleştiren bir görünümü açıp yüklemenin tamamlanmasını beklemeli ve sonra Rotasyon ekranına dönmelidir.
+**Yenile**, yalnız Rotasyon ekranının görünür özet ve kırılım sorgularını tazeler. Tarayıcıyı yeniden yüklemez; Entegrasyonlar, Active Directory ajan işlemleri, Görevler veya başka dashboard sorgularını topluca yenilemez. Güncel dizin kanıtı gerekiyorsa **Entegrasyonlar > Active Directory** veya **Görevler > Zamanlanmış** görünümünü açıp o ekranı ayrıca yenileyin.
 
 Her sorgu yine rol, lisans, aktif kasa ve uç erişimi kurallarına uyar. Tek bir anlık görüntü zamanı veya son güncelleme alanı yoktur; sorgular tamamlandıkça değerler değişebilir.
 
@@ -96,7 +106,7 @@ Ekran credential'ın hâlâ kullanımda olduğunu, hedefin yeni parolayı kabul 
 1. **61–90 gün**, **90+ gün** ve **Tarih yok** sayılarını ayrı değerlendirin.
 2. Beş satırlık en eski kayıtlar tablosunu yalnız başlangıç noktası olarak kullanın.
 3. Credential ekranında sahip, hesap, hedef, kaynak, gerçek son değişim kanıtı, bağımlılıklar ve geri dönüşü doğrulayın.
-4. Kurumun onaylı değişiklik sürecini kullanın; dashboard rotasyon planlamaz veya çalıştırmaz.
+4. Kurumun onaylı değişiklik sürecini kullanın; ilkeyi kayıt ekranından açın ve çalışmayı Görevler'den izleyin.
 5. Yetkili değişiklik başka yüzeyde tamamlandıktan sonra yenileyip kaynak tarih ve kanıtın değiştiğini doğrulayın.
 
 ### Başarısız veya bekleyen dizin işini inceleme

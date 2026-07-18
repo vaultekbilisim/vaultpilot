@@ -26,7 +26,7 @@ If `%ProgramData%` is not writable during fallback execution, the script writes 
 4. Run the install command on the agent machine from an Administrator PowerShell.
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File "$env:USERPROFILE\Downloads\vaultpilot-dc-agent.ps1" -InstallService -PassManUrl "<VAULTPILOT_URL>" -AgentId "<AGENT_ID>" -AgentToken "<AGENT_TOKEN>" -TrustPassManCertificate
+powershell -NoProfile -ExecutionPolicy Bypass -File "$env:USERPROFILE\Downloads\vaultpilot-dc-agent.ps1" -InstallService -PassManUrl "<VAULTPILOT_URL>" -AgentId "<AGENT_ID>" -PromptAgentToken -TrustPassManCertificate
 ```
 
 The generated 2.0 command may still use `-PassManUrl` and `-TrustPassManCertificate`. Treat those as compatibility flag names from the current agent script surface; do not rename them unless the release script adds VaultPilot aliases.
@@ -37,7 +37,15 @@ The script asks for:
 - AD bind username.
 - AD bind password through the local terminal prompt.
 
-The password is captured locally, not written to logs, and never posted to VaultPilot.
+Passwords and the agent token are accepted only through the local secure PowerShell prompt. Never place the agent token on the command line, in terminal history, or in documentation. The AD bind password is not posted to VaultPilot, and secret values are not written to logs.
+
+<a id="agent-version-and-readiness"></a>
+
+## Version and Readiness Check
+
+Prepared VaultPilot 2.2.0 ships DC Agent `1.2.21`; the current supported state expects both the service wrapper and PowerShell worker to report `1.2.21` and `ready`. A successful directory sync does not upgrade the agent. The identity-bound action protocol minimum remains `1.2.20`, so agents from `1.2.15` through `1.2.19` can still sync while unlock, require-password-change, random-password assignment, and account disable remain safely unavailable. Version 1.2.20 introduced target binding through `objectGUID` and `objectSid` plus AD-constructed `tokenGroups` and `primaryGroupID`; 1.2.21 preserves that boundary while hardening custom configuration-path recovery, idempotent mutation-result delivery, audited review for ambiguous delivery, and bounded diagnostics. Missing or drifting identity evidence keeps sensitive actions fail-closed.
+
+The current candidate package uses `vaultpilot-dc-agent.ps1`. If an installed server still downloads an older script, verify its static download asset and cache first; do not infer the service version from sync success.
 
 ## Operations Commands
 
@@ -50,10 +58,12 @@ powershell -ExecutionPolicy Bypass -File .\vaultpilot-dc-agent.ps1 -TailLog
 ```
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\vaultpilot-dc-agent.ps1 -RepairService
+powershell -ExecutionPolicy Bypass -File .\vaultpilot-dc-agent.ps1 -RepairService -PromptAgentToken
 ```
 
 For an installed service, use the Rotate token command from the existing provider card. The generated repair command keeps the same Windows service and can preserve or update the DC host and bind username. On VaultPilot 2.0.0 and newer, freshly generated or rotated agent tokens are authorized independently of server-secret/data-directory context drift on the server; the same fix first landed in the PassMan 1.8.19 compatibility line.
+
+Rotating the token invalidates the previous token immediately. Copy the replacement separately; the repair command must contain only `-PromptAgentToken`, and the token must be pasted only into the local secure prompt.
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\vaultpilot-dc-agent.ps1 -UninstallService
@@ -68,6 +78,22 @@ After sync, the Active Directory tab shows:
 - OU, group and user tree with search.
 - Separate checkbox scopes for login access and credential import.
 - Import action for selected credential candidates.
+
+<a id="agent-data-and-action-boundary"></a>
+
+## Data and Action Boundary
+
+The agent collects only OU, group, and user metadata. It never reads or sends AD passwords, password hashes, Kerberos tickets, vault keys, or plaintext secrets.
+
+A ready `1.2.20` or newer agent can advertise identity-bound capabilities for unlocking an account, requiring a password change at next sign-in, assigning a random password under the global password policy, and disabling an account. The prepared release ships `1.2.21` for its additional recovery and result-delivery hardening. Built-in identities and the agent bind identity are always protected. Automated rotation of a privileged but non-built-in target additionally requires an explicit durable policy approval; a manual action keeps its own second confirmation.
+
+<a id="managed-credential-reconciliation"></a>
+
+## Post-Sync Vault Reconciliation
+
+A successful agent sync refreshes provider inventory. Encrypted records for users selected for vault import can then receive identity and AD-state updates while the matching writable vault is unlocked in an authorized browser. The server and agent cannot decrypt a vault record, so reconciliation completes only in that browser context.
+
+Reconciliation never replaces an existing password with blank AD data. A user missing from the directory or removed from selection does not silently delete the encrypted record. Provider sync and vault update are separate outcomes; inspect failed entries in a partial batch before retrying.
 
 ## Hardening Notes
 

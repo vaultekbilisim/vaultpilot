@@ -14,7 +14,7 @@ Display name: VaultPilot DC Agent Service
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\vaultpilot-dc-agent.ps1 -Status
 powershell -ExecutionPolicy Bypass -File .\vaultpilot-dc-agent.ps1 -TailLog
-powershell -ExecutionPolicy Bypass -File .\vaultpilot-dc-agent.ps1 -RepairService
+powershell -ExecutionPolicy Bypass -File .\vaultpilot-dc-agent.ps1 -RepairService -PromptAgentToken
 ```
 
 ## Kontroller
@@ -23,6 +23,24 @@ powershell -ExecutionPolicy Bypass -File .\vaultpilot-dc-agent.ps1 -RepairServic
 - Bind username `DOMAIN\username` veya `username@domain.local` formatında olmalı.
 - Local loglar token, password ve secret-like değerleri redacted göstermeli.
 - Repair mode servis wrapper'ını credential yazdırmadan yeniden kurmalı.
+- Kurulum ve onarım komutu erişim anahtarını içermemeli; yalnız `-PromptAgentToken` kullanmalı.
+
+<a id="sync-works-actions-disabled"></a>
+
+## Eşitleme Çalışıyor Ama İşlemler Kapalı
+
+Başarılı eşitleme yalnız OU, grup ve kullanıcı meta verisinin alınabildiğini kanıtlar; hassas işlem yeteneğini veya ajan yükseltmesini kanıtlamaz. Hazırlanan VaultPilot 2.2.0 sürümündeki **Kilidi aç**, **Parola değişimi iste**, **Şimdi rastgele parola ata** ve **Hesabı kapat** işlemleri için aşağıdakilerin hepsi gerekir:
+
+- sağlayıcı sağlığı `CONNECTED`;
+- servis ve PowerShell çalışanı `ready`;
+- her ikisinin de güncel paket sürümü `1.2.21` bildirmesi;
+- ilgili ajan yeteneği;
+- Sahip rolü, yazılabilir lisans ve çözümlenebilen USER hedefi;
+- yerleşik veya bind hesabı olmayan hedef.
+
+`1.2.20` öncesindeki ajanlar eşitleme yapabilir fakat kimliğe bağlı hassas işlemleri güvenli biçimde kapalı tutar. Güncel paket `1.2.21` sürümüdür; 1.2.20 kimlik sınırını korurken yapılandırma kurtarmasını, idempotent sonuç teslimini, belirsiz teslimatın denetimli incelemeye taşınmasını ve sınırlı tanılamayı güçlendirir. **Durum** çıktısında sürümü doğrulayın, sonra mevcut sağlayıcıda anahtarı yenileyip güncel betikle onarım yapın. İkinci sağlayıcı oluşturmayın. Kurulu sunucu hâlâ eski betiği indiriyorsa statik indirme dosyası ile önbelleği doğrulayın.
+
+**Parola değişimi iste** yeni parola üretmez; yalnız sonraki girişte değişim bayrağını ayarlar. **Şimdi rastgele parola ata** AD parolasını hemen değiştirir. **Gizli değeri göster** ise yalnız kasada önceden şifreli bir değer varsa çalışır; ajan mevcut AD parolasını okuyamaz.
 
 ## Kurulum veya repair sırasında 401 Unauthorized
 
@@ -36,6 +54,8 @@ Hata devam ederse VaultPilot server logunda redakte edilmiş sebebi kontrol edin
 - `token_mismatch`: komut eski veya yanlış token kullanıyor.
 
 Gerçek `pma_` agent id veya `pmt_` token değerini public support kanalına yapıştırmayın. Placeholder kullanın ve token ifşa olduysa yenileyin.
+
+Erişim anahtarı yenilendiğinde eski değer hemen geçersiz olur. Yeni değeri komuta eklemeyin; ayrı kopyalayıp yalnız yerel gizli PowerShell istemine yapıştırın.
 
 ## İlgili
 

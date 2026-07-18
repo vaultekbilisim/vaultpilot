@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Public issues are not a place for secrets, exploit details, raw logs, database files, certificates, screenshots with real vault records, or customer-sensitive evidence. Use placeholders such as `<VAULTPILOT_URL>`, `<SERVER_HOST>`, `<AGENT_ID>`, `<AGENT_TOKEN>`, `<LICENSE_CODE>`, and `<REDACTED>`. Before posting, check [support evidence pack](https://github.com/ucsahinn/vaultpilot/blob/main/docs/en/support-evidence-pack.md), [public repository boundary](https://github.com/ucsahinn/vaultpilot/blob/main/docs/en/public-repository-boundary.md), and [public issue redaction](https://github.com/ucsahinn/vaultpilot/blob/main/kb/en/public-issue-redaction.md). Security vulnerabilities, exploit paths, or suspected secret exposure must use the private security report link instead of this public template.
+        Public issues are not a place for secrets, exploit details, raw logs, database files, certificates, screenshots with real vault records, or customer-sensitive evidence. Use placeholders such as `<VAULTPILOT_URL>`, `<SERVER_HOST>`, `<AGENT_ID>`, `<AGENT_TOKEN>`, `<LICENSE_CODE>`, and `<REDACTED>`. Before posting, check [support evidence pack](https://github.com/vaultekbilisim/vaultpilot/blob/main/docs/en/support-evidence-pack.md), [public repository boundary](https://github.com/vaultekbilisim/vaultpilot/blob/main/docs/en/public-repository-boundary.md), and [public issue redaction](https://github.com/vaultekbilisim/vaultpilot/blob/main/kb/en/public-issue-redaction.md). Security vulnerabilities, exploit paths, or suspected secret exposure must use the private security report link instead of this public template.
   - type: dropdown
     id: area
     attributes:

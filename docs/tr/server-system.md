@@ -8,11 +8,12 @@ Yukarıdaki ekran görüntüsü izole bir çalışma ortamında sentetik yapıla
 
 ## Bu Ekran Neyi Yönetir
 
-| Alan | Operatör aksiyonu | Public güvenli kanıt |
+| Alan | Operatör işlemi | Herkese açık güvenli kanıt |
 | --- | --- | --- |
+| Genel | Üretilen parola ilkesini, günlük düzeyini, Hızlı Kurtarma paketini, yönetim araçlarını, tam yedek içe aktarımını ve servis yeniden başlatmayı yönetir. | Parola ilkesi özeti, etkin günlük düzeyi, araç kullanılabilirliği ve redakte edilmiş işlem zamanı. |
 | Erişim ve HTTPS | Public host, public port, yönetilen HTTPS durumu ve sertifika paketi durumunu gözden geçirir. | Gerçek değer yerine `<SERVER_HOST>` kullanılan host biçimi, port ve sertifika subject/SAN özeti. |
 | Bildirimler | E-posta bildirimleri açıksa SMTP host, port, gönderen adres ve test sonucunu doğrular. | SMTP sağlayıcı ailesi, redakte edilmiş gönderen domain'i ve son test zamanı. |
-| Loglar ve bakım | Log saklama, audit saklama, güvenli tanılama ve yeniden başlatma rehberini inceler. | Saklama değerleri, servis durumu, redakte edilmiş zaman damgaları ve secret içermeyen hata adları. |
+| Bakım ve günlükler | Veritabanı ile günlük yollarını, geçiş içe aktarımını ve kategori bazlı bakım yedeklerini inceler. | Servis durumu, redakte edilmiş zaman damgaları, özetler ve gizli değer içermeyen hata adları. |
 
 Server System idari bir yüzeydir. Bu ayarları yalnızca Owner veya onaylı server administrator değiştirmelidir.
 
@@ -41,14 +42,29 @@ Bildirim ayarlarını yalnızca security, update veya idari uyarılar gibi opera
 
 SMTP parolalarını, uygulama parolalarını veya müşteri verisi içeren mesaj gövdelerini herkese açık issue içine koymayın.
 
-## Log Ve Bakım Kontrol Listesi
+<a id="general-and-tools-checklist"></a>
+
+## Genel ve Yönetim Araçları Kontrol Listesi
+
+| Kontrol | Sağlıklı sonuç |
+| --- | --- |
+| Parola ilkesi | 16–128 karakter; gereken sınıflar ve sembol profili kurum ilkesine uygun. |
+| Günlük düzeyi | Normal işletimde `INFO` veya daha dar; `DEBUG` yalnız süreli inceleme için. Denetim kaydı değişmez. |
+| Hızlı Kurtarma | `.vpr.json` ve 40 karakterlik anahtar ayrı konumlarda; bunun tam yedek olmadığı kayıtlı. |
+| Backup Tool | `VaultPilotBackupTool.exe` bağımsız `1.0.1` sürümünü gösterir; tam ZIP çevrimdışı ve erişimi sınırlı tutulur. |
+| Log Collector | `VaultPilotLogCollector.exe` bağımsız `1.0.1` sürümünü gösterir; yalnız redakte edilmiş destek paketi paylaşılır. |
+| Yeniden başlatma | Kaydedilmemiş taslak yoktur; yalnız kaydedilmiş yapılandırma için kontrollü pencere kullanılır. |
+
+<a id="logs-and-maintenance-checklist"></a>
+
+## Günlük ve Bakım Kontrol Listesi
 
 | Ayar | Operatör beklentisi |
 | --- | --- |
-| Log saklama | Destek ve audit incelemesi için yeterli, gereksiz operasyon gürültüsünü sınırlayacak kadar kısa. |
-| Audit saklama | Kurumun uyumluluk ve olay inceleme ihtiyacıyla uyumlu. |
-| Tanılama | Ortam dışına çıkmadan önce redakte edilmiş. |
-| Yeniden başlatma rehberi | Yalnızca yapılandırma değişikliği, güncelleme veya açık destek yönlendirmesi yeniden başlatma istediğinde kullanılır. |
+| Çalışma günlüğü | Etkin `DEBUG`, `INFO`, `WARN` veya `ERROR` düzeyi beklenen ayrıntıyı üretir; gizli değer içermez. |
+| Denetim | Çalışma günlük düzeyinden bağımsızdır ve değiştirilemez olay kapsamını korur. |
+| Tanılama | Ortam dışına çıkmadan önce redakte edilir. |
+| Bakım yedeği | Yalnız `AUDIT`, `DISCOVERY` veya `EXECUTIONS` kategorisine aittir; tam sunucu yedeği sayılmaz. |
 
 Owner bakım temizliği rutin sorun giderme değildir; önce yedek alan bir bakım aksiyonudur. Yalnız `AUDIT`, `DISCOVERY` veya `EXECUTIONS` kayıtlarını hedefleyebilir. İstek backup-clear modunu kullanmıyorsa VaultPilot temizliği reddeder ve `MAINTENANCE_BACKUP_REQUIRED` döndürür.
 
@@ -65,7 +81,7 @@ Toplayın:
 - Yapılandırılmış port.
 - HTTPS durumu ve sertifika subject/SAN özeti.
 - Bildirim test zamanı ve secret içermeyen hata adı.
-- Log ve audit retention değerleri.
+- Etkin çalışma günlük düzeyi ve bakım kategorisi.
 - UI tarafından yeniden başlatma istenip istenmediği.
 
 Toplamayın:

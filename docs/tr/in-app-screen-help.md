@@ -8,10 +8,27 @@ Bu sayfalar ürün tanıtımı değildir. Bir işlemi yapmadan önce hangi bilgi
 
 Aşağıdaki tabloda ekrandaki adı, açılan belgeyi ve belgeye hangi durumda başvurmanız gerektiğini görebilirsiniz. Yardım sayfasını doğrudan bu listeden açtıysanız işlem yapmadan önce uygulamada doğru ekran ve sekmede olduğunuzu kontrol edin. Ekrandaki değerler ile belgedeki açıklama uyuşmuyorsa gizli bilgi içermeyen bir ekran özetiyle dokümantasyon bildirimi açın; belgedeki varsayıma dayanarak üretim ayarını değiştirmeyin.
 
-İki sekme için yönlendirme daha özeldir:
+<a id="contextual-help-routing"></a>
+
+### Bağlama göre yardım yönlendirmesi
+
+Bazı sekmeler ve kayıt bağlamları, genel çalışma alanı belgesi yerine doğrudan ilgili bölümü açar:
 
 - **Entegrasyonlar > Tarayıcı eklentisi** açıkken `?`, genel Entegrasyonlar belgesi yerine [Tarayıcı Eklentisi Ekranı](screen-browser-extension.md) yardımını açar.
+- **Entegrasyonlar > Active Directory** açıkken `?`, [Entegrasyonlar](screen-integrations.md#active-directory-agent) belgesinin ajan bölümünü açar.
+- **Görevler > Zamanlanmış** açıkken `?`, [İşlemler](screen-executions.md#scheduled-operations) belgesinin zamanlanmış işler bölümünü açar.
+- **Sunucu Ayarları > Genel** açıkken `?`, [Sunucu Ayarları](screen-server-settings.md#general-settings) belgesinin genel ayarlar bölümünü açar.
 - **Sunucu Ayarları > Giriş güvenliği** açıkken `?`, genel Sunucu Ayarları belgesi yerine [Giriş Güvenliği Ekranı](screen-sign-in-security.md) yardımını açar.
+
+Kayıt ayrıntısından veya Active Directory kartından **Ajana git** seçildiğinde uygulama **Entegrasyonlar > Active Directory** sekmesine geçer ve ilgili sağlayıcıyı öne çıkarır. Bu geçiş yeni ajan oluşturmaz, eşitleme başlatmaz ve açık kaydı değiştirmez.
+
+<a id="scoped-workspace-refresh"></a>
+
+### Üst çubuktaki yenileme düğmesi
+
+Üst çubuktaki yenileme düğmesi tarayıcı sayfasını yeniden yüklemez. Yalnız o anda görünen ekranın ve seçili sekmenin verisini tazeler. Örneğin **Görevler > Zamanlanmış** açıkken çalışan iş listesi, **Entegrasyonlar > Active Directory** açıkken API istemcileri, başka bir sunucu ayarı sekmesi açıkken ilgisiz ayarlar yenilenmez. Yerel arama ve filtreler, açık formlar ve kasa kilit durumu korunur.
+
+Birden çok alanı doğrulamanız gerekiyorsa her ekrana geçip o ekranı ayrı yenileyin. Bu düğmeyi tüm sunucu durumunu yeniden yükleyen veya servisi yeniden başlatan bir işlem olarak yorumlamayın.
 
 | Ekran | Yardım sayfası | Bu belgeyi ne zaman kullanmalısınız? |
 | --- | --- | --- |

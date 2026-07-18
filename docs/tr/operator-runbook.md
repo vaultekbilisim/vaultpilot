@@ -20,15 +20,19 @@ Bu runbook, go-live sonrası VaultPilot işletimi için tekrar edilebilir enterp
 | Lisans | License ekranı | Aktif durum, kapasite ve süre beklenendir. |
 | Eklenti cihazları | Extension ekranı | Cihazlar bilinir; beklenmeyen pending cihaz yoktur. |
 | Update jobları | Update Center | Blocked veya stale job yoktur. |
+| Zamanlanmış işler | Görevler > Zamanlanmış | `BLOCKED`, uzun süren `DUE` veya açıklanamayan `RETRYING` iş yoktur. |
+| Dizin ajanı | Entegrasyonlar > Active Directory | Sağlık `CONNECTED`; servis ve çalışan sürümü beklenen değer ve `ready` durumundadır. |
 
 ## Haftalık Kontroller
 
 | Kontrol | Beklenen aksiyon |
 | --- | --- |
-| Backup export | Şifreli backup al ve onaylı operatör alanında sakla. |
+| Tam yedek | Backup Tool ZIP'ini sunucu diski dışında, çevrimdışı ve erişimi kısıtlı yerde sakla; ZIP kabının parola korumalı olmadığını varsay. |
+| Hızlı kurtarma | `.vpr.json` ile 40 karakterlik anahtarın ayrı tutulduğunu ve bunun tam yedek olmadığını doğrula. |
 | Restore tatbikatı | Politika gerektiriyorsa staging veya disposable profilde restore doğrula. |
 | Kullanıcı incelemesi | Disabled kullanıcıları, roller ve 2FA durumunu kontrol et. |
-| AD sync incelemesi | Provider health, son sync ve login/credential scope durumunu doğrula. |
+| AD eşitleme incelemesi | Sağlayıcı sağlığını, son eşitlemeyi, giriş ve kasa kapsamını, seçili mevcut kayıtların uzlaştırma sonucunu doğrula. |
+| Rotasyon incelemesi | Günlük, haftalık, aylık veya özel ilkelerin sonraki çalışmasını ve sınırlı loglarını doğrula. |
 | Eklenti incelemesi | Eski cihazları revoke et, fallback ZIP sürümünü doğrula. |
 | Release incelemesi | Kurulu sürümü son public release ile karşılaştır. |
 
@@ -51,6 +55,24 @@ Bu runbook, go-live sonrası VaultPilot işletimi için tekrar edilebilir enterp
 4. Gerekirse host, kullanıcı, internal URL ve timestamp değerlerini redakte et.
 5. Database, backup, PFX/P12, private key veya gerçek kasa kaydı içeren ekran görüntüsü ekleme.
 6. [Destek kanıt paketi](support-evidence-pack.md) ile private support kanalına taşı.
+
+<a id="directory-action-triage"></a>
+
+## Active Directory İşlem İncelemesi
+
+1. Eşitlemenin başarılı olmasını hassas işlemlerin hazır olduğu anlamında kullanmayın. **Durum** çıktısında servis ile PowerShell çalışanını ve sürümü ayrı doğrulayın.
+2. Ajan erişim anahtarını yenilemeniz gerekiyorsa eski anahtarın hemen geçersiz olacağını planlayın. Komut yalnız `-PromptAgentToken` içermeli; anahtarı yerel gizli PowerShell istemine yapıştırın.
+3. **Parola değişimi iste** ile **Şimdi rastgele parola ata** işlemlerini ayırın. İlki sonraki giriş bayrağını ayarlar; ikincisi AD parolasını hemen değiştirir ve kasa uzlaştırmasını ayrı sonuç olarak verir.
+4. Belirsiz sonuçta aynı işlemi körlemesine yinelemeyin. Görev, ajan ve kasa güncelleme kanıtını uzlaştırın.
+5. Yerleşik ve bind hesaplarında durun. Ayrıcalıklı diğer hedeflerde elle işlem için ikinci onayı, otomatik rotasyon için kalıcı ilke onayını doğrulayın.
+
+<a id="recovery-choice"></a>
+
+## Doğru Kurtarma Yolunu Seçme
+
+- Hızlı ve sınırlı profil dönüşü için Hızlı Kurtarma `.vpr.json` paketini kullanın; FILE verisi, geçmiş, lisans, sunucu ayarları ve günlükler kapsam dışıdır.
+- Tam sunucu kurtarması için Backup Tool ZIP'ini kullanın. Kaynağı ve bütünlüğü doğrulayın; başarılı içe aktarımın tüm oturumları kapatacağını planlayın.
+- `AUDIT`, `DISCOVERY` veya `EXECUTIONS` bakım yedeğini tam yedek saymayın. Bu yedek yalnız seçilen kategoriyi geri yükler ve daha yeni kategori kayıtlarının yerini alabilir.
 
 ## Değişiklik Pencereleri
 

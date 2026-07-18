@@ -10,7 +10,7 @@ Sahip, Yönetici ve Kullanıcı sistem rolleri, etkin kasada okuma yetkileri var
 
 ## Burada Ne Yapılır
 
-- Süresi dolmuş, 30 günlük yenileme aralığına girmiş, iptal edilmiş veya geçerlilik tarihi eksik kayıtları ayırın.
+- Süresi dolmuş, henüz geçerli olmayan, 30 günlük yenileme aralığına girmiş, iptal edilmiş veya geçerlilik tarihi eksik kayıtları ayırın.
 - Sertifika otoritesi ve kalan gün ilişkisini radarda inceleyip ilgili kaydın yalnız meta verisini açın.
 - Geçerlilik, durum, kaynak, sertifika otoritesi veya organizasyon satırından Sertifikalar ekranına hazır filtreyle geçin.
 - Uyarının kasa envanterine mi, VaultPilot sunucusunun tarayıcı HTTPS erişimine mi, yoksa Discovery taramasına mı ait olduğunu belirleyin.
@@ -20,7 +20,7 @@ Sahip, Yönetici ve Kullanıcı sistem rolleri, etkin kasada okuma yetkileri var
 
 ### Sertifika risk radarı
 
-Radarın sektörleri, etkin kasadaki kayıtlardan çıkarılan sertifika otoritelerini; merkeze uzaklık ise 90 güne kadar kalan süreyi gösterir. Renk bantları **0–15 gün**, **16–30 gün**, **31–60 gün**, **60+ gün** ve **Tarih yok** ayrımını kullanır. Kritik sayı; 15 gün veya daha az kalan kayıtların yanında süresi dolmuş ve iptal edilmiş kayıtları da kapsar.
+Radarın sektörleri, etkin kasadaki kayıtlardan çıkarılan sertifika otoritelerini; merkeze uzaklık ise 90 güne kadar kalan süreyi gösterir. Çok sertifikalı bir kayıtta kalan süre, yönetilen zincirin **en erken `notAfter`** değerinden hesaplanır. Renk bantları **0–15 gün**, **16–30 gün**, **31–60 gün**, **60+ gün** ve **Tarih yok** ayrımını kullanır. Kritik sayı; 15 gün veya daha az kalan kayıtların yanında süresi dolmuş ve iptal edilmiş kayıtları da kapsar.
 
 Bir radar noktasını seçmek ayrıntı penceresini açar. Burada kayıt sayısı, en yakın bitiş, durum, otorite ve imzalayan, konu, alan adı, kayıt sorumlusu, ortam, kaynak, biçim, kategori, içe aktarım tarihi ile kısaltılmış parmak izi ve seri numarası görülür. Bu pencere kaydı değiştirmez ve sertifika değerini göstermez.
 
@@ -28,7 +28,7 @@ Ekrandaki **Canlı tarama** ifadesi, eldeki envanter noktalarının görsel rada
 
 ### Sertifika geçerlilik takvimi
 
-Takvim yalnız süresi dolmamış, iptal edilmemiş ve geçerlilik tarihi bulunan kayıtları sayar. Görünen sütun etiketi ile kapsadığı gerçek kalan süre şöyledir:
+Takvim yalnız süresi dolmamış, henüz geçerli olmayan sınıfında bulunmayan, iptal edilmemiş ve okunabilir bitiş tarihi bulunan kayıtları sayar. Çok sertifikalı kayıtta en erken `notAfter` kullanılır. Görünen sütun etiketi ile kapsadığı gerçek kalan süre şöyledir:
 
 | Görünen etiket | Gerçek kalan süre |
 | --- | --- |
@@ -46,35 +46,36 @@ Başlıktaki ilk sayı bu aralıklara girebilen kayıtları, ikinci sayı etkin 
 
 ### Sertifika durumları
 
-Durum bileşeni tüm sertifika kayıtlarını beş sınıfa ayırır:
+Durum bileşeni tüm sertifika kayıtlarını altı sınıfa ayırır. Yönetilen zincirde bitiş için **en erken `notAfter`**, başlangıç için **en geç `notBefore`** kullanılır; böylece zincirin henüz başlamamış veya sona ermiş tek bir üyesi gözden kaçmaz.
 
 | Durum | Hesaplama |
 | --- | --- |
 | Geçerli | 30 günden fazla süresi kalan kayıt. |
 | Yenileme aralığında | Bugün dahil 30 gün veya daha az süresi kalan kayıt. |
+| Henüz geçerli değil | Zincirdeki en geç `notBefore` gelecekte; hiçbir zincir üyesinin süresi dolmamış. |
 | Süresi doldu | Bitiş tarihi geçmiş kayıt. |
 | İptal / pasif | Kayıt durumu iptal veya pasif olarak işaretlenmiş kayıt; bitiş tarihinden önce değerlendirilir. |
 | Tarih yok | Okunabilir bir bitiş tarihi bulunmayan kayıt. |
 
-Durum hesabında **İptal / pasif** önceliklidir. Bu nedenle iptal edilmiş bir kayıt, bitiş tarihi geçmiş veya eksik olsa bile **Süresi doldu** ya da **Tarih yok** yerine **İptal / pasif** altında sayılır.
+Durum hesabında **İptal / pasif** önceliklidir. Bu nedenle iptal edilmiş bir kayıt, bitiş tarihi geçmiş veya eksik olsa bile **Süresi doldu** ya da **Tarih yok** yerine **İptal / pasif** altında sayılır. Diğer kayıtlarda herhangi bir yönetilen zincir üyesinin süresi dolmuşsa kayıt **Süresi doldu**; hiçbiri dolmamış ancak en az biri gelecekte başlayacaksa **Henüz geçerli değil** sayılır.
 
-**Dikkat** sayısı, geçerli dışındaki dört sınıfın toplamıdır. Toplam sertifika düğmesi Sertifikalar ekranındaki tüm sertifikaları açar; belirli bir durum satırı yalnız o durumla filtrelenmiş listeyi açar. **Dikkat** halkası da tıklanabilir, ancak dikkat sayısı sıfırdan büyük olduğunda her zaman **Yenileme aralığında** filtresine gider. Dikkat yalnız süresi dolmuş, iptal/pasif veya tarihi eksik kayıtlardan geliyorsa sonuç boş olabilir. Kesin inceleme için adlandırılmış durum satırını seçin. Dikkat sayısı sıfırsa halka **Geçerli** filtresini açar.
+**Dikkat** sayısı, geçerli dışındaki beş sınıfın toplamıdır. Toplam sertifika düğmesi Sertifikalar ekranındaki tüm sertifikaları açar; belirli bir durum satırı yalnız o durumla filtrelenmiş listeyi açar. Ortadaki donut, oranları gösteren statik bir görseldir ve tıklanmaz. Kesin ayrıntıya inmek için adlandırılmış durum satırını seçin.
 
 ### Sertifika dağılımı
 
 Dağılım alanı kayıtları üç yönden gruplar:
 
-- **Kaynak:** Manuel, İçe aktarılan, AD sync ve Diğer. **Diğer** yalnız özet grubudur; ayrı bir kaynak filtresi yoktur.
+- **Kaynak:** Manuel, İçe aktarılan, AD sync ve Diğer. **Diğer**, bu üç tanımlı kaynak dışında kalan kaynak değerlerinin tamamını kapsar.
 - **CA:** Kayıt meta verisinden sınıflandırılan sertifika otoritesi.
 - **Organizasyon:** Kayıtlardan çıkarılan ilk dört organizasyon grubu.
 
-**Manuel**, **İçe aktarılan** ve **AD sync** kaynak satırları ile CA ve organizasyon satırları Sertifikalar ekranını ilgili filtreyle açar. **Diğer** kaynak satırı ayrı bir kaynak değerine bağlı değildir; seçildiğinde güvenilir bir “Diğer kaynak” ayrıntısı açmaz ve organizasyon filtresine düşebilir. Diğer kaynakları incelemek için Sertifikalar ekranını doğrudan açıp kayıtların kaynak alanını gözden geçirin. Üstteki özet görseli gruptaki ilk dolu bölümü açar; Kaynak grubunda ilk bölüm **Diğer** ise aynı sınırlama geçerlidir.
+Tüm kaynak, CA ve organizasyon satırları Sertifikalar ekranını ilgili filtreyle açar. **Diğer** satırı, kapsadığı bütün kaynak değerlerini tek bir çoklu filtre halinde taşır; organizasyon filtresine düşmez. Üstteki donutlar yalnız dağılımı gösteren statik görsellerdir; ayrıntıya inmek için altlarındaki adlandırılmış satırları kullanın.
 
 ## Filtreler ve Ayrıntıya İnme
 
 - Geçerlilik takvimindeki dolu bir sütun, o süre aralığını **Sertifikalar** ekranında akıllı filtre olarak açar.
-- Durum satırları **Geçerli**, **Yenileme aralığında**, **Süresi doldu**, **İptal / pasif** veya **Tarih yok** filtresine gider.
-- Manuel, İçe aktarılan ve AD sync kaynak satırları ile CA ve organizasyon satırları aynı değerle filtrelenmiş sertifika envanterine gider. **Diğer** kaynak satırı bu garantinin dışındadır.
+- Durum satırları **Geçerli**, **Yenileme aralığında**, **Henüz geçerli değil**, **Süresi doldu**, **İptal / pasif** veya **Tarih yok** filtresine gider.
+- Manuel, İçe aktarılan ve AD sync kaynak satırları tek değerle; **Diğer** kaynak satırı kapsanan değer kümesiyle filtrelenmiş sertifika envanterine gider. CA ve organizasyon satırları da kendi kesin değerlerini taşır.
 - Radar noktası Sertifika Panelinden ayrılmadan meta veri penceresi açar; kayıt düzenleyicisini açmaz.
 - Bir filtre beklenenden az sonuç gösteriyorsa etkin kasayı kontrol edin. Panel ve ayrıntı listesi yalnız seçili kasanın okunabilir kayıtlarını kullanır.
 
@@ -90,9 +91,9 @@ Bir kasa kaydının konusu ile alan adı farklı görünüyor diye Sertifika Pan
 
 ## Önerilen İş Akışları
 
-### Süresi dolmuş veya yenileme aralığındaki kaydı inceleme
+### Süresi dolmuş, henüz geçerli olmayan veya yenileme aralığındaki kaydı inceleme
 
-1. **Sertifika durumları** içinden **Süresi doldu** veya **Yenileme aralığında** satırını seçin.
+1. **Sertifika durumları** içinden **Süresi doldu**, **Henüz geçerli değil** veya **Yenileme aralığında** satırını seçin.
 2. Sertifikalar ekranındaki filtreli kayıtların bitiş tarihini, ortamını, sorumlusunu ve kullanım bağlamını doğrulayın.
 3. Yenileme onay sahibini ve hedef tarihi kurum içi değişiklik kaydında belirleyin.
 4. Yeni materyali bu panelden yüklemeyin. Envanter kaydı için Sertifikalar ekranını, sunucu HTTPS paketi için Sunucu ayarlarını kullanın.
@@ -123,6 +124,7 @@ Süresi dolmuş kayıt takvimde görünmez; **Süresi doldu** durum satırında 
 | Sertifika kaydı yok | Etkin kasayı ve kasa okuma yetkisini doğrulayın; başka yüzeylerdeki sertifikaların burada görünmesi beklenmez. |
 | Geçerli kayıtlar | 60+ gün bandını sakin izleyin; sorumlu ve ortam meta verisinin güncel kaldığını doğrulayın. |
 | Yenileme aralığı | 30 gün ve altındaki kayıtlar için onay sahibi ve hedef tarih belirleyin. |
+| Henüz geçerli değil | Zincirin en geç başlangıç zamanını ve sunucu saatini doğrulayın; geçerlilik başlamadan materyali kullanmayın. |
 | Süresi dolmuş | İlgili kullanımı doğrulayın; yenileme veya kontrollü kullanım dışı bırakma kararı verin. |
 | İptal / pasif | Kaydın bilerek pasifleştirildiğini ve artık etkin kullanım kanıtı olmadığını doğrulayın. |
 | Tarih yok | Meta veriyi doğrulamadan kaydı sağlıklı kabul etmeyin. |

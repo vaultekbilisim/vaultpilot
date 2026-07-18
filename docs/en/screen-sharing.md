@@ -54,12 +54,12 @@ The recipient sees only ready, `PENDING`, unexpired bundles with remaining uses 
 
 This is not source-vault membership or live synchronization. Later source-record changes do not flow to the recipient's copy.
 
-Active Directory credentials appear in the selection list, but the current acceptance path does not pass the required provider and DN source fields when creating the destination record. The server can reject that item. Do not plan an internal Active Directory credential handoff until successful acceptance has been verified for the specific workflow.
+When an Active Directory credential is shared, its provider identity and object DN are carried from the encrypted record into destination creation. The same provider and user object must still exist in the organization, and the recipient must be able to write to the target vault. A removed provider, missing object, or duplicate managed credential is rejected safely and records created by that acceptance attempt are rolled back.
 
 ### Incoming and outgoing lists
 
 - **Incoming shares** is not history. It shows only bundles that can currently be accepted. Accepted, revoked, expired, exhausted, or still-preparing bundles are absent.
-- **Recent outgoing shares** shows only the newest six internal bundles. The server returns at most the newest 100 incoming/outgoing bundles for the user; older bundles are not visible history on this screen.
+- **Recent outgoing shares** shows only the newest six internal bundles. The server returns the bundle list in metadata-only pages of 50; list responses never contain the encrypted bundle, wrapped key, or selected-item hashes. The full encrypted body is fetched through a single-item, authorization-checked detail request only after an eligible recipient chooses to open it.
 - Display states are **Preparing**, **Pending**, **Used**, **Expired**, and **Revoked**.
 - The current UI shows **Revoke** only for the sender's own `PENDING`, unexpired bundle while uses remain. That condition is button visibility, not the server authorization boundary: the current revoke route accepts any bundle owned by the authenticated sender, regardless of its status, expiry, or remaining uses. Revocation marks the bundle `REVOKED` and blocks future opens; it does not delete copies already imported into a recipient vault or change source records.
 
@@ -87,7 +87,8 @@ When SMTP is used, the external package is posted transiently to the VaultPilot 
 | --- | --- |
 | Internal bundle | At most 250 records, 512 total file chunks, and 1 GiB of plaintext file bytes. |
 | Internal file chunk | At most 2 MiB of plaintext per chunk; each chunk-upload request is capped at 8 MiB. |
-| Internal create request | Request body is capped at 1.5 MB. Large encrypted record payloads can hit this even without file data. |
+| Internal create request | Request body is capped at 24 MiB. Each sender can keep at most 50 pending bundles and 128 MiB of reserved encrypted share storage; the organization-wide pending-share cap is 512 MiB. Creation is limited to 6 requests per 10 minutes. |
+| Encrypted record body | Standard records are capped at 6 MiB and certificate records at 24 MiB. Current records and their history share a 512 MiB per-vault and 2 GiB per-organization encrypted storage budget. |
 | Direct external download | Selected files total at most 1 GiB and reuse existing 2 MiB source chunks. The internal 250-record/512-total-chunk schema is not applied before local download. |
 | External package through SMTP | Package content is capped at 12 MiB and metadata at 250 items. A larger local package cannot use built-in SMTP; use an approved manual delivery path. |
 
@@ -96,7 +97,7 @@ When SMTP is used, the external package is posted transiently to the VaultPilot 
 The full sharing workflow is not one transaction:
 
 - **Internal creation stops partway:** A real bundle row and some encrypted file chunks can remain. It appears as **Preparing** for the sender but is hidden from the recipient. Retrying creates another bundle instead of resuming the old one. Reconcile the outgoing bundle and Audit Log first; revoke the incomplete bundle when appropriate.
-- **Incoming acceptance stops partway:** Records and file chunks are written to the target vault one at a time, and the use count changes last. An error can leave new records or an incomplete file while the bundle remains `PENDING` with its use apparently unconsumed. Blind retry can create duplicates. Reconcile the target vault, incoming/outgoing state, and audit evidence first.
+- **Incoming acceptance stops partway:** Records are written to the destination one by one, file uploads commit atomically per record, and the use count changes last. On failure, records created by that acceptance attempt are deleted in reverse order. If any compensating delete also fails, the UI reports that cleanup was incomplete; only then reconcile the target vault and audit before retrying.
 - **Concurrent acceptance:** The use counter does not place destination-vault writes inside one transaction. A double click or two sessions can both import records before count/status updates settle. Use one operator and one session.
 - **External generation and audit are separate:** The browser places the package and passphrase into result state before it writes the generic `SHARE` audit event. If audit writing fails, the UI can report generation failure while package material already exists in memory. Inspect the result state and audit evidence before generating again.
 - **SMTP audit has two stages:** A durable intent event is written before SMTP; if it cannot be written, no email is sent. Post-send delivery evidence is best-effort, so SMTP can succeed even when that second audit write fails. Intent alone is not proof of delivery, and missing delivery evidence is not a reason for an immediate duplicate send.
@@ -142,7 +143,7 @@ The full sharing workflow is not one transaction:
 
 ## When to Stop
 
-Stop when selection scope is uncertain, the target user or key cannot be verified, file chunks are incomplete, an Active Directory credential is entering internal acceptance, an existing bundle is **Preparing**, partial destination writes are possible, external result state conflicts with audit, SMTP outcome is ambiguous, or the package and passphrase shared a channel. Do not create a second package or accept again until a private review reconciles redacted identifiers, time, status, and audit evidence.
+Stop when selection scope is uncertain, the target user or key cannot be verified, file chunks are incomplete, the Active Directory provider or target object can no longer be verified, an existing bundle is **Preparing**, the UI reports incomplete rollback, external result state conflicts with audit, SMTP outcome is ambiguous, or the package and passphrase shared a channel. Do not create a second package or accept again until a private review reconciles redacted identifiers, time, status, and audit evidence.
 
 ## Operator Notes
 

@@ -10,9 +10,10 @@ The screenshot above is a sanitized UI capture from an isolated runtime with syn
 
 | Area | Operator action | Public-safe evidence |
 | --- | --- | --- |
+| General | Manage generated-password policy, runtime log level, Quick Recovery, administrative tools, full-backup import, and service restart. | Password-policy summary, effective log level, tool availability, and redacted action time. |
 | Access and HTTPS | Review public host, public port, managed HTTPS state and certificate package state. | Host shape with the real value replaced by `<SERVER_HOST>`, port and certificate subject/SAN summary. |
 | Notifications | Confirm SMTP host, port, sender and test result when email notifications are enabled. | SMTP provider family, redacted sender domain and timestamp of the last test. |
-| Logs and maintenance | Review log retention, audit retention, safe diagnostics and restart guidance. | Retention values, service state, redacted timestamps and non-secret error names. |
+| Maintenance and logs | Review database and log paths, migration import, and category-scoped maintenance backups. | Service state, redacted timestamps, digests, and non-secret error names. |
 
 Server System is an administrative surface. Only Owners or approved server administrators should change these settings.
 
@@ -41,14 +42,29 @@ Use notification settings only for operational mail such as security, update or 
 
 Do not paste SMTP passwords, app passwords or message bodies containing customer data into public issues.
 
+<a id="general-and-tools-checklist"></a>
+
+## General and Administrative Tools Checklist
+
+| Check | Healthy result |
+| --- | --- |
+| Password policy | Length is 16–128 and selected character classes and symbol profile match policy. |
+| Runtime log level | `INFO` or narrower for normal operation; `DEBUG` only for a bounded investigation. Audit remains unchanged. |
+| Quick Recovery | The `.vpr.json` file and 40-character key are stored separately and documented as not being a full backup. |
+| Backup Tool | `VaultPilotBackupTool.exe` reports its independent `1.0.1` version; the full ZIP is offline and access-restricted. |
+| Log Collector | `VaultPilotLogCollector.exe` reports its independent `1.0.1` version; only a redacted support package is shared. |
+| Restart | No unsaved draft exists, and a controlled window is used to apply only saved configuration. |
+
+<a id="logs-and-maintenance-checklist"></a>
+
 ## Logs And Maintenance Checklist
 
 | Setting | Operator expectation |
 | --- | --- |
-| Log retention | Long enough for support and audit review, short enough to limit stored operational noise. |
-| Audit retention | Aligned with the organization's compliance and incident-review needs. |
+| Runtime log | Effective `DEBUG`, `INFO`, `WARN`, or `ERROR` produces expected detail without secrets. |
+| Audit | Independent of runtime log level and retains immutable event coverage. |
 | Diagnostics | Redacted before leaving the environment. |
-| Restart guidance | Used only after configuration changes, updates or support guidance that explicitly require a restart. |
+| Maintenance backup | Scoped only to `AUDIT`, `DISCOVERY`, or `EXECUTIONS`; never treated as a full server backup. |
 
 Owner maintenance cleanup is a backup-first maintenance action, not routine troubleshooting. It can target only `AUDIT`, `DISCOVERY` or `EXECUTIONS` records. VaultPilot rejects cleanup unless the request uses backup-clear mode; otherwise it returns `MAINTENANCE_BACKUP_REQUIRED`.
 
@@ -65,7 +81,7 @@ Collect:
 - Configured port.
 - HTTPS state and certificate subject/SAN summary.
 - Notification test timestamp and non-secret error name.
-- Log and audit retention values.
+- Effective runtime log level and maintenance category.
 - Whether a restart was requested by the UI.
 
 Do not collect:
