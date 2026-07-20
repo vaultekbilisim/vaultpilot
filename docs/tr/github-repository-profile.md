@@ -10,7 +10,7 @@ Bu repo public dokümantasyon reposudur. Desteklenen release kolay bulunmalı, o
 | --- | --- |
 | Repo adı | `vaultpilot` |
 | Kısa açıklama | VaultPilot Enterprise Vault Console için public release hub, operatör wiki, bilgi bankası ve destek sınırı. |
-| Website veya homepage | `https://github.com/vaultekbilisim/vaultpilot#readme` |
+| Website veya homepage | `https://github.com/ucsahinn/vaultpilot#readme` |
 | Topics | `vaultpilot`, `password-manager`, `secrets-manager`, `zero-knowledge`, `self-hosted`, `windows-server`, `msi`, `enterprise-security`, `browser-extension`, `active-directory`, `documentation`, `knowledge-base` |
 | Social preview | `assets/visuals/social-preview.png` kullanılmalı. |
 | Security policy | Açık olmalı ve `SECURITY.md` dosyasına yönlenmeli. |

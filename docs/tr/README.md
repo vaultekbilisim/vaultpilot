@@ -2,7 +2,7 @@
 
 Bu sayfa VaultPilot Enterprise Vault Console için Türkçe operatör haritasıdır. Kurulumdan güvenli işletime kadar en kısa yolu göstermek için hazırlanmıştır.
 
-Güncel doğrulanmış herkese açık yayın: **VaultPilot Enterprise Vault Console 2.0.0**. GitHub Release [`v2.0.0`](https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.0.0) 30 Haziran 2026'da yayınlandı.
+Güncel doğrulanmış herkese açık yayın: **VaultPilot Enterprise Vault Console 2.0.0**. GitHub Release [`v2.0.0`](https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0) 30 Haziran 2026'da yayınlandı.
 
 ## Önerilen Sıra
 

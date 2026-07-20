@@ -4,7 +4,7 @@ Use this page before installing or publishing a VaultPilot public release asset 
 
 ## Release State
 
-The current verified public release is GitHub Release [`v2.0.0`](https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.0.0), published on June 30, 2026.
+The current verified public release is GitHub Release [`v2.0.0`](https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0), published on June 30, 2026.
 
 Treat the GitHub Release asset metadata as the public source of truth. Unpublished build output, copied files, support attachments and chat uploads are not release evidence.
 
@@ -41,7 +41,7 @@ The git tree should not contain MSI, ZIP, EXE, PFX, P12, DB, SQLite, backup or s
 
 ## Verification Steps
 
-1. Open GitHub Release [`v2.0.0`](https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.0.0).
+1. Open GitHub Release [`v2.0.0`](https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0).
 2. Confirm the release tag is `v2.0.0` and the release is not draft or prerelease unless your internal policy explicitly allows it.
 3. Download `vaultpilot-update.json` from that release.
 4. Confirm the manifest lists server version `2.0.0`.
@@ -56,7 +56,7 @@ The git tree should not contain MSI, ZIP, EXE, PFX, P12, DB, SQLite, backup or s
 Run these commands from a temporary folder that contains the downloaded release files. Keep the output with internal release evidence; redact local paths or hostnames before sharing publicly.
 
 ```powershell
-gh release view v2.0.0 --repo vaultekbilisim/vaultpilot --json tagName,name,isDraft,isPrerelease,publishedAt,assets,url
+gh release view v2.0.0 --repo ucsahinn/vaultpilot --json tagName,name,isDraft,isPrerelease,publishedAt,assets,url
 
 Get-ChildItem -File |
   Where-Object { $_.Name -like 'VaultPilot-2.0.0-x64.msi' -or $_.Name -like 'vaultpilot-*' } |

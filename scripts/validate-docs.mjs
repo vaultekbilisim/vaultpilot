@@ -803,7 +803,7 @@ function validateRequiredPublicReferences() {
       'legacy PassMan compatibility-line',
       'chromium-extension',
       'operator-docs',
-      'https://github.com/vaultekbilisim/vaultpilot/releases/latest',
+      'https://github.com/ucsahinn/vaultpilot/releases/latest',
       'Issues are disabled',
       'Discussions are disabled',
       'Commit and push',
@@ -828,7 +828,7 @@ function validateRequiredPublicReferences() {
       'legacy PassMan compatibility-line',
       'chromium-extension',
       'operator-docs',
-      'https://github.com/vaultekbilisim/vaultpilot/releases/latest',
+      'https://github.com/ucsahinn/vaultpilot/releases/latest',
       'Issues kapalı',
       'Discussions kapalı',
       'commit ve push',
@@ -983,13 +983,13 @@ function validateRequiredPublicReferences() {
       "Status-only client'lar vault assignment olmadan oluşturulabilir."
     ]],
     ['docs/en/release-asset-verification.md', [
-      'gh release view v2.0.0 --repo vaultekbilisim/vaultpilot',
+      'gh release view v2.0.0 --repo ucsahinn/vaultpilot',
       'Get-FileHash .\\VaultPilot-2.0.0-x64.msi -Algorithm SHA256',
       'Get-AuthenticodeSignature .\\VaultPilot-2.0.0-x64.msi',
       'If `gh release view` shows a different tag'
     ]],
     ['docs/tr/release-asset-verification.md', [
-      'gh release view v2.0.0 --repo vaultekbilisim/vaultpilot',
+      'gh release view v2.0.0 --repo ucsahinn/vaultpilot',
       'Get-FileHash .\\VaultPilot-2.0.0-x64.msi -Algorithm SHA256',
       'Get-AuthenticodeSignature .\\VaultPilot-2.0.0-x64.msi',
       '`gh release view` farklı tag'
