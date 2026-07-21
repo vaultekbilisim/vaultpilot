@@ -1,8 +1,8 @@
 # VaultPilot Release Notes
 
-Latest public release: **VaultPilot 2.0.0**.
+Latest public release: **VaultPilot 2.2.0**.
 
-Latest published GitHub Release: **VaultPilot 2.0.0**.
+Latest published GitHub Release: **VaultPilot 2.2.0**.
 
 VaultPilot is the canonical product name for new work. PassMan remains the compatibility name for older installed services, data paths, environment variables, cookies, headers, update aliases, extension protocol names, and release artifacts that existing customers may still depend on.
 
@@ -19,9 +19,13 @@ This page is a selected public release history for customer-facing milestones an
 | Compatibility | Gold | Legacy alias, migration, rollback, or old-client behavior intentionally kept. |
 | Removed | Red | A visible action or old path intentionally removed from the daily flow. |
 
-## Prepared VaultPilot 2.2.0 candidate — not published
+## VaultPilot 2.2.0
 
-Status: locally prepared for release review. This section is not a GitHub Release announcement and does not replace the verified public `v2.0.0` record below.
+Status: published and independently verified against GitHub Release `v2.2.0`.
+
+Release date: 2026-07-21
+
+Distribution note: the MSI is Authenticode-signed with the manifest-pinned VaultPilot development signer and has no RFC3161 timestamp. Windows trust and SmartScreen reputation are therefore environment-dependent. Repair and authenticated Health evidence passed against the published MSI hash; physical Windows Sandbox installation was explicitly deferred for this release because Windows Sandbox was unavailable on the release host.
 
 | Component | Prepared version |
 | --- | ---: |
@@ -32,12 +36,12 @@ Status: locally prepared for release review. This section is not a GitHub Releas
 | VaultPilot Backup Tool | 1.0.1 |
 | VaultPilot Log Collector | 1.0.1 |
 
-### Candidate highlights
+### Release highlights
 
 - Certificate, Discovery, audit, execution, integration, rotation, notification, and server-settings surfaces use clearer progressive disclosure and evidence-first detail views.
 - Identity-bound directory actions require DC Agent `1.2.20` or newer. The prepared package ships DC Agent `1.2.21`, which also preserves custom configuration paths through service recovery, delivers mutation results idempotently, moves ambiguous delivery to audited review, and bounds diagnostic logging.
 - Backup Tool and Log Collector now carry independent `1.0.1` component versions instead of inheriting the console package label; their independent history began at `1.0.0`.
-- This candidate still requires public signing, signed update manifests, matching install/repair evidence, clean-machine acceptance, and explicit publication approval before it can become the latest public release.
+- Signed canonical and legacy update manifests bind the exact MSI, Offline Share Decrypter and DC Agent hashes published with this release.
 
 ## VaultPilot 2.0.0
 

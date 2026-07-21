@@ -30,7 +30,7 @@ Bir sonraki Chrome Web Store yayıncı paneli düzenlemesi için bu aktarım not
 | --- | --- |
 | Extension name | `VaultPilot Browser Vault Extension` |
 | Extension ID | `hjkbedlaieikhkoplgpiohlaakgebobi` |
-| VaultPilot 2.2.0 adayı için gereken sürüm | `1.3.3` (2026-07-17 tarihinde canlı mağazayla aynı) |
+| Yayınlanan VaultPilot 2.2.0 sürümü için gereken sürüm | `1.3.3` (2026-07-17 tarihinde canlı mağazayla aynı) |
 | Kısa açıklama | [Kısa Açıklama](#kisa-aciklama) altındaki metni kullanın. |
 | Detaylı açıklama | PassMan'ı hâlâ güncel sunucu ve ürün adı gibi gösteren canlı `Detailed description` yerine [Detaylı Açıklama](#detayli-aciklama) altındaki metni kullanın. |
 | Privacy data categories | Personally identifiable information, authentication information ve web history. |
@@ -143,7 +143,7 @@ Gerçek kasa kaydı, müşteri hostname'i, kullanıcı adı, log, token, lisans 
 
 ## Submission Kontrol Listesi
 
-1. Yayın arşivinin tam olarak aday eklenti sürümü `1.3.3` içerdiğini ve canlı mağazanın hâlâ `1.3.3` gösterdiğini doğrulayın; taraflardan biri ilerlediyse yayın öncesinde sürüm sözleşmesini ve iki doğrulama sayfasını güncelleyin.
+1. Yayınlanan sürümün tam olarak yayınlanan eklenti sürümü `1.3.3` kullandığını ve canlı mağazanın hâlâ `1.3.3` gösterdiğini doğrulayın; taraflardan biri ilerlediyse sürüm sözleşmesini ve iki doğrulama sayfasını güncelleyin.
 2. Listing'in hâlâ `hjkbedlaieikhkoplgpiohlaakgebobi` extension ID kullandığını doğrulayın.
 3. Developer Dashboard privacy practices alanını [PRIVACY.md](../../PRIVACY.md) ile karşılaştırın.
 4. Paketlenmiş `manifest.json` permissions ve host permissions değerlerini yeniden kontrol edin.

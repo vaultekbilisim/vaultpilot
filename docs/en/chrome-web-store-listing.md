@@ -28,7 +28,7 @@ Use this handoff for the next Chrome Web Store publisher-dashboard edit. It is i
 | --- | --- |
 | Extension name | `VaultPilot Browser Vault Extension` |
 | Extension ID | `hjkbedlaieikhkoplgpiohlaakgebobi` |
-| Required version for the VaultPilot 2.2.0 candidate | `1.3.3` (matches the live listing checked on 2026-07-17) |
+| Required version for the published VaultPilot 2.2.0 release | `1.3.3` (matches the live listing checked on 2026-07-17) |
 | Short description | Use the text under [Short Description](#short-description). |
 | Detailed description | Replace the live detailed description that still presents PassMan as the current server/product with the text under [Detailed Description](#detailed-description). |
 | Privacy data categories | Personally identifiable information, authentication information, and web history. |
@@ -137,7 +137,7 @@ Never upload screenshots with real vault records, customer hostnames, usernames,
 
 ## Submission Checklist
 
-1. Confirm the release archive contains the exact candidate extension version `1.3.3` and that the live store still reports `1.3.3`; if either advances, update the release contract and both verification pages before release.
+1. Confirm the published release uses the exact published extension version `1.3.3` and that the live store still reports `1.3.3`; if either advances, update the release contract and both verification pages.
 2. Confirm the listing still uses extension ID `hjkbedlaieikhkoplgpiohlaakgebobi`.
 3. Compare Developer Dashboard privacy practices with [PRIVACY.md](../../PRIVACY.md).
 4. Recheck the packaged `manifest.json` permissions and host permissions.

@@ -37,6 +37,9 @@ function replaceRequired(root, relativePath, from, to) {
 function preparePublishedFixture(root) {
   const contractPath = path.join(root, 'release-contract.json')
   const contract = JSON.parse(readFileSync(contractPath, 'utf8'))
+  if (contract.state === 'published') {
+    return
+  }
   contract.state = 'published'
   contract.observedPublic = {
     checkedAt: contract.observedPublic.checkedAt,
