@@ -20,7 +20,7 @@ Bu yüzeyler repository owner erişimi gerektirir. Owner hesap tarafı güncelle
 | --- | --- |
 | Repo adı | `vaultpilot` |
 | Açıklama | VaultPilot Enterprise Vault Console için public release hub, operatör wiki, bilgi bankası ve destek sınırı. |
-| Homepage | Kanonik public homepage olarak `https://github.com/vaultekbilisim/vaultpilot#readme` kullanılır. Latest-release çağrıları README ve release dokümanlarının içinde kalır. |
+| Homepage | Kanonik public homepage olarak `https://github.com/ucsahinn/vaultpilot#readme` kullanılır. Latest-release çağrıları README ve release dokümanlarının içinde kalır. |
 | Topics | `vaultpilot`, `password-manager`, `secrets-manager`, `zero-knowledge`, `self-hosted`, `windows-server`, `msi`, `enterprise-security`, `browser-extension`, `active-directory`, `documentation` ve `knowledge-base` gibi keşif topic'leri korunur. GitHub topic'leri küçük harf, sayı ve tire kullanmalı; her topic 50 karakteri geçmemeli ve en fazla 20 topic kullanılmalıdır. |
 | Social preview | Repository settings içinde `assets/visuals/social-preview.png` yüklenir veya seçilir. |
 | Security policy | GitHub security policy açık kalır ve `SECURITY.md` dosyasına yönlenir. |
@@ -55,7 +55,7 @@ Owner onayı gerektiren dış yüzey farklarını, account-side değişiklik ist
 
 Bunu yalnız repository owner Google indexing kanıtı istiyorsa çalıştırın. Normal docs yayını için zorunlu değildir:
 
-1. Private veya signed-out browser açın ve `site:github.com/vaultekbilisim/vaultpilot VaultPilot` aramasını yapın.
+1. Private veya signed-out browser açın ve `site:github.com/ucsahinn/vaultpilot VaultPilot` aramasını yapın.
 2. Result title ve snippet değerlerinin private source code, release binary, müşteri verisi veya license terms git içinde yayınlanıyormuş gibi görünmediğini doğrulayın.
 3. Public repo sayfasını açıp README, social preview, release linki, support sınırı ve Chrome Web Store linkinin hesap erişimi olmadan render edildiğini doğrulayın.
 4. Owner public VaultPilot docs domain'i veya deployed public site için verified Search Console property kontrol ediyorsa URL Inspection'ı yalnız o verified property içindeki URL'ler için kullanın ve yalnız public result summary bilgisini kaydedin. GitHub repository path'inin owner tarafından verify edilip Search Console içinde açılamadığı sürece inspect edilebilir olduğunu ima etmeyin.

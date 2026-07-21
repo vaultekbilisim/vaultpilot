@@ -51,8 +51,8 @@ function preparePublishedFixture(root) {
   replaceRequired(
     root,
     'README.md',
-    '<strong>Current verified public release:</strong> VaultPilot Enterprise Vault Console 2.0.0, published as GitHub Release <a href="https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.0.0">v2.0.0</a> on June 30, 2026.',
-    '<strong>Current verified public release:</strong> VaultPilot Enterprise Vault Console 2.2.0, published as GitHub Release <a href="https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.2.0">v2.2.0</a>.'
+    '<strong>Current verified public release:</strong> VaultPilot Enterprise Vault Console 2.0.0, published as GitHub Release <a href="https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0">v2.0.0</a> on June 30, 2026.',
+    '<strong>Current verified public release:</strong> VaultPilot Enterprise Vault Console 2.2.0, published as GitHub Release <a href="https://github.com/ucsahinn/vaultpilot/releases/tag/v2.2.0">v2.2.0</a>.'
   )
   replaceRequired(root, 'README.md', 'Prepared 2.2.0 Component Versions', 'VaultPilot 2.2.0 Component Versions')
   replaceRequired(
@@ -72,7 +72,7 @@ function preparePublishedFixture(root) {
 
   for (const language of ['en', 'tr']) {
     const relativePath = `docs/${language}/release-asset-verification.md`
-    replaceRequired(root, relativePath, 'gh release view v2.0.0 --repo vaultekbilisim/vaultpilot', 'gh release view v2.2.0 --repo vaultekbilisim/vaultpilot')
+    replaceRequired(root, relativePath, 'gh release view v2.0.0 --repo ucsahinn/vaultpilot', 'gh release view v2.2.0 --repo ucsahinn/vaultpilot')
     replaceRequired(root, relativePath, 'VaultPilot-2.0.0-x64.msi', 'VaultPilot-2.2.0-x64.msi')
     replaceRequired(root, relativePath, 'v2.0.0', 'v2.2.0')
     replaceRequired(root, relativePath, '| VaultPilot Enterprise Vault Console | 2.0.0 |', '| VaultPilot Enterprise Vault Console | 2.2.0 |')

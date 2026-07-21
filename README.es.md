@@ -10,7 +10,7 @@ VaultPilot es un gestor self-hosted y zero-knowledge de contrase&#241;as y secre
 
 | &Aacute;rea | Detalle |
 | --- | --- |
-| Release p&uacute;blica actual | VaultPilot Enterprise Vault Console 2.0.0, GitHub Release [v2.0.0](https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.0.0). |
+| Release p&uacute;blica actual | VaultPilot Enterprise Vault Console 2.0.0, GitHub Release [v2.0.0](https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0). |
 | Canal de instalaci&oacute;n | MSI y artifacts de soporte en GitHub Releases; browser extension en Chrome Web Store. |
 | Nombre can&oacute;nico | VaultPilot para documentaci&oacute;n y releases nuevos. |
 | Nombre de compatibilidad | PassMan queda solo para servicios antiguos, rutas de datos, variables de entorno, cookies, headers, strings de protocolo, aliases de update y rollback. |

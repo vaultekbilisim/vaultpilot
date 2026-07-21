@@ -47,7 +47,7 @@ Type: major product transition with compatible upgrade/rollback contracts.
 
 Audience: Windows server operators, browser extension users, support operators, and teams upgrading from PassMan-branded installs.
 
-GitHub Release: https://github.com/vaultekbilisim/vaultpilot/releases/tag/v2.0.0
+GitHub Release: https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0
 
 ### Highlights
 
@@ -160,7 +160,7 @@ Release date: 2026-06-09
 
 Type: hotfix patch.
 
-GitHub Release: https://github.com/vaultekbilisim/vaultpilot/releases/tag/v1.8.21
+GitHub Release: https://github.com/ucsahinn/vaultpilot/releases/tag/v1.8.21
 
 ### Highlights
 
@@ -194,7 +194,7 @@ Release date: 2026-06-06
 
 Type: browser extension channel patch.
 
-GitHub Release: https://github.com/vaultekbilisim/vaultpilot/releases/tag/v1.8.20
+GitHub Release: https://github.com/ucsahinn/vaultpilot/releases/tag/v1.8.20
 
 ### Highlights
 
@@ -219,7 +219,7 @@ Release date: 2026-06-04
 
 Type: Active Directory agent authorization patch.
 
-GitHub Release: https://github.com/vaultekbilisim/vaultpilot/releases/tag/v1.8.19
+GitHub Release: https://github.com/ucsahinn/vaultpilot/releases/tag/v1.8.19
 
 ### Highlights
 
@@ -241,7 +241,7 @@ GitHub Release: https://github.com/vaultekbilisim/vaultpilot/releases/tag/v1.8.1
 
 Release date: 2026-06-01.
 
-GitHub Release: https://github.com/vaultekbilisim/vaultpilot/releases/tag/v1.8.0
+GitHub Release: https://github.com/ucsahinn/vaultpilot/releases/tag/v1.8.0
 
 Type: minor milestone.
 
@@ -263,7 +263,7 @@ Release date: 2026-06-01.
 
 Type: enterprise console and MSI maintenance release.
 
-GitHub Release: https://github.com/vaultekbilisim/vaultpilot/releases/tag/v1.7.0
+GitHub Release: https://github.com/ucsahinn/vaultpilot/releases/tag/v1.7.0
 
 ### Highlights
 

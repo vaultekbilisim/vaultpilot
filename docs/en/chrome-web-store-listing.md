@@ -32,8 +32,8 @@ Use this handoff for the next Chrome Web Store publisher-dashboard edit. It is i
 | Short description | Use the text under [Short Description](#short-description). |
 | Detailed description | Replace the live detailed description that still presents PassMan as the current server/product with the text under [Detailed Description](#detailed-description). |
 | Privacy data categories | Personally identifiable information, authentication information, and web history. |
-| Privacy policy URL | `https://github.com/vaultekbilisim/vaultpilot/blob/main/PRIVACY.md` or the raw GitHub URL shown by the dashboard. |
-| Support URL | `https://github.com/vaultekbilisim/vaultpilot/blob/main/SUPPORT.md` |
+| Privacy policy URL | `https://github.com/ucsahinn/vaultpilot/blob/main/PRIVACY.md` or the raw GitHub URL shown by the dashboard. |
+| Support URL | `https://github.com/ucsahinn/vaultpilot/blob/main/SUPPORT.md` |
 | Store screenshots | Use only sanitized synthetic-data screenshots that match [public screenshot standards](public-screenshot-standards.md). |
 
 Replace live detailed-description text that presents PassMan as the current product. Keep PassMan only when explaining older deployment compatibility.

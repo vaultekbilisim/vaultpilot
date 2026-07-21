@@ -802,7 +802,7 @@ function validateRequiredPublicReferences() {
       'legacy PassMan compatibility-line',
       'chromium-extension',
       'operator-docs',
-      'https://github.com/vaultekbilisim/vaultpilot/releases/latest',
+      'https://github.com/ucsahinn/vaultpilot/releases/latest',
       'Issues are disabled',
       'Discussions are disabled',
       'Commit and push',
@@ -826,7 +826,7 @@ function validateRequiredPublicReferences() {
       'legacy PassMan compatibility-line',
       'chromium-extension',
       'operator-docs',
-      'https://github.com/vaultekbilisim/vaultpilot/releases/latest',
+      'https://github.com/ucsahinn/vaultpilot/releases/latest',
       'Issues kapalı',
       'Discussions kapalı',
       'commit ve push',
@@ -1488,7 +1488,7 @@ function validateReleaseContract() {
       `| VaultPilot DC Agent Service | ${observed.dcAgent} |`,
       `| VaultPilot Backup Tool | ${target.backupTool} |`,
       `| VaultPilot Log Collector | ${target.logCollector} |`,
-      `gh release view v${observed.server} --repo vaultekbilisim/vaultpilot`,
+      `gh release view v${observed.server} --repo ucsahinn/vaultpilot`,
       `Get-FileHash .\\VaultPilot-${observed.server}-x64.msi -Algorithm SHA256`,
       `Get-AuthenticodeSignature .\\VaultPilot-${observed.server}-x64.msi`
     ])

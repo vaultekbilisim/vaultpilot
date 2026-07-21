@@ -65,5 +65,5 @@ Chrome Web Store privacy practice disclosures for this extension should match th
 
 Use the support channels listed in the public VaultPilot support page:
 
-- Support: https://github.com/vaultekbilisim/vaultpilot/blob/main/SUPPORT.md
-- Security reporting: https://github.com/vaultekbilisim/vaultpilot/blob/main/SECURITY.md
+- Support: https://github.com/ucsahinn/vaultpilot/blob/main/SUPPORT.md
+- Security reporting: https://github.com/ucsahinn/vaultpilot/blob/main/SECURITY.md

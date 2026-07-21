@@ -5,11 +5,11 @@
   "description": "Public GitHub documentation and release hub for VaultPilot Enterprise Vault Console.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vaultekbilisim/vaultpilot.git"
+    "url": "https://github.com/ucsahinn/vaultpilot.git"
   },
-  "homepage": "https://github.com/vaultekbilisim/vaultpilot#readme",
+  "homepage": "https://github.com/ucsahinn/vaultpilot#readme",
   "bugs": {
-    "url": "https://github.com/vaultekbilisim/vaultpilot/blob/main/SUPPORT.md"
+    "url": "https://github.com/ucsahinn/vaultpilot/blob/main/SUPPORT.md"
   },
   "keywords": [
     "vaultpilot",
