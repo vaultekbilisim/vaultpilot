@@ -33,7 +33,7 @@ Paket FILE kayıtlarını, dosya parçalarını, sürüm geçmişini, denetim ge
 
 ### Yönetim araçları, tam yedek ve servis
 
-- **Backup Tool** indirmesi `VaultPilotBackupTool.exe` sürüm `1.0.2`, **Log Collector** indirmesi `VaultPilotLogCollector.exe` sürüm `1.0.2` adını taşır. İki aracın sürümü de bağımsızdır ve sunucu sürümünü devralmaz. Eski PassMan adları yalnız uyumluluk takma adıdır.
+- **Backup Tool** indirmesi `VaultPilotBackupTool.exe` sürüm `1.0.3`, **Log Collector** indirmesi `VaultPilotLogCollector.exe` sürüm `1.0.3` adını taşır. İki aracın sürümü de bağımsızdır ve sunucu sürümünü devralmaz. Eski PassMan adları yalnız uyumluluk takma adıdır.
 - İndirme yalnız paketlenmiş üretim yapıtı sunucuda varsa ve Sahip yetkisiyle çalışır. Geliştirme ortamında dosya yoksa düğme kullanılabilir görünmemelidir.
 - Backup Tool tam sunucu kurtarma ZIP'i üretir. ZIP kabının kendisi parola korumalı değildir; şifreli içerik taşısa da erişimi sınırlı, çevrimdışı konumda saklayın.
 - **Sunucu yedeğini içe aktar**, onaylı Backup Tool ZIP'i veya desteklenen şifreli JSON yedeğini bütünlük ve eski biçim onaylarıyla geri yükler. Birleştirme yapmaz ve başarılı olduğunda bütün oturumları kapatır.

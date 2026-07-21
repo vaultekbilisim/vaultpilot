@@ -33,8 +33,8 @@ Distribution note: the MSI is Authenticode-signed with the manifest-pinned Vault
 | Chromium Browser Extension | 1.3.3 |
 | Offline Share Decrypter | 1.2.1 |
 | VaultPilot DC Agent Service | 1.2.21 |
-| VaultPilot Backup Tool | 1.0.2 |
-| VaultPilot Log Collector | 1.0.2 |
+| VaultPilot Backup Tool | 1.0.3 |
+| VaultPilot Log Collector | 1.0.3 |
 
 ### Hotfix highlights
 
@@ -44,7 +44,7 @@ Distribution note: the MSI is Authenticode-signed with the manifest-pinned Vault
 - Resolves the registered active payload and versioned runtime correctly in the detached restart helper.
 - Preserves actionable ACL, custom-action and installer-health failure details across long rollback logs.
 - Retains the existing SQLite database, vault data, users, certificates, configuration and PassMan compatibility paths during upgrade.
-- Advances Backup Tool and Log Collector to independent `1.0.2` component versions so Windows Installer replaces the exact hotfix binaries during upgrade and repair.
+- Advances Backup Tool and Log Collector to independent `1.0.3` component versions so Windows Installer replaces the exact final hotfix binaries during upgrade and repair.
 
 ## VaultPilot 2.2.0
 

@@ -132,8 +132,8 @@ function runValidator(root) {
 test('candidate contract tracks the current managed support-tool versions', () => {
   const contract = JSON.parse(readFileSync(path.join(repositoryRoot, 'release-contract.json'), 'utf8'))
 
-  assert.equal(contract.target.backupTool, '1.0.2')
-  assert.equal(contract.target.logCollector, '1.0.2')
+  assert.equal(contract.target.backupTool, '1.0.3')
+  assert.equal(contract.target.logCollector, '1.0.3')
 })
 
 test('published release contract validates without retaining candidate-only Chrome listing language', (t) => {
@@ -166,8 +166,8 @@ for (const language of ['en', 'tr']) {
     const fixtureRoot = createPublishedFixture(t)
     const relativePath = `docs/${language}/release-asset-verification.md`
 
-    replaceRequired(fixtureRoot, relativePath, '| VaultPilot Backup Tool | 1.0.2 |', '| VaultPilot Backup Tool | 1.0.1 |')
-    replaceRequired(fixtureRoot, relativePath, '| VaultPilot Log Collector | 1.0.2 |', '| VaultPilot Log Collector | 1.0.1 |')
+    replaceRequired(fixtureRoot, relativePath, '| VaultPilot Backup Tool | 1.0.3 |', '| VaultPilot Backup Tool | 1.0.2 |')
+    replaceRequired(fixtureRoot, relativePath, '| VaultPilot Log Collector | 1.0.3 |', '| VaultPilot Log Collector | 1.0.2 |')
 
     const result = runValidator(fixtureRoot)
     assert.notEqual(result.status, 0, `${relativePath} unexpectedly accepted stale managed support-tool versions`)

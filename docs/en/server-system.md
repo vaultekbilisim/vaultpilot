@@ -51,8 +51,8 @@ Do not paste SMTP passwords, app passwords or message bodies containing customer
 | Password policy | Length is 16–128 and selected character classes and symbol profile match policy. |
 | Runtime log level | `INFO` or narrower for normal operation; `DEBUG` only for a bounded investigation. Audit remains unchanged. |
 | Quick Recovery | The `.vpr.json` file and 40-character key are stored separately and documented as not being a full backup. |
-| Backup Tool | `VaultPilotBackupTool.exe` reports its independent `1.0.2` version; the full ZIP is offline and access-restricted. |
-| Log Collector | `VaultPilotLogCollector.exe` reports its independent `1.0.2` version; only a redacted support package is shared. |
+| Backup Tool | `VaultPilotBackupTool.exe` reports its independent `1.0.3` version; the full ZIP is offline and access-restricted. |
+| Log Collector | `VaultPilotLogCollector.exe` reports its independent `1.0.3` version; only a redacted support package is shared. |
 | Restart | No unsaved draft exists, and a controlled window is used to apply only saved configuration. |
 
 <a id="logs-and-maintenance-checklist"></a>

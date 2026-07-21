@@ -28,8 +28,8 @@ This matrix records the independently checked public `v2.2.1` asset set used for
 | Chromium Browser Extension | 1.3.3 | Chrome Web Store version; no extension ZIP in this release |
 | Offline Share Decrypter | 1.2.1 | Versioned release archive and signed component manifest |
 | VaultPilot DC Agent Service | 1.2.21 | Versioned PowerShell asset and signed component manifest |
-| VaultPilot Backup Tool | 1.0.2 | Bundled server support component; not a separate GitHub Release asset |
-| VaultPilot Log Collector | 1.0.2 | Bundled server support component; not a separate GitHub Release asset |
+| VaultPilot Backup Tool | 1.0.3 | Bundled server support component; not a separate GitHub Release asset |
+| VaultPilot Log Collector | 1.0.3 | Bundled server support component; not a separate GitHub Release asset |
 
 ## Public Asset Set
 
@@ -37,14 +37,14 @@ The public GitHub Release contains these customer-safe delivery assets. This tab
 
 | Asset | Size | SHA-256 |
 | --- | ---: | --- |
-| `VaultPilot-2.2.1-x64.msi` | 65,626,112 | `9e65f41f5b581bd38ee247e1acaab44dd3dd36744328b88766218442168ec062` |
-| `vaultpilot-update.json` | 1,375 | `f8f51799fb743bdef6c02dfb120ec0f8349ad1dc257eedd25241116c8829e264` |
+| `VaultPilot-2.2.1-x64.msi` | 65,622,016 | `182dc5de611175cd559d6ec54b5567a5f07dac54b02130be1d69ef792d18147b` |
+| `vaultpilot-update.json` | 1,375 | `8aa83c62b7cddab5de8e451f87c429194e92b22663b2e8cd0eafe9676421d909` |
 | `vaultpilot-share-decrypter.zip` | 102,628 | `3f2475e96ecbcb4606878fcf3646c106f49f30be9a666cd23310ba250261d449` |
 | `vaultpilot-share-decrypter.json` | 219 | `aa2d71a8209399c50e0b1b16ba2f8eed83e42161c500d17853b85b87d328fca4` |
 | `vaultpilot-dc-agent.ps1` | 235,272 | `b5af74774d205dc5e07bd7f59a63d21d9b9dd5905427c98eb568684949e32199` |
 | `vaultpilot-dc-agent.json` | 213 | `5deab881826b79f8c77c37f0b0eac34339f0ac10ba5739da6ccf7489871c0e8a` |
-| `PassMan-2.2.1-x64.msi` | 65,626,112 | `9e65f41f5b581bd38ee247e1acaab44dd3dd36744328b88766218442168ec062` |
-| `passman-update.json` | 1,357 | `a6c68d58d43dcf7d9c6404969185c2c2203f288c4e8a18bba64adbc92cb7a158` |
+| `PassMan-2.2.1-x64.msi` | 65,622,016 | `182dc5de611175cd559d6ec54b5567a5f07dac54b02130be1d69ef792d18147b` |
+| `passman-update.json` | 1,357 | `032b8ec823155db555e2b261bec8d6ddbeba83c97acdd469a82a9ee79d65e9ea` |
 | `passman-share-decrypter.zip` | 102,628 | `3f2475e96ecbcb4606878fcf3646c106f49f30be9a666cd23310ba250261d449` |
 | `passman-share-decrypter.json` | 216 | `d9490a761c5413ef957bd08e1e4ae1ad6c5e7c6f7df59cc38bb600e0f27c6304` |
 | `passman-ad-agent.ps1` | 235,272 | `b5af74774d205dc5e07bd7f59a63d21d9b9dd5905427c98eb568684949e32199` |

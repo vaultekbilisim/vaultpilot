@@ -185,8 +185,8 @@ This matrix records the component versions independently verified for the public
 | Chromium Browser Extension | 1.3.3 | Chrome Web Store |
 | Offline Share Decrypter | 1.2.1 | Bundled support component and release ZIP |
 | VaultPilot DC Agent Service | 1.2.21 | Bundled support component and release script |
-| VaultPilot Backup Tool | 1.0.2 | Independently versioned tool bundled in the MSI |
-| VaultPilot Log Collector | 1.0.2 | Independently versioned tool bundled in the MSI |
+| VaultPilot Backup Tool | 1.0.3 | Independently versioned tool bundled in the MSI |
+| VaultPilot Log Collector | 1.0.3 | Independently versioned tool bundled in the MSI |
 
 ## <img src="assets/icons/docs.svg" width="22" alt=""> Full Wiki, KB, And Visual References
 

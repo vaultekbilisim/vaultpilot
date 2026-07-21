@@ -25,7 +25,7 @@ Run backup collection on the Windows server as Administrator. The primary packag
 
 Record the output path and keep the archive private. It can contain encrypted vault data, configuration, and certificate material. The standard ZIP container itself is not password protected; store it offline with restricted access. Do not attach it to public issues, public support threads, or this repository.
 
-The download identifies VaultPilot Backup Tool version `1.0.2`. The adjacent `VaultPilotLogCollector.exe` has its own independent `1.0.2` version. These tool versions do not inherit the VaultPilot server version.
+The download identifies VaultPilot Backup Tool version `1.0.3`. The adjacent `VaultPilotLogCollector.exe` has its own independent `1.0.3` version. These tool versions do not inherit the VaultPilot server version.
 
 The current console can import either a VaultPilot Backup Tool ZIP archive or an encrypted JSON export from the server-backup import panel. Import rebuilds the server profile from the backup and closes active sessions, so run it only as an administrator recovery action after confirming the file source and backup purpose.
 

@@ -33,7 +33,7 @@ The package excludes FILE records, file chunks, revision history, audit history,
 
 ### Administrative tools, full backup, and service
 
-- The **Backup Tool** download is `VaultPilotBackupTool.exe` version `1.0.2`; **Log Collector** is `VaultPilotLogCollector.exe` version `1.0.2`. Both tools have independent version lines and do not inherit the server version. Legacy PassMan names remain compatibility aliases only.
+- The **Backup Tool** download is `VaultPilotBackupTool.exe` version `1.0.3`; **Log Collector** is `VaultPilotLogCollector.exe` version `1.0.3`. Both tools have independent version lines and do not inherit the server version. Legacy PassMan names remain compatibility aliases only.
 - Owner-only download works only when the packaged production artifact exists on the server. A development environment without the binary must report it as unavailable.
 - Backup Tool creates a full-server recovery ZIP. The ZIP container itself is not password protected; even when payload data is encrypted, keep the archive offline and access-restricted.
 - **Import server backup** restores an approved Backup Tool ZIP or supported encrypted JSON backup with integrity and legacy-format confirmations. It is not a merge and closes every session after success.

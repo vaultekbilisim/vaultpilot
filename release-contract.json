@@ -5,8 +5,8 @@
     "extension": "1.3.3",
     "shareDecrypter": "1.2.1",
     "dcAgent": "1.2.21",
-    "backupTool": "1.0.2",
-    "logCollector": "1.0.2"
+    "backupTool": "1.0.3",
+    "logCollector": "1.0.3"
   },
   "observedPublic": {
     "checkedAt": "2026-07-17",

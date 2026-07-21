@@ -25,7 +25,7 @@ Backup toplama işlemini Windows sunucuda Administrator olarak çalıştırın. 
 
 Çıktı yolunu kaydedin ve arşivi özel tutun. Arşiv şifreli kasa verisi, yapılandırma ve sertifika materyali içerebilir. Standart ZIP kabının kendisi parola korumalı değildir; çevrimdışı ve erişimi kısıtlı konumda saklayın. Herkese açık bildirime, destek başlığına veya bu depoya eklemeyin.
 
-İndirme alanı VaultPilot Backup Tool sürümünü `1.0.2` olarak gösterir. Yanındaki `VaultPilotLogCollector.exe` dosyasının da sunucudan bağımsız kendi `1.0.2` sürümü vardır. Bu araçların sürümü VaultPilot sunucu sürümünü devralmaz.
+İndirme alanı VaultPilot Backup Tool sürümünü `1.0.3` olarak gösterir. Yanındaki `VaultPilotLogCollector.exe` dosyasının da sunucudan bağımsız kendi `1.0.3` sürümü vardır. Bu araçların sürümü VaultPilot sunucu sürümünü devralmaz.
 
 Mevcut konsol, server-backup import panelinden VaultPilot Backup Tool ZIP arşivi veya encrypted JSON export içe aktarabilir. Import, sunucu profilini yedekten yeniden kurar ve açık oturumları kapatır. Bu yüzden yalnız admin recovery aksiyonu olarak, dosya kaynağı ve recovery amacı doğrulandıktan sonra çalıştırılmalıdır.
 

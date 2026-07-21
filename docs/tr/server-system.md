@@ -51,8 +51,8 @@ SMTP parolalarını, uygulama parolalarını veya müşteri verisi içeren mesaj
 | Parola ilkesi | 16–128 karakter; gereken sınıflar ve sembol profili kurum ilkesine uygun. |
 | Günlük düzeyi | Normal işletimde `INFO` veya daha dar; `DEBUG` yalnız süreli inceleme için. Denetim kaydı değişmez. |
 | Hızlı Kurtarma | `.vpr.json` ve 40 karakterlik anahtar ayrı konumlarda; bunun tam yedek olmadığı kayıtlı. |
-| Backup Tool | `VaultPilotBackupTool.exe` bağımsız `1.0.2` sürümünü gösterir; tam ZIP çevrimdışı ve erişimi sınırlı tutulur. |
-| Log Collector | `VaultPilotLogCollector.exe` bağımsız `1.0.2` sürümünü gösterir; yalnız redakte edilmiş destek paketi paylaşılır. |
+| Backup Tool | `VaultPilotBackupTool.exe` bağımsız `1.0.3` sürümünü gösterir; tam ZIP çevrimdışı ve erişimi sınırlı tutulur. |
+| Log Collector | `VaultPilotLogCollector.exe` bağımsız `1.0.3` sürümünü gösterir; yalnız redakte edilmiş destek paketi paylaşılır. |
 | Yeniden başlatma | Kaydedilmemiş taslak yoktur; yalnız kaydedilmiş yapılandırma için kontrollü pencere kullanılır. |
 
 <a id="logs-and-maintenance-checklist"></a>
