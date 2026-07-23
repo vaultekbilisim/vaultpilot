@@ -43,18 +43,12 @@ The public GitHub Release contains these customer-safe delivery assets. This tab
 | `vaultpilot-share-decrypter.json` | 219 | `aa2d71a8209399c50e0b1b16ba2f8eed83e42161c500d17853b85b87d328fca4` |
 | `vaultpilot-dc-agent.ps1` | 235,272 | `b5af74774d205dc5e07bd7f59a63d21d9b9dd5905427c98eb568684949e32199` |
 | `vaultpilot-dc-agent.json` | 213 | `5deab881826b79f8c77c37f0b0eac34339f0ac10ba5739da6ccf7489871c0e8a` |
-| `PassMan-2.2.1-x64.msi` | 65,622,016 | `182dc5de611175cd559d6ec54b5567a5f07dac54b02130be1d69ef792d18147b` |
-| `passman-update.json` | 1,357 | `032b8ec823155db555e2b261bec8d6ddbeba83c97acdd469a82a9ee79d65e9ea` |
-| `passman-share-decrypter.zip` | 102,628 | `3f2475e96ecbcb4606878fcf3646c106f49f30be9a666cd23310ba250261d449` |
-| `passman-share-decrypter.json` | 216 | `d9490a761c5413ef957bd08e1e4ae1ad6c5e7c6f7df59cc38bb600e0f27c6304` |
-| `passman-ad-agent.ps1` | 235,272 | `b5af74774d205dc5e07bd7f59a63d21d9b9dd5905427c98eb568684949e32199` |
-| `passman-ad-agent.json` | 210 | `f769bea81748093b34d54ad89f685d2a749993988b43f0cede3f462e5f82db0c` |
 
 The Chrome Web Store listing is the primary customer install and update channel for the browser extension and can advance independently from a GitHub Release. The live store reports `1.3.3`; the default `v2.2.1` update manifest does not publish an extension ZIP.
 
 The MSI is signed with the manifest-pinned VaultPilot development signer and has no RFC3161 timestamp. VaultPilot-managed updates still verify the signed manifest, exact SHA-256 and signer thumbprint, but Windows trust and SmartScreen reputation remain environment-dependent. Commit-bound final artifact evidence plus elevated Repair and authenticated Health evidence passed for the published MSI hash. A hash-bound Sandbox package was prepared; physical Windows Sandbox Install/Health was explicitly deferred because `WindowsSandbox.exe` was unavailable on the release host.
 
-PassMan-named compatibility files can exist in installed environments, rollback paths or source build output for legacy clients. They are not public release assets unless they appear on the GitHub Release being verified.
+Legacy compatibility files can remain inside installed migration and rollback paths, but new public releases contain VaultPilot-named customer assets only.
 
 The git tree should not contain MSI, ZIP, EXE, PFX, P12, DB, SQLite, backup or signing-key files.
 

@@ -43,18 +43,12 @@ Public GitHub Release şu müşteri güvenli teslim dosyalarını içerir. Bu ta
 | `vaultpilot-share-decrypter.json` | 219 | `aa2d71a8209399c50e0b1b16ba2f8eed83e42161c500d17853b85b87d328fca4` |
 | `vaultpilot-dc-agent.ps1` | 235,272 | `b5af74774d205dc5e07bd7f59a63d21d9b9dd5905427c98eb568684949e32199` |
 | `vaultpilot-dc-agent.json` | 213 | `5deab881826b79f8c77c37f0b0eac34339f0ac10ba5739da6ccf7489871c0e8a` |
-| `PassMan-2.2.1-x64.msi` | 65,622,016 | `182dc5de611175cd559d6ec54b5567a5f07dac54b02130be1d69ef792d18147b` |
-| `passman-update.json` | 1,357 | `032b8ec823155db555e2b261bec8d6ddbeba83c97acdd469a82a9ee79d65e9ea` |
-| `passman-share-decrypter.zip` | 102,628 | `3f2475e96ecbcb4606878fcf3646c106f49f30be9a666cd23310ba250261d449` |
-| `passman-share-decrypter.json` | 216 | `d9490a761c5413ef957bd08e1e4ae1ad6c5e7c6f7df59cc38bb600e0f27c6304` |
-| `passman-ad-agent.ps1` | 235,272 | `b5af74774d205dc5e07bd7f59a63d21d9b9dd5905427c98eb568684949e32199` |
-| `passman-ad-agent.json` | 210 | `f769bea81748093b34d54ad89f685d2a749993988b43f0cede3f462e5f82db0c` |
 
 Chrome Web Store listelemesi tarayıcı eklentisi için birincil müşteri kurulum ve güncelleme kanalıdır ve GitHub Release'den bağımsız ilerleyebilir. Canlı mağaza `1.3.3` gösterir; varsayılan `v2.2.1` güncelleme manifestosu extension ZIP yayımlamaz.
 
 MSI, manifestoda sabitlenen VaultPilot geliştirme imzalayıcısıyla Authenticode imzalıdır ve RFC3161 zaman damgası yoktur. VaultPilot yönetimli güncellemeler imzalı manifestoyu, kesin SHA-256 değerini ve signer thumbprint'ini doğrular; ancak Windows güveni ve SmartScreen itibarı ortama bağlıdır. Yayımlanan MSI hash'i için commit-bound final artifact, elevated Repair ve kimliği doğrulanmış Health kanıtı geçti. Hash-bağlı Sandbox paketi hazırlandı; fiziksel Windows Sandbox Install/Health, release hostunda `WindowsSandbox.exe` bulunmadığı için açıkça ertelendi.
 
-PassMan adlı uyumluluk dosyaları eski client'lar için kurulu ortamlarda, rollback yollarında veya source build çıktısında bulunabilir. Doğrulanan GitHub Release üzerinde görünmedikçe public release asset'i değildir.
+Legacy uyumluluk dosyaları yalnız kurulu migration ve rollback yollarında kalabilir; yeni public release'ler sadece VaultPilot adlı müşteri varlıklarını içerir.
 
 Git tree içinde MSI, ZIP, EXE, PFX, P12, DB, SQLite, backup veya signing-key dosyası bulunmamalıdır.
 

@@ -133,7 +133,7 @@ GitHub Release: https://github.com/ucsahinn/vaultpilot/releases/tag/v2.0.0
 - New installs prefer `VaultPilotServer`, `VaultPilot Server`, `C:\ProgramData\VaultPilot`, `VAULTPILOT_*`, `vaultpilot-update.json`, and VaultPilot package names.
 - Existing installs may still rely on `PassManServer`, `PassMan Server`, `C:\ProgramData\PassMan`, `PASSMAN_*`, `passman_session`, `x-passman-request`, `passman-update.json`, and legacy package names.
 - Extension protocol names, cookies, headers, environment variables, update aliases, and MSI aliases remain available for old clients and rollback paths.
-- PassMan-named compatibility files can exist in installed environments, rollback paths or source build output for legacy clients. They are not public release assets unless they appear on the GitHub Release being verified.
+- Legacy compatibility files can remain inside installed migration and rollback paths, but new public releases contain VaultPilot-named customer assets only.
 
 ### Browser Vault Extension 1.3.2
 
